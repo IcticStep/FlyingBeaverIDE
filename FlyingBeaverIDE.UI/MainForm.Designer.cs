@@ -1,4 +1,4 @@
-﻿namespace Flying_Beaver_IDE
+﻿namespace FlyingBeaverIDE.UI
 {
     partial class MainForm
     {
@@ -268,4 +268,3 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
-
