@@ -11,9 +11,9 @@ using Syncfusion.WinForms.Controls;
 
 namespace Flying_Beaver_IDE
 {
-    public partial class MainForm : RibbonForm
+    public partial class MainFormDesign : RibbonForm
     {
-        public MainForm()
+        public MainFormDesign()
         {
             InitializeComponent();
         }
@@ -23,22 +23,22 @@ namespace Flying_Beaver_IDE
 
         }
 
-        private void OpenFileButton_Click(object sender, EventArgs e)
+        private void OpenFile(object sender, EventArgs e)
         {
 
         }
 
-        private void SaveFileButton_Click(object sender, EventArgs e)
+        private void SaveFile(object sender, EventArgs e)
         {
 
         }
 
-        private void SaveFileAsButton_Click(object sender, EventArgs e)
+        private void SaveFileAs(object sender, EventArgs e)
         {
 
         }
 
-        private void ExitButton_Click(object sender, EventArgs e)
+        private void ExitProgram(object sender, EventArgs e)
         {
 
         }
