@@ -32,6 +32,7 @@ public class FileSaver
         var saveFileDialog = new SaveFileDialog();
         saveFileDialog.Filter = FileFilter;
         saveFileDialog.Title = DialogTitle;
+        saveFileDialog.DefaultExt = FileExtension;
         saveFileDialog.AddExtension = true;
         return saveFileDialog;
     }

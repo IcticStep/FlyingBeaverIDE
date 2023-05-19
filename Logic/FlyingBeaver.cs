@@ -9,7 +9,7 @@ public class FlyingBeaver
     public FlyingBeaver() { }
     public FlyingBeaver(string json) => _poem = DeserializePoem(json);
 
-    private readonly Poem _poem = new Poem();
+    public Poem _poem { get; set; } = new Poem();
 
     public string PoemText
     {
