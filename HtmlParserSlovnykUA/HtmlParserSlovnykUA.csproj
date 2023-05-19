@@ -10,8 +10,4 @@
       <ProjectReference Include="..\HtmlParserCore\HtmlParserCore.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Parsers\Common\" />
-    </ItemGroup>
-
 </Project>

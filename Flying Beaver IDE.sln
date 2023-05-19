@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{AFFEBB08-E3A7-48CF-B440-39491D9254CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlSlovnykUaConsoleApplication", "HtmlSlovnykUaConsoleApplication\HtmlSlovnykUaConsoleApplication.csproj", "{4A8B180F-20F2-4A52-AC3B-4E86C6BC03C5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlParserCore", "HtmlParserCore\HtmlParserCore.csproj", "{BCD9692F-C18F-4900-B125-D94140E73CC5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSyllabler", "WordSyllabler\WordSyllabler.csproj", "{B87A2ADC-43BD-475F-8A4B-0EC138682CC6}"
@@ -51,10 +49,6 @@ Global
 		{AFFEBB08-E3A7-48CF-B440-39491D9254CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFFEBB08-E3A7-48CF-B440-39491D9254CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFFEBB08-E3A7-48CF-B440-39491D9254CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A8B180F-20F2-4A52-AC3B-4E86C6BC03C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A8B180F-20F2-4A52-AC3B-4E86C6BC03C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A8B180F-20F2-4A52-AC3B-4E86C6BC03C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A8B180F-20F2-4A52-AC3B-4E86C6BC03C5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BCD9692F-C18F-4900-B125-D94140E73CC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BCD9692F-C18F-4900-B125-D94140E73CC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCD9692F-C18F-4900-B125-D94140E73CC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
