@@ -1,6 +1,6 @@
 ﻿using AngleSharp.Html.Dom;
 
-namespace HTMLParserCore.API;
+namespace HtmlParserCore.API;
 
 public interface IParser<T>
 {

@@ -1,9 +1,9 @@
 ﻿using System.Net;
-using HTMLParserCore.API;
+using HtmlParserCore.API;
 
-namespace HTMLParserCore;
+namespace HtmlParserCore.Services;
 
-public class HtmlLoader
+internal class HtmlLoader
 {
     private readonly HttpClient _client;
     private readonly string _url;

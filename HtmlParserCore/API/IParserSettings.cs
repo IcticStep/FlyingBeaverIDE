@@ -1,4 +1,4 @@
-﻿namespace HTMLParserCore.API;
+﻿namespace HtmlParserCore.API;
 
 public interface IParserSettings
 {

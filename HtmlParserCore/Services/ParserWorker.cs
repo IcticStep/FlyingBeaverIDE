@@ -1,19 +1,23 @@
-﻿using HTMLParserCore.API;
+﻿using AngleSharp.Html.Parser;
+using HtmlParserCore.API;
 
-namespace HTMLParserCore;
+namespace HtmlParserCore.Services;
 
 public class ParserWorker<T>
 {
     public ParserWorker(IParser<T> parser) => 
-        _parser = parser;
+        Parser = parser;
 
     public ParserWorker(IParser<T> parser, IParserSettings settings)
     : this(parser) =>
-        _parserSettings = settings;
+        ParserSettings = settings;
 
+    public event Action<T> OnCompleted;
     private IParser<T> _parser;
     private IParserSettings _parserSettings;
     private HtmlLoader _htmlLoader;
+    
+    public bool Active { get; private set; }
 
     public IParser<T> Parser
     {
@@ -31,13 +35,15 @@ public class ParserWorker<T>
         }
     }
 
-    public void Start()
+    public void Start() => Parse();
+
+    private async void Parse()
     {
+        var source = await _htmlLoader.GetSource();
+        var domParser = new HtmlParser();
+        var document = await domParser.ParseDocumentAsync(source);
+        var result = _parser.Parse(document);
         
-    }
-    
-    public void Abort()
-    {
-        
+        OnCompleted?.Invoke(result);
     }
 }
