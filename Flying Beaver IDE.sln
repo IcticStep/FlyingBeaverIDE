@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTMLParserApplication", "HT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTMLParserCore", "HTMLParserCore\HTMLParserCore.csproj", "{BCD9692F-C18F-4900-B125-D94140E73CC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSyllabler", "WordSyllabler\WordSyllabler.csproj", "{B87A2ADC-43BD-475F-8A4B-0EC138682CC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSyllabler_Tests", "WordSyllabler_Tests\WordSyllabler_Tests.csproj", "{3E9378EC-D2EB-4671-8DA8-8F56AD72DB50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{BCD9692F-C18F-4900-B125-D94140E73CC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCD9692F-C18F-4900-B125-D94140E73CC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCD9692F-C18F-4900-B125-D94140E73CC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B87A2ADC-43BD-475F-8A4B-0EC138682CC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B87A2ADC-43BD-475F-8A4B-0EC138682CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B87A2ADC-43BD-475F-8A4B-0EC138682CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B87A2ADC-43BD-475F-8A4B-0EC138682CC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E9378EC-D2EB-4671-8DA8-8F56AD72DB50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E9378EC-D2EB-4671-8DA8-8F56AD72DB50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E9378EC-D2EB-4671-8DA8-8F56AD72DB50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E9378EC-D2EB-4671-8DA8-8F56AD72DB50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
