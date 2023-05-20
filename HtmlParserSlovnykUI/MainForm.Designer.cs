@@ -30,6 +30,12 @@ partial class MainForm
     private void InitializeComponent()
     {
         panel1 = new Panel();
+        panel14 = new Panel();
+        ProgressOperationsCounter = new Label();
+        ProgressBar = new ProgressBar();
+        panel8 = new Panel();
+        CurrentOperationName = new Label();
+        label6 = new Label();
         Header = new Label();
         LettersPanel = new Panel();
         panel3 = new Panel();
@@ -76,9 +82,11 @@ partial class MainForm
         WordsParseButton = new Button();
         Panel15 = new Panel();
         comboBox2 = new ComboBox();
-        label2 = new Label();
+        WordsDataRows = new Label();
         label5 = new Label();
         panel1.SuspendLayout();
+        panel14.SuspendLayout();
+        panel8.SuspendLayout();
         LettersPanel.SuspendLayout();
         panel3.SuspendLayout();
         tableLayoutPanel1.SuspendLayout();
@@ -101,20 +109,82 @@ partial class MainForm
         // 
         // panel1
         // 
+        panel1.Controls.Add(panel14);
+        panel1.Controls.Add(panel8);
         panel1.Controls.Add(Header);
         panel1.Dock = DockStyle.Top;
         panel1.Location = new Point(0, 0);
         panel1.Name = "panel1";
-        panel1.Size = new Size(915, 49);
+        panel1.Size = new Size(915, 102);
         panel1.TabIndex = 0;
+        // 
+        // panel14
+        // 
+        panel14.Controls.Add(ProgressOperationsCounter);
+        panel14.Controls.Add(ProgressBar);
+        panel14.Dock = DockStyle.Fill;
+        panel14.Location = new Point(209, 41);
+        panel14.Name = "panel14";
+        panel14.Size = new Size(706, 61);
+        panel14.TabIndex = 4;
+        // 
+        // ProgressOperationsCounter
+        // 
+        ProgressOperationsCounter.Dock = DockStyle.Top;
+        ProgressOperationsCounter.Font = new Font("Arial", 15.75F, FontStyle.Italic, GraphicsUnit.Point);
+        ProgressOperationsCounter.Location = new Point(0, 0);
+        ProgressOperationsCounter.Name = "ProgressOperationsCounter";
+        ProgressOperationsCounter.Size = new Size(706, 33);
+        ProgressOperationsCounter.TabIndex = 4;
+        ProgressOperationsCounter.Text = "0/0";
+        ProgressOperationsCounter.TextAlign = ContentAlignment.MiddleLeft;
+        // 
+        // ProgressBar
+        // 
+        ProgressBar.Anchor = AnchorStyles.Top;
+        ProgressBar.Location = new Point(36, 33);
+        ProgressBar.Name = "ProgressBar";
+        ProgressBar.Size = new Size(636, 28);
+        ProgressBar.TabIndex = 1;
+        // 
+        // panel8
+        // 
+        panel8.Controls.Add(CurrentOperationName);
+        panel8.Controls.Add(label6);
+        panel8.Dock = DockStyle.Left;
+        panel8.Location = new Point(0, 41);
+        panel8.Name = "panel8";
+        panel8.Size = new Size(209, 61);
+        panel8.TabIndex = 3;
+        // 
+        // CurrentOperationName
+        // 
+        CurrentOperationName.Dock = DockStyle.Fill;
+        CurrentOperationName.Font = new Font("Segoe UI", 12F, FontStyle.Italic, GraphicsUnit.Point);
+        CurrentOperationName.Location = new Point(0, 30);
+        CurrentOperationName.Name = "CurrentOperationName";
+        CurrentOperationName.Size = new Size(209, 31);
+        CurrentOperationName.TabIndex = 3;
+        CurrentOperationName.Text = "Нічого не робимо";
+        // 
+        // label6
+        // 
+        label6.Dock = DockStyle.Top;
+        label6.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+        label6.Location = new Point(0, 0);
+        label6.Name = "label6";
+        label6.Size = new Size(209, 30);
+        label6.TabIndex = 2;
+        label6.Text = "Поточна операція";
+        label6.TextAlign = ContentAlignment.MiddleLeft;
         // 
         // Header
         // 
-        Header.Dock = DockStyle.Fill;
+        Header.Dock = DockStyle.Top;
         Header.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
         Header.Location = new Point(0, 0);
         Header.Name = "Header";
-        Header.Size = new Size(915, 49);
+        Header.Size = new Size(915, 41);
         Header.TabIndex = 0;
         Header.Text = "Парсинг сайту Slovnyk UA";
         Header.TextAlign = ContentAlignment.MiddleCenter;
@@ -124,7 +194,7 @@ partial class MainForm
         LettersPanel.Controls.Add(panel3);
         LettersPanel.Controls.Add(panel2);
         LettersPanel.Dock = DockStyle.Top;
-        LettersPanel.Location = new Point(0, 49);
+        LettersPanel.Location = new Point(0, 102);
         LettersPanel.Name = "LettersPanel";
         LettersPanel.Size = new Size(915, 59);
         LettersPanel.TabIndex = 1;
@@ -319,7 +389,7 @@ partial class MainForm
         SublettersPanel.Controls.Add(panel9);
         SublettersPanel.Controls.Add(panel10);
         SublettersPanel.Dock = DockStyle.Top;
-        SublettersPanel.Location = new Point(0, 108);
+        SublettersPanel.Location = new Point(0, 161);
         SublettersPanel.Name = "SublettersPanel";
         SublettersPanel.Size = new Size(915, 59);
         SublettersPanel.TabIndex = 2;
@@ -359,6 +429,7 @@ partial class MainForm
         SublettersSaveButton.TabIndex = 2;
         SublettersSaveButton.Text = "Зберегти";
         SublettersSaveButton.UseVisualStyleBackColor = true;
+        SublettersSaveButton.Click += SaveSublettersData;
         // 
         // SublettersOpenButton
         // 
@@ -369,6 +440,7 @@ partial class MainForm
         SublettersOpenButton.TabIndex = 1;
         SublettersOpenButton.Text = "Відкрити";
         SublettersOpenButton.UseVisualStyleBackColor = true;
+        SublettersOpenButton.Click += LoadSublettersData;
         // 
         // SublettersParseButton
         // 
@@ -379,6 +451,7 @@ partial class MainForm
         SublettersParseButton.TabIndex = 0;
         SublettersParseButton.Text = "Парсити";
         SublettersParseButton.UseVisualStyleBackColor = true;
+        SublettersParseButton.Click += ParseSubletters;
         // 
         // panel10
         // 
@@ -417,7 +490,7 @@ partial class MainForm
         WordinksPanel.Controls.Add(panel11);
         WordinksPanel.Controls.Add(panel12);
         WordinksPanel.Dock = DockStyle.Top;
-        WordinksPanel.Location = new Point(0, 167);
+        WordinksPanel.Location = new Point(0, 220);
         WordinksPanel.Name = "WordinksPanel";
         WordinksPanel.Size = new Size(915, 63);
         WordinksPanel.TabIndex = 3;
@@ -515,7 +588,7 @@ partial class MainForm
         WordsParsing.Controls.Add(panel13);
         WordsParsing.Controls.Add(Panel15);
         WordsParsing.Dock = DockStyle.Top;
-        WordsParsing.Location = new Point(0, 230);
+        WordsParsing.Location = new Point(0, 283);
         WordsParsing.Name = "WordsParsing";
         WordsParsing.Size = new Size(915, 96);
         WordsParsing.TabIndex = 4;
@@ -579,7 +652,7 @@ partial class MainForm
         // Panel15
         // 
         Panel15.Controls.Add(comboBox2);
-        Panel15.Controls.Add(label2);
+        Panel15.Controls.Add(WordsDataRows);
         Panel15.Controls.Add(label5);
         Panel15.Dock = DockStyle.Left;
         Panel15.Location = new Point(0, 0);
@@ -596,16 +669,16 @@ partial class MainForm
         comboBox2.Size = new Size(482, 33);
         comboBox2.TabIndex = 4;
         // 
-        // label2
+        // WordsDataRows
         // 
-        label2.Dock = DockStyle.Top;
-        label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-        label2.Location = new Point(0, 29);
-        label2.Name = "label2";
-        label2.Size = new Size(482, 30);
-        label2.TabIndex = 2;
-        label2.Text = "Кількість записів: 0";
-        label2.TextAlign = ContentAlignment.BottomLeft;
+        WordsDataRows.Dock = DockStyle.Top;
+        WordsDataRows.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+        WordsDataRows.Location = new Point(0, 29);
+        WordsDataRows.Name = "WordsDataRows";
+        WordsDataRows.Size = new Size(482, 30);
+        WordsDataRows.TabIndex = 2;
+        WordsDataRows.Text = "Кількість записів: 0";
+        WordsDataRows.TextAlign = ContentAlignment.BottomLeft;
         // 
         // label5
         // 
@@ -622,7 +695,7 @@ partial class MainForm
         // 
         AutoScaleDimensions = new SizeF(11F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(915, 327);
+        ClientSize = new Size(915, 380);
         Controls.Add(WordsParsing);
         Controls.Add(WordinksPanel);
         Controls.Add(SublettersPanel);
@@ -634,6 +707,8 @@ partial class MainForm
         Name = "MainForm";
         Text = "Парсинг Slovnyk.UA";
         panel1.ResumeLayout(false);
+        panel14.ResumeLayout(false);
+        panel8.ResumeLayout(false);
         LettersPanel.ResumeLayout(false);
         panel3.ResumeLayout(false);
         tableLayoutPanel1.ResumeLayout(false);
@@ -703,7 +778,13 @@ partial class MainForm
     private Button WordsOpenButton;
     private Button WordsParseButton;
     private Panel Panel15;
-    private Label label2;
+    private Label WordsDataRows;
     private Label label5;
     private ComboBox comboBox2;
+    private Label label6;
+    private ProgressBar ProgressBar;
+    private Panel panel8;
+    private Panel panel14;
+    private Label ProgressOperationsCounter;
+    private Label CurrentOperationName;
 }

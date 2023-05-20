@@ -16,14 +16,14 @@ internal class LettersLinksParser : IParser<IEnumerable<LetterLink>>
         return lettersLinksElements.Select(ConvertToLetterLink);
     }
 
-    private static IEnumerable<IElement> GetLettersLinksElements(IHtmlCollection<IElement> lettersElements) =>
+    private static IEnumerable<IElement> GetLettersLinksElements(IEnumerable<IElement> lettersElements) =>
         lettersElements.Select(lettersElement =>
             lettersElement.Children.First());
 
     private static LetterLink ConvertToLetterLink(IElement letterLink)
     {
         var letter = letterLink.TextContent.First();
-        var link = letterLink.GetAttribute("href");
+        var link = letterLink.GetHref();
         return new LetterLink(letter, link!);
     }
 }

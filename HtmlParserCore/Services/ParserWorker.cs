@@ -17,8 +17,6 @@ public class ParserWorker<T>
     private IParserSettings _parserSettings;
     private HtmlLoader _htmlLoader;
     
-    public bool Active { get; private set; }
-
     public IParser<T> Parser
     {
         get => _parser;

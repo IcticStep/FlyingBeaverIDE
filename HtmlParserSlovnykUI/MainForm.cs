@@ -1,23 +1,28 @@
 using HtmlParserSlovnykUA;
+using HtmlParserSlovnykUA.Parsers.Common;
 using HtmlParserSlovnykUA.Parsers.LettersLinksParser;
 
 namespace HtmlParserSlovnykUI;
 
 public partial class MainForm : Form
 {
+    private const string RowsLinkDataCountLabel = "Кількість посилань: ";
     private const string RowsDataCountLabel = "Кількість записів: ";
-    private const string FilesDescription = "JSON Data File";
-    private const string FileExtension = "json";
-    private const string FileFilter = $"{FilesDescription}|*.{FileExtension}";
+    private const string LettersFileName = "LettersLinks";
+    private const string SublettersFileName = "SublettersLinks";
+
     private readonly SlovnykUAParser _slovnykUaParser = new();
     private List<Button> _buttons;
+    private readonly FileSaver _fileSaver = new();
 
     public MainForm()
     {
         InitializeComponent();
-        _slovnykUaParser.OnUpdate += _ => UpdateView();
+        _slovnykUaParser.OnProgressDone += (_, progress) => UpdateProgressInfo(progress);
         _slovnykUaParser.OnFinish += _ => EnableButtons();
+        _slovnykUaParser.OnFinish += _ => UpdateView();
         InitButtonsList();
+        UpdateView();
     }
 
     private void InitButtonsList()
@@ -35,19 +40,46 @@ public partial class MainForm : Form
             WordsLinksSaveButton,
             WordsParseButton,
             WordsOpenButton,
-            WordsLinksSaveButton
+            WordsSaveButton
         };
     }
 
     private void ParseLetters(object sender, EventArgs e)
     {
         DisableButtons();
+        CurrentOperationName.Text = "Парсинг букв";
+        ProgressOperationsCounter.Text = "0/1";
         _slovnykUaParser.StartParsingLetterLinks();
     }
 
+    private void ParseSubletters(object sender, EventArgs e)
+    {
+        if (!_slovnykUaParser.CanParseSubletters)
+        {
+            ShowError("Неможливо виконати парсинг. Необхідні посилання на букви.");
+            return;
+        }
+
+        CurrentOperationName.Text = "Парсинг підрозділів букв";
+        DisableButtons();
+        _slovnykUaParser.StartParsingSubletterLinks();
+    }
+
+    private void UpdateProgressInfo(ProgressInfo progressInfo)
+    {
+        ProgressOperationsCounter.Text = progressInfo.ToString();
+        ProgressBar.Value = (int)progressInfo.FancyProgressPercents;
+    }
+
+    private static void ShowError(string message) =>
+        MessageBox.Show(message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
     private void UpdateView()
     {
-        LettersDataRows.Text = RowsDataCountLabel + _slovnykUaParser.LetterLinks.Count;
+        LettersDataRows.Text = RowsLinkDataCountLabel + _slovnykUaParser.LetterLinksDataRowsCount;
+        SublettersDataRows.Text = RowsLinkDataCountLabel + _slovnykUaParser.SubletterLinksDataRowsCount;
+        WordLinksDataRows.Text = RowsLinkDataCountLabel + 0;
+        WordsDataRows.Text = RowsDataCountLabel + 0;
     }
 
     private void EnableButtons() =>
@@ -56,59 +88,31 @@ public partial class MainForm : Form
     private void DisableButtons() =>
         _buttons.ForEach(button => button.Enabled = false);
 
-    private void SaveLettersLinksData(object sender, EventArgs e)
-    {
-        var saveDialog = GetNewSaveDialog("LettersLinks");
-        if (saveDialog.ShowDialog() != DialogResult.OK)
-            return;
-
-        SaveDataToFile(_slovnykUaParser.LetterLinksJson, saveDialog);
-    }
+    private void SaveLettersLinksData(object sender, EventArgs e) =>
+        _fileSaver.SaveData(LettersFileName, _slovnykUaParser.LetterLinksJson);
 
     private void LoadLettersData(object sender, EventArgs e)
     {
-        var loadDialog = GetNewLoadDialog("LettersLinks");
-        if (loadDialog.ShowDialog() != DialogResult.OK)
+        var loaded = _fileSaver.LoadData(LettersFileName);
+        if (string.IsNullOrWhiteSpace(loaded))
             return;
 
-        var loaded = LoadTextFromFile(loadDialog);
         _slovnykUaParser.LetterLinksJson = loaded;
         UpdateView();
     }
 
-    private static string LoadTextFromFile(FileDialog loadFileDialog)
+
+
+    private void LoadSublettersData(object sender, EventArgs e)
     {
-        using var reader = new StreamReader(loadFileDialog.FileName);
-        return reader.ReadToEnd();
+        var loaded = _fileSaver.LoadData(SublettersFileName);
+        if (string.IsNullOrWhiteSpace(loaded))
+            return;
+
+        _slovnykUaParser.SubletterLinksJson = loaded;
+        UpdateView();
     }
 
-    private static void SaveDataToFile(string data, FileDialog saveFileDialog)
-    {
-        using var fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create);
-        using var writer = new StreamWriter(fileStream);
-        writer.WriteLine(data);
-    }
-
-    private OpenFileDialog GetNewLoadDialog(string fileName)
-    {
-        var saveFileDialog = new OpenFileDialog();
-        ConfigureDialog(fileName, saveFileDialog);
-        return saveFileDialog;
-    }
-
-    private SaveFileDialog GetNewSaveDialog(string fileName)
-    {
-        var saveFileDialog = new SaveFileDialog();
-        ConfigureDialog(fileName, saveFileDialog);
-        return saveFileDialog;
-    }
-
-    private static void ConfigureDialog(string fileName, FileDialog saveFileDialog)
-    {
-        saveFileDialog.Filter = FileFilter;
-        saveFileDialog.Title = fileName;
-        saveFileDialog.FileName = fileName;
-        saveFileDialog.DefaultExt = FileExtension;
-        saveFileDialog.AddExtension = true;
-    }
+    private void SaveSublettersData(object sender, EventArgs e) =>
+        _fileSaver.SaveData(SublettersFileName, _slovnykUaParser.SubletterLinksJson);
 }
