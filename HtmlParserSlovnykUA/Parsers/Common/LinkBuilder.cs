@@ -9,5 +9,5 @@ public class LinkBuilder
     private readonly string _mainDomainUrl;
 
     public LetterLink GetAbsoluteLetterLink(LetterLink linkWithRelative) => 
-        new(linkWithRelative.Letter, _mainDomainUrl + linkWithRelative);
+        new(linkWithRelative.Letter, _mainDomainUrl + linkWithRelative.Link);
 }
