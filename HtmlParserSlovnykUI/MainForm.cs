@@ -10,6 +10,8 @@ public partial class MainForm : Form
     private const string RowsDataCountLabel = "Кількість записів: ";
     private const string LettersFileName = "LettersLinks";
     private const string SublettersFileName = "SublettersLinks";
+    private const string WordLinksFileName = "WordLinks";
+    private const string ErrorHeader = "Помилка";
 
     private readonly SlovnykUAParser _slovnykUaParser = new();
     private List<Button> _buttons;
@@ -65,6 +67,19 @@ public partial class MainForm : Form
         _slovnykUaParser.StartParsingSubletterLinks();
     }
 
+    private void ParseWordsLinks(object sender, EventArgs e)
+    {
+        if (!_slovnykUaParser.CanParseWordsLinks)
+        {
+            ShowError("Неможливо виконати парсинг. Необхідні посилання на підрозділи букв.");
+            return;
+        }
+
+        CurrentOperationName.Text = "Парсинг ссилок на слова";
+        DisableButtons();
+        _slovnykUaParser.StartParsingWordsLinks();
+    }
+
     private void UpdateProgressInfo(ProgressInfo progressInfo)
     {
         ProgressOperationsCounter.Text = progressInfo.ToString();
@@ -72,13 +87,13 @@ public partial class MainForm : Form
     }
 
     private static void ShowError(string message) =>
-        MessageBox.Show(message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show(message, ErrorHeader, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
     private void UpdateView()
     {
         LettersDataRows.Text = RowsLinkDataCountLabel + _slovnykUaParser.LetterLinksDataRowsCount;
         SublettersDataRows.Text = RowsLinkDataCountLabel + _slovnykUaParser.SubletterLinksDataRowsCount;
-        WordLinksDataRows.Text = RowsLinkDataCountLabel + 0;
+        WordLinksDataRows.Text = RowsLinkDataCountLabel + _slovnykUaParser.WordsLinksDataRowsCount;
         WordsDataRows.Text = RowsDataCountLabel + 0;
     }
 
@@ -101,8 +116,6 @@ public partial class MainForm : Form
         UpdateView();
     }
 
-
-
     private void LoadSublettersData(object sender, EventArgs e)
     {
         var loaded = _fileSaver.LoadData(SublettersFileName);
@@ -113,6 +126,19 @@ public partial class MainForm : Form
         UpdateView();
     }
 
+    private void LoadWordsLinksData(object sender, EventArgs e)
+    {
+        var loaded = _fileSaver.LoadData(WordLinksFileName);
+        if (string.IsNullOrWhiteSpace(loaded))
+            return;
+
+        _slovnykUaParser.WordLinksJson = loaded;
+        UpdateView();
+    }
+
     private void SaveSublettersData(object sender, EventArgs e) =>
         _fileSaver.SaveData(SublettersFileName, _slovnykUaParser.SubletterLinksJson);
+
+    private void SaveWordLinksData(object sender, EventArgs e) => 
+        _fileSaver.SaveData(WordLinksFileName, _slovnykUaParser.WordLinksJson);
 }

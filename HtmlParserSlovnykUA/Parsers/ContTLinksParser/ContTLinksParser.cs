@@ -3,18 +3,23 @@ using AngleSharp.Html.Dom;
 using HtmlParserCore.API;
 using HTMLParserCore.Extensions;
 
-namespace HtmlParserSlovnykUA.Parsers.SublettersLinksParser;
+namespace HtmlParserSlovnykUA.Parsers.ContTLinksParser;
 
-public class SubletterLinksParser : IParser<SubletterLink>
+public class ContTLinksParser : IParser<ContTLink>
 {
     private const string SubletterLinkClassName = "cont_link";
     
-    public SubletterLink Parse(IHtmlDocument document)
+    public ContTLink? Parse(IHtmlDocument document)
     {
         var subletterLinksElements = document.FindClasses(SubletterLinkClassName);
+        if (!subletterLinksElements.Any())
+            return null;
         var links = GetLinks(subletterLinksElements);
+        if (!links.Any())
+            return null;
+        
         var letter = GetLetterOf(subletterLinksElements);
-        return new SubletterLink(letter, links!);
+        return new ContTLink(letter, links.ToList());
     }
 
     private static IEnumerable<string?> GetLinks(IEnumerable<IElement> subletterLinksElements) => 

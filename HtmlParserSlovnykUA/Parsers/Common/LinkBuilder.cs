@@ -1,5 +1,5 @@
-﻿using HtmlParserSlovnykUA.Parsers.LettersLinksParser;
-using HtmlParserSlovnykUA.Parsers.SublettersLinksParser;
+﻿using HtmlParserSlovnykUA.Parsers.ContTLinksParser;
+using HtmlParserSlovnykUA.Parsers.LettersLinksParser;
 
 namespace HtmlParserSlovnykUA.Parsers.Common;
 
@@ -15,10 +15,10 @@ public class LinkBuilder
         return linkData;
     }
 
-    public SubletterLink ModifyToAbsoluteLink(SubletterLink linkWithRelative)
+    public ContTLink? ModifyToAbsoluteLink(ContTLink? linkWithRelative)
     {
         linkWithRelative.Links = linkWithRelative.Links
-            .Select(link => _mainDomainUrl + link)
+            .Select(link => _mainDomainUrl + "/" + link)
             .ToList();
         
         return linkWithRelative;

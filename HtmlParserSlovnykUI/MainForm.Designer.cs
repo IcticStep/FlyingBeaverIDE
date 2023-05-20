@@ -530,6 +530,7 @@ partial class MainForm
         WordsLinksSaveButton.TabIndex = 2;
         WordsLinksSaveButton.Text = "Зберегти";
         WordsLinksSaveButton.UseVisualStyleBackColor = true;
+        WordsLinksSaveButton.Click += SaveWordLinksData;
         // 
         // WordsLinksOpenButton
         // 
@@ -540,6 +541,7 @@ partial class MainForm
         WordsLinksOpenButton.TabIndex = 1;
         WordsLinksOpenButton.Text = "Відкрити";
         WordsLinksOpenButton.UseVisualStyleBackColor = true;
+        WordsLinksOpenButton.Click += LoadWordsLinksData;
         // 
         // WordsLinksParseButton
         // 
@@ -550,6 +552,7 @@ partial class MainForm
         WordsLinksParseButton.TabIndex = 0;
         WordsLinksParseButton.Text = "Парсити";
         WordsLinksParseButton.UseVisualStyleBackColor = true;
+        WordsLinksParseButton.Click += ParseWordsLinks;
         // 
         // panel12
         // 
