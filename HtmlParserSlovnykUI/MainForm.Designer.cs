@@ -81,7 +81,6 @@ partial class MainForm
         WordsOpenButton = new Button();
         WordsParseButton = new Button();
         Panel15 = new Panel();
-        comboBox2 = new ComboBox();
         WordsDataRows = new Label();
         label5 = new Label();
         panel1.SuspendLayout();
@@ -196,7 +195,7 @@ partial class MainForm
         LettersPanel.Dock = DockStyle.Top;
         LettersPanel.Location = new Point(0, 102);
         LettersPanel.Name = "LettersPanel";
-        LettersPanel.Size = new Size(915, 59);
+        LettersPanel.Size = new Size(915, 60);
         LettersPanel.TabIndex = 1;
         // 
         // panel3
@@ -205,7 +204,7 @@ partial class MainForm
         panel3.Dock = DockStyle.Fill;
         panel3.Location = new Point(482, 0);
         panel3.Name = "panel3";
-        panel3.Size = new Size(433, 59);
+        panel3.Size = new Size(433, 60);
         panel3.TabIndex = 1;
         // 
         // tableLayoutPanel1
@@ -222,7 +221,7 @@ partial class MainForm
         tableLayoutPanel1.Name = "tableLayoutPanel1";
         tableLayoutPanel1.RowCount = 1;
         tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-        tableLayoutPanel1.Size = new Size(433, 59);
+        tableLayoutPanel1.Size = new Size(433, 60);
         tableLayoutPanel1.TabIndex = 0;
         // 
         // LettersSaveButton
@@ -230,7 +229,7 @@ partial class MainForm
         LettersSaveButton.Dock = DockStyle.Fill;
         LettersSaveButton.Location = new Point(294, 3);
         LettersSaveButton.Name = "LettersSaveButton";
-        LettersSaveButton.Size = new Size(136, 53);
+        LettersSaveButton.Size = new Size(136, 54);
         LettersSaveButton.TabIndex = 2;
         LettersSaveButton.Text = "Зберегти";
         LettersSaveButton.UseVisualStyleBackColor = true;
@@ -241,7 +240,7 @@ partial class MainForm
         LettersOpenButton.Dock = DockStyle.Fill;
         LettersOpenButton.Location = new Point(148, 3);
         LettersOpenButton.Name = "LettersOpenButton";
-        LettersOpenButton.Size = new Size(140, 53);
+        LettersOpenButton.Size = new Size(140, 54);
         LettersOpenButton.TabIndex = 1;
         LettersOpenButton.Text = "Відкрити";
         LettersOpenButton.UseVisualStyleBackColor = true;
@@ -252,7 +251,7 @@ partial class MainForm
         LettersParseButton.Dock = DockStyle.Fill;
         LettersParseButton.Location = new Point(3, 3);
         LettersParseButton.Name = "LettersParseButton";
-        LettersParseButton.Size = new Size(139, 53);
+        LettersParseButton.Size = new Size(139, 54);
         LettersParseButton.TabIndex = 0;
         LettersParseButton.Text = "Парсити";
         LettersParseButton.UseVisualStyleBackColor = true;
@@ -265,7 +264,7 @@ partial class MainForm
         panel2.Dock = DockStyle.Left;
         panel2.Location = new Point(0, 0);
         panel2.Name = "panel2";
-        panel2.Size = new Size(482, 59);
+        panel2.Size = new Size(482, 60);
         panel2.TabIndex = 0;
         // 
         // LettersDataRows
@@ -274,7 +273,7 @@ partial class MainForm
         LettersDataRows.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
         LettersDataRows.Location = new Point(0, 29);
         LettersDataRows.Name = "LettersDataRows";
-        LettersDataRows.Size = new Size(482, 30);
+        LettersDataRows.Size = new Size(482, 31);
         LettersDataRows.TabIndex = 2;
         LettersDataRows.Text = "Кількість записів: 0";
         LettersDataRows.TextAlign = ContentAlignment.BottomLeft;
@@ -389,9 +388,9 @@ partial class MainForm
         SublettersPanel.Controls.Add(panel9);
         SublettersPanel.Controls.Add(panel10);
         SublettersPanel.Dock = DockStyle.Top;
-        SublettersPanel.Location = new Point(0, 161);
+        SublettersPanel.Location = new Point(0, 162);
         SublettersPanel.Name = "SublettersPanel";
-        SublettersPanel.Size = new Size(915, 59);
+        SublettersPanel.Size = new Size(915, 60);
         SublettersPanel.TabIndex = 2;
         // 
         // panel9
@@ -400,7 +399,7 @@ partial class MainForm
         panel9.Dock = DockStyle.Fill;
         panel9.Location = new Point(482, 0);
         panel9.Name = "panel9";
-        panel9.Size = new Size(433, 59);
+        panel9.Size = new Size(433, 60);
         panel9.TabIndex = 1;
         // 
         // tableLayoutPanel4
@@ -417,7 +416,7 @@ partial class MainForm
         tableLayoutPanel4.Name = "tableLayoutPanel4";
         tableLayoutPanel4.RowCount = 1;
         tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-        tableLayoutPanel4.Size = new Size(433, 59);
+        tableLayoutPanel4.Size = new Size(433, 60);
         tableLayoutPanel4.TabIndex = 0;
         // 
         // SublettersSaveButton
@@ -425,7 +424,7 @@ partial class MainForm
         SublettersSaveButton.Dock = DockStyle.Fill;
         SublettersSaveButton.Location = new Point(294, 3);
         SublettersSaveButton.Name = "SublettersSaveButton";
-        SublettersSaveButton.Size = new Size(136, 53);
+        SublettersSaveButton.Size = new Size(136, 54);
         SublettersSaveButton.TabIndex = 2;
         SublettersSaveButton.Text = "Зберегти";
         SublettersSaveButton.UseVisualStyleBackColor = true;
@@ -436,7 +435,7 @@ partial class MainForm
         SublettersOpenButton.Dock = DockStyle.Fill;
         SublettersOpenButton.Location = new Point(148, 3);
         SublettersOpenButton.Name = "SublettersOpenButton";
-        SublettersOpenButton.Size = new Size(140, 53);
+        SublettersOpenButton.Size = new Size(140, 54);
         SublettersOpenButton.TabIndex = 1;
         SublettersOpenButton.Text = "Відкрити";
         SublettersOpenButton.UseVisualStyleBackColor = true;
@@ -447,7 +446,7 @@ partial class MainForm
         SublettersParseButton.Dock = DockStyle.Fill;
         SublettersParseButton.Location = new Point(3, 3);
         SublettersParseButton.Name = "SublettersParseButton";
-        SublettersParseButton.Size = new Size(139, 53);
+        SublettersParseButton.Size = new Size(139, 54);
         SublettersParseButton.TabIndex = 0;
         SublettersParseButton.Text = "Парсити";
         SublettersParseButton.UseVisualStyleBackColor = true;
@@ -460,7 +459,7 @@ partial class MainForm
         panel10.Dock = DockStyle.Left;
         panel10.Location = new Point(0, 0);
         panel10.Name = "panel10";
-        panel10.Size = new Size(482, 59);
+        panel10.Size = new Size(482, 60);
         panel10.TabIndex = 0;
         // 
         // SublettersDataRows
@@ -469,7 +468,7 @@ partial class MainForm
         SublettersDataRows.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
         SublettersDataRows.Location = new Point(0, 29);
         SublettersDataRows.Name = "SublettersDataRows";
-        SublettersDataRows.Size = new Size(482, 30);
+        SublettersDataRows.Size = new Size(482, 31);
         SublettersDataRows.TabIndex = 2;
         SublettersDataRows.Text = "Кількість записів: 0";
         SublettersDataRows.TextAlign = ContentAlignment.BottomLeft;
@@ -490,9 +489,9 @@ partial class MainForm
         WordinksPanel.Controls.Add(panel11);
         WordinksPanel.Controls.Add(panel12);
         WordinksPanel.Dock = DockStyle.Top;
-        WordinksPanel.Location = new Point(0, 220);
+        WordinksPanel.Location = new Point(0, 222);
         WordinksPanel.Name = "WordinksPanel";
-        WordinksPanel.Size = new Size(915, 63);
+        WordinksPanel.Size = new Size(915, 60);
         WordinksPanel.TabIndex = 3;
         // 
         // panel11
@@ -501,7 +500,7 @@ partial class MainForm
         panel11.Dock = DockStyle.Fill;
         panel11.Location = new Point(482, 0);
         panel11.Name = "panel11";
-        panel11.Size = new Size(433, 63);
+        panel11.Size = new Size(433, 60);
         panel11.TabIndex = 1;
         // 
         // tableLayoutPanel5
@@ -518,7 +517,7 @@ partial class MainForm
         tableLayoutPanel5.Name = "tableLayoutPanel5";
         tableLayoutPanel5.RowCount = 1;
         tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-        tableLayoutPanel5.Size = new Size(433, 63);
+        tableLayoutPanel5.Size = new Size(433, 60);
         tableLayoutPanel5.TabIndex = 0;
         // 
         // WordsLinksSaveButton
@@ -526,7 +525,7 @@ partial class MainForm
         WordsLinksSaveButton.Dock = DockStyle.Fill;
         WordsLinksSaveButton.Location = new Point(294, 3);
         WordsLinksSaveButton.Name = "WordsLinksSaveButton";
-        WordsLinksSaveButton.Size = new Size(136, 57);
+        WordsLinksSaveButton.Size = new Size(136, 54);
         WordsLinksSaveButton.TabIndex = 2;
         WordsLinksSaveButton.Text = "Зберегти";
         WordsLinksSaveButton.UseVisualStyleBackColor = true;
@@ -537,7 +536,7 @@ partial class MainForm
         WordsLinksOpenButton.Dock = DockStyle.Fill;
         WordsLinksOpenButton.Location = new Point(148, 3);
         WordsLinksOpenButton.Name = "WordsLinksOpenButton";
-        WordsLinksOpenButton.Size = new Size(140, 57);
+        WordsLinksOpenButton.Size = new Size(140, 54);
         WordsLinksOpenButton.TabIndex = 1;
         WordsLinksOpenButton.Text = "Відкрити";
         WordsLinksOpenButton.UseVisualStyleBackColor = true;
@@ -548,7 +547,7 @@ partial class MainForm
         WordsLinksParseButton.Dock = DockStyle.Fill;
         WordsLinksParseButton.Location = new Point(3, 3);
         WordsLinksParseButton.Name = "WordsLinksParseButton";
-        WordsLinksParseButton.Size = new Size(139, 57);
+        WordsLinksParseButton.Size = new Size(139, 54);
         WordsLinksParseButton.TabIndex = 0;
         WordsLinksParseButton.Text = "Парсити";
         WordsLinksParseButton.UseVisualStyleBackColor = true;
@@ -561,7 +560,7 @@ partial class MainForm
         panel12.Dock = DockStyle.Left;
         panel12.Location = new Point(0, 0);
         panel12.Name = "panel12";
-        panel12.Size = new Size(482, 63);
+        panel12.Size = new Size(482, 60);
         panel12.TabIndex = 0;
         // 
         // WordLinksDataRows
@@ -591,9 +590,9 @@ partial class MainForm
         WordsParsing.Controls.Add(panel13);
         WordsParsing.Controls.Add(Panel15);
         WordsParsing.Dock = DockStyle.Top;
-        WordsParsing.Location = new Point(0, 283);
+        WordsParsing.Location = new Point(0, 282);
         WordsParsing.Name = "WordsParsing";
-        WordsParsing.Size = new Size(915, 96);
+        WordsParsing.Size = new Size(915, 60);
         WordsParsing.TabIndex = 4;
         // 
         // panel13
@@ -602,7 +601,7 @@ partial class MainForm
         panel13.Dock = DockStyle.Fill;
         panel13.Location = new Point(482, 0);
         panel13.Name = "panel13";
-        panel13.Size = new Size(433, 96);
+        panel13.Size = new Size(433, 60);
         panel13.TabIndex = 1;
         // 
         // tableLayoutPanel6
@@ -619,7 +618,7 @@ partial class MainForm
         tableLayoutPanel6.Name = "tableLayoutPanel6";
         tableLayoutPanel6.RowCount = 1;
         tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-        tableLayoutPanel6.Size = new Size(433, 96);
+        tableLayoutPanel6.Size = new Size(433, 60);
         tableLayoutPanel6.TabIndex = 0;
         // 
         // WordsSaveButton
@@ -627,50 +626,43 @@ partial class MainForm
         WordsSaveButton.Dock = DockStyle.Fill;
         WordsSaveButton.Location = new Point(294, 3);
         WordsSaveButton.Name = "WordsSaveButton";
-        WordsSaveButton.Size = new Size(136, 90);
+        WordsSaveButton.Size = new Size(136, 54);
         WordsSaveButton.TabIndex = 2;
         WordsSaveButton.Text = "Зберегти";
         WordsSaveButton.UseVisualStyleBackColor = true;
+        WordsSaveButton.Click += SaveWordsData;
         // 
         // WordsOpenButton
         // 
         WordsOpenButton.Dock = DockStyle.Fill;
         WordsOpenButton.Location = new Point(148, 3);
         WordsOpenButton.Name = "WordsOpenButton";
-        WordsOpenButton.Size = new Size(140, 90);
+        WordsOpenButton.Size = new Size(140, 54);
         WordsOpenButton.TabIndex = 1;
         WordsOpenButton.Text = "Відкрити";
         WordsOpenButton.UseVisualStyleBackColor = true;
+        WordsOpenButton.Click += LoadWordsData;
         // 
         // WordsParseButton
         // 
         WordsParseButton.Dock = DockStyle.Fill;
         WordsParseButton.Location = new Point(3, 3);
         WordsParseButton.Name = "WordsParseButton";
-        WordsParseButton.Size = new Size(139, 90);
+        WordsParseButton.Size = new Size(139, 54);
         WordsParseButton.TabIndex = 0;
         WordsParseButton.Text = "Парсити";
         WordsParseButton.UseVisualStyleBackColor = true;
+        WordsParseButton.Click += ParseWords;
         // 
         // Panel15
         // 
-        Panel15.Controls.Add(comboBox2);
         Panel15.Controls.Add(WordsDataRows);
         Panel15.Controls.Add(label5);
         Panel15.Dock = DockStyle.Left;
         Panel15.Location = new Point(0, 0);
         Panel15.Name = "Panel15";
-        Panel15.Size = new Size(482, 96);
+        Panel15.Size = new Size(482, 60);
         Panel15.TabIndex = 0;
-        // 
-        // comboBox2
-        // 
-        comboBox2.Dock = DockStyle.Fill;
-        comboBox2.FormattingEnabled = true;
-        comboBox2.Location = new Point(0, 59);
-        comboBox2.Name = "comboBox2";
-        comboBox2.Size = new Size(482, 33);
-        comboBox2.TabIndex = 4;
         // 
         // WordsDataRows
         // 
@@ -698,7 +690,7 @@ partial class MainForm
         // 
         AutoScaleDimensions = new SizeF(11F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(915, 380);
+        ClientSize = new Size(915, 342);
         Controls.Add(WordsParsing);
         Controls.Add(WordinksPanel);
         Controls.Add(SublettersPanel);
@@ -783,7 +775,6 @@ partial class MainForm
     private Panel Panel15;
     private Label WordsDataRows;
     private Label label5;
-    private ComboBox comboBox2;
     private Label label6;
     private ProgressBar ProgressBar;
     private Panel panel8;

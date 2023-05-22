@@ -1,10 +1,12 @@
 ﻿using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
+using HtmlParserCore.API;
 using HtmlParserCore.Services;
 using HtmlParserSlovnykUA.Parsers.Common;
 using HtmlParserSlovnykUA.Parsers.ContTLinksParser;
 using HtmlParserSlovnykUA.Parsers.LettersLinksParser;
+using HtmlParserSlovnykUA.Parsers.WordsParser;
 
 #pragma warning disable CS8619
 #pragma warning disable CS8601
@@ -29,21 +31,26 @@ public class SlovnykUAParser
     private List<LetterLink> _letterLinks = new();
     private List<ContTLink?> _subletterLinks = new();
     private List<ContTLink> _wordsLinks = new();
+    private List<WordParsedContent?> _words = new();
     
-    private ParserWorker<IEnumerable<LetterLink>> _letterLinksParser = null!;
-    private ParserWorker<ContTLink> _contTLinksParser = null!;
+    private ParserWorker<IEnumerable<LetterLink>> _letterLinksParserWorker = null!;
+    private ParserWorker<ContTLink> _contTLinksParserWorker = null!;
+    private ParserWorker<WordParsedContent> _wordsParserWorker = null!;
     
     private Queue<LetterLink> _letterLinksToSubletterQueue = null!;
     private Queue<string> _subletterLinksToWordsQueue = null!;
+    private Queue<string> _wordLinksToWordsQueue = null!;
 
     public int LetterLinksDataRowsCount => _letterLinks.Count;
     public int SubletterLinksDataRowsCount => _subletterLinks.Sum(
         linkContainer => linkContainer.Links.Count);
     public int WordsLinksDataRowsCount => _wordsLinks.Sum(
         linkContainer => linkContainer.Links.Count);
+    public int WordsDataRowsCount => _words.Count;
     
     public bool CanParseSubletters => _letterLinks.Count > 0;
     public bool CanParseWordsLinks => _subletterLinks.Count > 0;
+    public bool CanParseWords => _wordsLinks.Count > 0;
 
     public string LetterLinksJson
     {
@@ -63,13 +70,19 @@ public class SlovnykUAParser
         set => _wordsLinks = JsonSerializer.Deserialize<List<ContTLink>>(value, _jsonOptions);
     }
 
+    public string WordsJson 
+    { 
+        get => JsonSerializer.Serialize(_words, _jsonOptions);
+        set => _words = JsonSerializer.Deserialize<List<WordParsedContent>>(value, _jsonOptions); 
+    }
+
     public void StartParsingLetterLinks()
     {
-        _letterLinksParser = new(
+        _letterLinksParserWorker = new(
             new LettersLinksParser(),
             new LettersLinksParserSettings());
-        _letterLinksParser.OnCompleted += ProceedLetterLinks;
-        _letterLinksParser.Start();
+        _letterLinksParserWorker.OnCompleted += ProceedLetterLinks;
+        _letterLinksParserWorker.Start();
     }
 
     public void StartParsingSubletterLinks()
@@ -80,8 +93,8 @@ public class SlovnykUAParser
         InitSublettersParsing();
 
         _currentProgress = new ProgressInfo(_letterLinksToSubletterQueue.Count, 0);
-        _contTLinksParser.ParserSettings = GetNextLinkToSubletterFromLetter();
-        _contTLinksParser.Start();
+        _contTLinksParserWorker.ParserSettings = GetNextLinkToSubletterFromLetter();
+        _contTLinksParserWorker.Start();
     }
     
     public void StartParsingWordsLinks()
@@ -92,31 +105,61 @@ public class SlovnykUAParser
         InitWordsLinksParsing();
 
         _currentProgress = new ProgressInfo(_subletterLinksToWordsQueue.Count, 0);
-        _contTLinksParser.ParserSettings = GetNextLinkToWordsLinksFromSubletter();
-        _contTLinksParser.Start();
+        _contTLinksParserWorker.ParserSettings = GetNextLinkToWordsLinksFromSubletter();
+        _contTLinksParserWorker.Start();
+    }
+    
+    public void StartParsingWords()
+    {
+        if (!CanParseWords)
+            throw new InvalidOperationException();
+        
+        InitWordsParsing();
+
+        _currentProgress = new ProgressInfo(_wordLinksToWordsQueue.Count, 0);
+        _wordsParserWorker.ParserSettings = GetNextLinkToWordsFromWordLinks();
+        _wordsParserWorker.Start();
     }
 
     private void InitSublettersParsing()
     {
         _subletterLinks.Clear();
-        _contTLinksParser = new(new ContTLinksParser());
+        _contTLinksParserWorker = new(new ContTLinksParser());
         _letterLinksToSubletterQueue = new(_letterLinks);
-        _contTLinksParser.OnCompleted += ProceedSubletterContTLinks;
+        _contTLinksParserWorker.OnCompleted += ProceedSubletterContTLinks;
     }
-    
+
     private void InitWordsLinksParsing()
     {
         _wordsLinks.Clear();
-        _contTLinksParser = new(new ContTLinksParser());
+        _contTLinksParserWorker = new(new ContTLinksParser());
         _subletterLinksToWordsQueue = new(_subletterLinks.SelectMany(linkGroup => linkGroup.Links));
-        _contTLinksParser.OnCompleted += ProceedWordsLinksContTLinks;
+        _contTLinksParserWorker.OnCompleted += ProceedWordsLinksContTLinks;
     }
 
-    private ContTLinksParserSettings GetNextLinkToSubletterFromLetter() 
-        => new(_letterLinksToSubletterQueue.Dequeue().Link);
+    private void InitWordsParsing()
+    {
+        _words.Clear();
+        _wordsParserWorker = new(new WordsParser());
+        _wordLinksToWordsQueue = new(_wordsLinks.SelectMany(linkGroup => linkGroup.Links));
+        _wordsParserWorker.OnCompleted += ProceedWords;
+    }
 
-    private ContTLinksParserSettings GetNextLinkToWordsLinksFromSubletter() 
-        => new(_subletterLinksToWordsQueue.Dequeue());
+    private ContTLinksParserSettings GetNextLinkToSubletterFromLetter() => 
+        new(_letterLinksToSubletterQueue.Dequeue().Link);
+
+    private ContTLinksParserSettings GetNextLinkToWordsLinksFromSubletter() => 
+        new(_subletterLinksToWordsQueue.Dequeue());
+
+    private WordsParserSettings GetNextLinkToWordsFromWordLinks() => 
+        new(_wordLinksToWordsQueue.Dequeue());
+
+    private void ProceedLetterLinks(IEnumerable<LetterLink> links)
+    {
+        _letterLinks = links.Select(_linkBuilder.ModifyToAbsoluteLink).ToList();
+        OnProgressDone?.Invoke(this, new ProgressInfo(1, 1));
+        OnFinish?.Invoke(this);
+    }
 
     private void ProceedSubletterContTLinks(ContTLink? result)
     {
@@ -130,10 +173,10 @@ public class SlovnykUAParser
             return;
         }
         
-        _contTLinksParser.ParserSettings = GetNextLinkToSubletterFromLetter();
-        _contTLinksParser.Start();
+        _contTLinksParserWorker.ParserSettings = GetNextLinkToSubletterFromLetter();
+        _contTLinksParserWorker.Start();
     }
-    
+
     private void ProceedWordsLinksContTLinks(ContTLink? result)
     {
         if(result is not null)
@@ -146,20 +189,29 @@ public class SlovnykUAParser
             return;
         }
         
-        _contTLinksParser.ParserSettings = GetNextLinkToWordsLinksFromSubletter();
-        _contTLinksParser.Start();
+        _contTLinksParserWorker.ParserSettings = GetNextLinkToWordsLinksFromSubletter();
+        _contTLinksParserWorker.Start();
+    }
+
+    private void ProceedWords(WordParsedContent? result)
+    {
+        if(result is not null)
+            _words.Add(result);
+        
+        SignalProgress();
+        if (_currentProgress.Finished)
+        {
+            OnFinish?.Invoke(this);
+            return;
+        }
+
+        _wordsParserWorker.ParserSettings = GetNextLinkToWordsFromWordLinks();
+        _wordsParserWorker.Start();
     }
 
     private void SignalProgress()
     {
         _currentProgress = ProgressInfo.WithIncreasedProgress(_currentProgress);
         OnProgressDone?.Invoke(this, _currentProgress);
-    }
-
-    private void ProceedLetterLinks(IEnumerable<LetterLink> links)
-    {
-        _letterLinks = links.Select(_linkBuilder.ModifyToAbsoluteLink).ToList();
-        OnProgressDone?.Invoke(this, new ProgressInfo(1, 1));
-        OnFinish?.Invoke(this);
     }
 }

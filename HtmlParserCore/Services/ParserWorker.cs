@@ -16,6 +16,7 @@ public class ParserWorker<T>
     private IParser<T> _parser;
     private IParserSettings _parserSettings;
     private HtmlLoader _htmlLoader;
+    private HtmlParser _domParser = new();
     
     public IParser<T> Parser
     {
@@ -38,8 +39,7 @@ public class ParserWorker<T>
     private async void Parse()
     {
         var source = await _htmlLoader.GetSource();
-        var domParser = new HtmlParser();
-        var document = await domParser.ParseDocumentAsync(source);
+        var document = await _domParser.ParseDocumentAsync(source);
         var result = _parser.Parse(document);
         
         OnCompleted?.Invoke(result);
