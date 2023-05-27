@@ -1,4 +1,5 @@
 ﻿using HtmlParserCore.Services;
+using HtmlParserSlovnyk.Domain;
 using HtmlParserSlovnyk.Logic.Parsers.Common;
 
 namespace HtmlParserSlovnyk.Logic.Parsers.WordsParser;

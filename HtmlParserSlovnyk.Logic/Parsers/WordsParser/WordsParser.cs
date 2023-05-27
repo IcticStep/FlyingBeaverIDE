@@ -3,6 +3,7 @@ using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using HtmlParserCore.API;
 using HTMLParserCore.Extensions;
+using HtmlParserSlovnyk.Domain;
 
 namespace HtmlParserSlovnyk.Logic.Parsers.WordsParser;
 

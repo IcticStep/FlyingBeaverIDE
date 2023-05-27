@@ -2,6 +2,7 @@
 using System.Text.Json;
 using System.Text.Unicode;
 using HtmlParserCore.Services;
+using HtmlParserSlovnyk.Domain;
 using HtmlParserSlovnyk.Logic.Parsers.Common;
 using HtmlParserSlovnyk.Logic.Parsers.ContTLinksParser;
 using HtmlParserSlovnyk.Logic.Parsers.LettersLinksParser;
