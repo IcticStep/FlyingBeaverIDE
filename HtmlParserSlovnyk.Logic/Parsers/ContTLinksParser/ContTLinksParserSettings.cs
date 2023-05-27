@@ -1,6 +1,6 @@
 ﻿using HtmlParserCore.API;
 
-namespace HtmlParserSlovnykUA.Parsers.ContTLinksParser;
+namespace HtmlParserSlovnyk.Logic.Parsers.ContTLinksParser;
 
 public class ContTLinksParserSettings : IParserSettings
 {

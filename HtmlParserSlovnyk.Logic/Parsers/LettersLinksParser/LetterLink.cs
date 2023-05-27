@@ -1,4 +1,4 @@
-﻿namespace HtmlParserSlovnykUA.Parsers.LettersLinksParser;
+﻿namespace HtmlParserSlovnyk.Logic.Parsers.LettersLinksParser;
 
 [Serializable]
 public class LetterLink

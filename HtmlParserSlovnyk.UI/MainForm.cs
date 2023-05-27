@@ -1,8 +1,7 @@
-using HtmlParserSlovnykUA;
-using HtmlParserSlovnykUA.Parsers.Common;
-using HtmlParserSlovnykUA.Parsers.LettersLinksParser;
+using HtmlParserSlovnyk.Logic;
+using HtmlParserSlovnyk.Logic.Parsers.Common;
 
-namespace HtmlParserSlovnykUI;
+namespace HtmlParserSlovnyk.UI;
 
 public partial class MainForm : Form
 {

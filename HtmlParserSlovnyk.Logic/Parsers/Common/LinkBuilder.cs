@@ -1,7 +1,7 @@
-﻿using HtmlParserSlovnykUA.Parsers.ContTLinksParser;
-using HtmlParserSlovnykUA.Parsers.LettersLinksParser;
+﻿using HtmlParserSlovnyk.Logic.Parsers.ContTLinksParser;
+using HtmlParserSlovnyk.Logic.Parsers.LettersLinksParser;
 
-namespace HtmlParserSlovnykUA.Parsers.Common;
+namespace HtmlParserSlovnyk.Logic.Parsers.Common;
 
 public class LinkBuilder
 {

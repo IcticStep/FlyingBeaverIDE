@@ -1,7 +1,7 @@
 ﻿using HtmlParserCore.Services;
-using HtmlParserSlovnykUA.Parsers.Common;
+using HtmlParserSlovnyk.Logic.Parsers.Common;
 
-namespace HtmlParserSlovnykUA.Parsers.WordsParser;
+namespace HtmlParserSlovnyk.Logic.Parsers.WordsParser;
 
 public class WordsParserMultiWorker
 {

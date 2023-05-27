@@ -2,15 +2,15 @@
 using System.Text.Json;
 using System.Text.Unicode;
 using HtmlParserCore.Services;
-using HtmlParserSlovnykUA.Parsers.Common;
-using HtmlParserSlovnykUA.Parsers.ContTLinksParser;
-using HtmlParserSlovnykUA.Parsers.LettersLinksParser;
-using HtmlParserSlovnykUA.Parsers.WordsParser;
+using HtmlParserSlovnyk.Logic.Parsers.Common;
+using HtmlParserSlovnyk.Logic.Parsers.ContTLinksParser;
+using HtmlParserSlovnyk.Logic.Parsers.LettersLinksParser;
+using HtmlParserSlovnyk.Logic.Parsers.WordsParser;
 
 #pragma warning disable CS8619
 #pragma warning disable CS8601
 
-namespace HtmlParserSlovnykUA;
+namespace HtmlParserSlovnyk.Logic;
 
 // ReSharper disable once InconsistentNaming
 public class SlovnykUAParser

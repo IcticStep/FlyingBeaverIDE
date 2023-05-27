@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\HtmlParserCore\HtmlParserCore.csproj" />
+      <ProjectReference Include="..\HtmlParserSlovnyk.Domain\HtmlParserSlovnyk.Domain.csproj" />
     </ItemGroup>
 
 </Project>

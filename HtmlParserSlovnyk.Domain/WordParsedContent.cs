@@ -1,4 +1,4 @@
-﻿namespace HtmlParserSlovnykUA.Parsers.WordsParser;
+﻿namespace HtmlParserSlovnyk.Logic.Parsers.WordsParser;
 
 [Serializable]
 public class WordParsedContent

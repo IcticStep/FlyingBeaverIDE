@@ -1,6 +1,6 @@
 ﻿using HtmlParserCore.API;
 
-namespace HtmlParserSlovnykUA.Parsers.WordsParser;
+namespace HtmlParserSlovnyk.Logic.Parsers.WordsParser;
 
 public class WordsParserSettings : IParserSettings
 {

@@ -3,7 +3,7 @@ using AngleSharp.Html.Dom;
 using HtmlParserCore.API;
 using HTMLParserCore.Extensions;
 
-namespace HtmlParserSlovnykUA.Parsers.ContTLinksParser;
+namespace HtmlParserSlovnyk.Logic.Parsers.ContTLinksParser;
 
 public class ContTLinksParser : IParser<ContTLink>
 {

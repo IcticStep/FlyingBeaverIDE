@@ -4,7 +4,7 @@ using AngleSharp.Html.Dom;
 using HtmlParserCore.API;
 using HTMLParserCore.Extensions;
 
-namespace HtmlParserSlovnykUA.Parsers.WordsParser;
+namespace HtmlParserSlovnyk.Logic.Parsers.WordsParser;
 
 public class WordsParser : IParser<WordParsedContent>
 {

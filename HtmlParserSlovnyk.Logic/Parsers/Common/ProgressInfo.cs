@@ -1,4 +1,4 @@
-﻿namespace HtmlParserSlovnykUA.Parsers.Common;
+﻿namespace HtmlParserSlovnyk.Logic.Parsers.Common;
 
 public class ProgressInfo
 {

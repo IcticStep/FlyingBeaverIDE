@@ -1,6 +1,6 @@
 ﻿using HtmlParserCore.API;
 
-namespace HtmlParserSlovnykUA.Parsers.LettersLinksParser;
+namespace HtmlParserSlovnyk.Logic.Parsers.LettersLinksParser;
 
 public class LettersLinksParserSettings : IParserSettings
 {

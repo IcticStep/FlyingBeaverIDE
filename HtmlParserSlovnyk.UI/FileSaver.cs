@@ -1,4 +1,4 @@
-﻿namespace HtmlParserSlovnykUI;
+﻿namespace HtmlParserSlovnyk.UI;
 
 public class FileSaver
 {

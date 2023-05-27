@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\HtmlParserSlovnykUA\HtmlParserSlovnykUA.csproj" />
+      <ProjectReference Include="..\HtmlParserSlovnyk.Logic\HtmlParserSlovnyk.Logic.csproj" />
     </ItemGroup>
 
 </Project>

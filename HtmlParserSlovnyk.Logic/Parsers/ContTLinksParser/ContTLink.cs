@@ -1,4 +1,4 @@
-﻿namespace HtmlParserSlovnykUA.Parsers.ContTLinksParser;
+﻿namespace HtmlParserSlovnyk.Logic.Parsers.ContTLinksParser;
 
 [Serializable]
 public class ContTLink

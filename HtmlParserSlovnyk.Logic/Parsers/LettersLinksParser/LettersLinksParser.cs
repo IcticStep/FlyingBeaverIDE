@@ -3,7 +3,7 @@ using AngleSharp.Html.Dom;
 using HtmlParserCore.API;
 using HTMLParserCore.Extensions;
 
-namespace HtmlParserSlovnykUA.Parsers.LettersLinksParser;
+namespace HtmlParserSlovnyk.Logic.Parsers.LettersLinksParser;
 
 internal class LettersLinksParser : IParser<IEnumerable<LetterLink>>
 {
