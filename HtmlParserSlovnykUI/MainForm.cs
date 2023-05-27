@@ -13,11 +13,11 @@ public partial class MainForm : Form
     private const string WordLinksFileName = "WordLinks";
     private const string WordFileName = "Words";
     private const string ErrorHeader = "Помилка";
+    private const int WordsParallelWorkersCount = 100;
 
     private readonly SlovnykUAParser _slovnykUaParser = new();
     private List<Button> _buttons;
     private readonly FileSaver _fileSaver = new();
-
 
     public MainForm()
     {
@@ -51,7 +51,7 @@ public partial class MainForm : Form
 
     private void ParseLetters(object sender, EventArgs e)
     {
-        DisableButtons();
+        //DisableButtons();
         CurrentOperationName.Text = "Парсинг букв";
         ProgressOperationsCounter.Text = "0/1";
         _slovnykUaParser.StartParsingLetterLinks();
@@ -66,7 +66,7 @@ public partial class MainForm : Form
         }
 
         CurrentOperationName.Text = "Парсинг підрозділів букв";
-        DisableButtons();
+        //DisableButtons();
         _slovnykUaParser.StartParsingSubletterLinks();
     }
 
@@ -79,7 +79,7 @@ public partial class MainForm : Form
         }
 
         CurrentOperationName.Text = "Парсинг ссилок на слова";
-        DisableButtons();
+        //DisableButtons();
         _slovnykUaParser.StartParsingWordsLinks();
     }
 
@@ -92,8 +92,8 @@ public partial class MainForm : Form
         }
 
         CurrentOperationName.Text = "Парсинг самих слів";
-        DisableButtons();
-        _slovnykUaParser.StartParsingWords();
+        //DisableButtons();
+        _slovnykUaParser.StartParsingWords(WordsParallelWorkersCount);
     }
 
     private void UpdateProgressInfo(ProgressInfo progressInfo)

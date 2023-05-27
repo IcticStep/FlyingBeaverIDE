@@ -34,7 +34,7 @@ public class SlovnykUAParser
     
     private ParserWorker<IEnumerable<LetterLink>> _letterLinksParserWorker = null!;
     private ParserWorker<ContTLink> _contTLinksParserWorker = null!;
-    private ParserWorker<WordParsedContent> _wordsParserWorker = null!;
+    private WordsParserMultiWorker _wordsParserWorker = null!;
     
     private Queue<LetterLink> _letterLinksToSubletterQueue = null!;
     private Queue<string> _subletterLinksToWordsQueue = null!;
@@ -108,16 +108,17 @@ public class SlovnykUAParser
         _contTLinksParserWorker.Start();
     }
     
-    public void StartParsingWords()
+    public void StartParsingWords(int parallelWorkersAmount)
     {
+        if (parallelWorkersAmount <= 0)
+            throw new ArgumentException("Can't start 0 or less workers!");
+        
         if (!CanParseWords)
             throw new InvalidOperationException();
         
-        InitWordsParsing();
-
+        InitWordsParsing(parallelWorkersAmount);
         _currentProgress = new ProgressInfo(_wordLinksToWordsQueue.Count, 0);
-        _wordsParserWorker.ParserSettings = GetNextLinkToWordsFromWordLinks();
-        _wordsParserWorker.Start();
+        _wordsParserWorker.StartParsing();
     }
 
     private void InitSublettersParsing()
@@ -136,12 +137,12 @@ public class SlovnykUAParser
         _contTLinksParserWorker.OnCompleted += ProceedWordsLinksContTLinks;
     }
 
-    private void InitWordsParsing()
+    private void InitWordsParsing(int parallelWorkersAmount)
     {
         _words.Clear();
-        _wordsParserWorker = new(new WordsParser());
         _wordLinksToWordsQueue = new(_wordsLinks.SelectMany(linkGroup => linkGroup.Links));
-        _wordsParserWorker.OnCompleted += ProceedWords;
+        _wordsParserWorker = new(_wordLinksToWordsQueue, parallelWorkersAmount);
+        _wordsParserWorker.OnProgressDone += ProceedWords;
     }
 
     private ContTLinksParserSettings GetNextLinkToSubletterFromLetter() => 
@@ -198,14 +199,9 @@ public class SlovnykUAParser
             _words.Add(result);
         
         SignalProgress();
-        if (_currentProgress.Finished)
-        {
-            OnFinish?.Invoke(this);
-            return;
-        }
 
-        _wordsParserWorker.ParserSettings = GetNextLinkToWordsFromWordLinks();
-        _wordsParserWorker.Start();
+        if (!_currentProgress.Finished) return;
+        OnFinish?.Invoke(this);
     }
 
     private void SignalProgress()
