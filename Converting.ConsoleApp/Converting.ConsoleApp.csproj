@@ -9,7 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ConsoleHelpers.Viewer\ConsoleHelpers.Viewer.csproj" />
-      <ProjectReference Include="..\ParsedToDbFormatConverter.Logic\ParsedToDbFormatConverter.Logic.csproj" />
+      <ProjectReference Include="..\Converting.Logic\Converting.Logic.csproj" />
     </ItemGroup>
 
 </Project>

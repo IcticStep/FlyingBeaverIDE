@@ -6,12 +6,10 @@ using Domain;
 using HtmlParserSlovnyk.Domain;
 using WordSyllabler;
 
-namespace ParsedToDbFormatConverter.Logic;
+namespace Converting.Logic;
 
-public class SlovnykToAccentuationsConverter : ILinearHelper
+public class RawAccentuationToAccentuations : ILinearHelper
 {
-    public SlovnykToAccentuationsConverter() { }
-
     private const char AccentuationSymbol = '$';
     private readonly Syllabler _syllabler = new();
     private readonly JsonSerializerOptions _jsonOptions = new()

@@ -35,7 +35,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlParserSlovnyk.Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SlovnykUA", "SlovnykUA", "{3D0DD5B3-3D2D-4D60-A37B-F92C07A36BD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsedToDbFormatConverter.Logic", "ParsedToDbFormatConverter.Logic\ParsedToDbFormatConverter.Logic.csproj", "{296EDE8B-1A7C-43D8-8D2A-0A66F5EBB289}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Converting.Logic", "Converting.Logic\Converting.Logic.csproj", "{296EDE8B-1A7C-43D8-8D2A-0A66F5EBB289}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Converting", "Converting", "{7DD31A72-4518-4ACA-96AE-694CFFE2082A}"
 EndProject

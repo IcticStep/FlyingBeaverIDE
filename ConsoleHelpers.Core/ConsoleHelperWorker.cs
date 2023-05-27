@@ -22,9 +22,9 @@ public class ConsoleHelperWorker<THelper>
     private static void GetSettingsFromUser()
     {
         Console.WriteLine("Введіть абсолютний шлях до початкового файлу:");
-        _inputFilePath = Console.ReadLine();
+        _inputFilePath = Console.ReadLine()?.Replace("\"","");
         Console.WriteLine("Введіть абсолютний шлях до файлу результату:");
-        _outputFilePath = Console.ReadLine();
+        _outputFilePath = Console.ReadLine()?.Replace("\"","");
     }
 
     private static void TryGetInput()
