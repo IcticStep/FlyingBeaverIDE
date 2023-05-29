@@ -6,18 +6,16 @@ namespace DataAccess;
 
 public class AccentuationRepository : IAccentuationsRepository
 {
-    public AccentuationRepository()
+    public AccentuationRepository(DataBaseCredentials credentials)
     {
+        _client = new(credentials.ConnectionString);
         _database = _client.GetDatabase(DataBaseName);
         _data = _database.GetCollection<AccentuationDto>(TargetCollectionName);
     }
 
-    private const string UserName = "";
-    private const string UserPassword = "";
-    private const string ConnectionPath = "";
     private const string DataBaseName = "FlyingBeaverDb";
     private const string TargetCollectionName = "Accentuations";
-    private static readonly MongoClient _client = new(ConnectionPath);
+    private readonly MongoClient _client;
 
     private readonly IMongoDatabase _database;
     public IMongoCollection<AccentuationDto> _data;
