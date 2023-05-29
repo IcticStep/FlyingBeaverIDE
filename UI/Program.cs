@@ -18,7 +18,8 @@ internal static class Program
             Application.Run(new MainForm());
             return;
         }
-        
-        Application.Run(new MainForm(args[0]));
+
+        var path = FileSaver.UnshieldPath(args[0]);
+        Application.Run(new MainForm(path));
     }
 }

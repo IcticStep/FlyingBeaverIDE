@@ -1,94 +1,69 @@
-﻿using System.Text.Encodings.Web;
-using System.Text.Json;
-using System.Text.Unicode;
-using Domain;
+﻿using System.Diagnostics;
+using FlyingBeaverIDE.Logic;
 
 namespace FlyingBeaverIDE.UI.Services;
 
 public class FileSaver
 {
-    private const string FilesDescription = "Flying Beaver poem files";
-    private const string FileExtension = "beaverpoem";
-    private const string FileFilter = $"{FilesDescription}|*.{FileExtension}|All files|*.*";
-    private const string DialogTitle = "Зберегти вірш";
+    public FileSaver(FlyingBeaver flyingBeaver) => 
+        _flyingBeaver = flyingBeaver;
+
+    private const string PathWhiteSpaceShield = "?";
+    private readonly SaveDialogsViewer _saveDialogsViewer = new();
+    private readonly FlyingBeaver _flyingBeaver;
+
+    public void OpenFile()
+    {
+        var filePath = _saveDialogsViewer.ChooseFilePathToOpen();
+        if (filePath is null) return;
+        Process.Start(Application.ExecutablePath, ShieldPath(filePath));
+    }
     
-    private readonly JsonSerializerOptions _jsonOptions = new()
-    {
-        Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
-        WriteIndented = true
-    };
+    public void CreateNewFile() => 
+        Process.Start(Application.ExecutablePath);
 
-    public bool AllChangesSaved { get; private set; }
-    private string _savedPath = null!;
-
-    public void SaveFileWithDialog(Poem data)
+    public void SaveFile()
     {
-        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-        if (string.IsNullOrWhiteSpace(_savedPath))
+        if (_flyingBeaver.HasSavedPath)
         {
-            TrySaveFileAsWithDialog(data);
+            _flyingBeaver.SavePoemToFile();
+            return;                
+        }
+
+        SaveFileAs();
+    }
+    
+    public void SaveFileAs()
+    {
+        var path = _saveDialogsViewer.ChooseFilePathToSave();
+        if (string.IsNullOrEmpty(path))
+            return;
+        _flyingBeaver.SavePoemToFile(path);
+    }
+    
+    public void TrySaveOnClose(FormClosingEventArgs formClosingEventArgs)
+    {
+        if (_flyingBeaver.AllChangesSaved)
+            return;
+
+        var choice = _saveDialogsViewer.AskSaveBeforeClosing();
+        if (choice == DialogResult.Cancel)
+        {
+            formClosingEventArgs.Cancel = true;
             return;
         }
 
-        var serializedPoem = SerializePoem(data);
-        SaveDataToFile(_savedPath, serializedPoem);
-        AllChangesSaved = true;
+        if (choice == DialogResult.No)
+            return;
+
+        SaveFile();
+        if (!_flyingBeaver.AllChangesSaved)
+            formClosingEventArgs.Cancel = true;
     }
 
-    public bool TrySaveFileAsWithDialog(Poem data)
-    {
-        var saveFileDialog = GetNewFileDialog<SaveFileDialog>();
-        if (saveFileDialog.ShowDialog() != DialogResult.OK) return false;
-        
-        var serializedPoem = SerializePoem(data);
-        SaveDataToFile(saveFileDialog.FileName, serializedPoem);
-        _savedPath = saveFileDialog.FileName;
-        AllChangesSaved = true;
-        return true;
-    }
-
-    public string? ChooseFilePathToOpen()
-    {
-        var openFileDialog = GetNewFileDialog<OpenFileDialog>();
-        if (openFileDialog.ShowDialog() != DialogResult.OK) 
-            return default;
-        return openFileDialog.FileName;
-    }
-
-    public Poem? LoadFileThroughDialog()
-    {
-        var openFileDialog = GetNewFileDialog<OpenFileDialog>();
-        if (openFileDialog.ShowDialog() != DialogResult.OK) 
-            return default;
-        _savedPath = openFileDialog.FileName;
-        AllChangesSaved = true;
-        return LoadDataFromFile(openFileDialog.FileName);
-    }
-
-    public void SignalUserInput() => 
-        AllChangesSaved = false;
-
-    public Poem? LoadDataFromFile(string fileName)
-    {
-        var json = File.ReadAllText(fileName);
-        _savedPath = fileName;
-        AllChangesSaved = true;
-        return JsonSerializer.Deserialize<Poem>(json);
-    }
-
-    private static void SaveDataToFile(string path, string data) => 
-        File.WriteAllText(path, data);
-
-    private string SerializePoem(Poem poem) => JsonSerializer.Serialize(poem, _jsonOptions);
-
-    private T GetNewFileDialog<T>()
-        where T : FileDialog, new()
-    {
-        var saveFileDialog = new T();
-        saveFileDialog.Filter = FileFilter;
-        saveFileDialog.Title = DialogTitle;
-        saveFileDialog.DefaultExt = FileExtension;
-        saveFileDialog.AddExtension = true;
-        return saveFileDialog;
-    }
+    public static string ShieldPath(string path)
+        => path.Replace(" ", PathWhiteSpaceShield);
+    
+    public static string UnshieldPath(string path)
+        => path.Replace(PathWhiteSpaceShield, " ");
 }

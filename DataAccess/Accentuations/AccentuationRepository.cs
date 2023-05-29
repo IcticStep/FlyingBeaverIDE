@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace DataAccess;
+namespace DataAccess.Accentuations;
 
 public class AccentuationRepository : IAccentuationsRepository
 {
@@ -18,7 +18,7 @@ public class AccentuationRepository : IAccentuationsRepository
     private readonly MongoClient _client;
 
     private readonly IMongoDatabase _database;
-    public IMongoCollection<AccentuationDto> _data;
+    private IMongoCollection<AccentuationDto> _data;
 
     public int Count() => (int)_data.EstimatedDocumentCount();
 

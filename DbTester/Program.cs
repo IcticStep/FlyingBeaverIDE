@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using DataAccess;
+using DataAccess.Accentuations;
 using Microsoft.Extensions.Configuration;
 
 namespace DbTester;
@@ -10,9 +10,9 @@ public class Program
     private const string UserPasswordConfigKey = "UserPassword";
     private const string ConnectionStringConfigKey = "ConnectionString";
     
-    private static AccentuationRepository _accentuations;
+    private static IAccentuationsRepository _accentuations = default!;
     
-    public static void Main(string[] args)
+    public static void Main()
     {
         Init();
         
@@ -20,6 +20,8 @@ public class Program
         {
             Console.WriteLine("Яке слово шукаємо?('0' закриє програму)");
             var find = Console.ReadLine();
+            if(find == "0") return;
+            
             var result = _accentuations.GetAccentuation(find);
 
             if (result is null)
@@ -52,8 +54,8 @@ public class Program
         Console.OutputEncoding = Encoding.Unicode;
     }
 
-    private static void InitAccentuationsRepository(IConfigurationRoot configuration) =>
-        _accentuations = new(new(
+    private static void InitAccentuationsRepository(IConfiguration configuration) =>
+        _accentuations = new AccentuationRepository(new(
             configuration[ConnectionStringConfigKey]!,
             configuration[UserNameConfigKey]!,
             configuration[UserPasswordConfigKey]!));
