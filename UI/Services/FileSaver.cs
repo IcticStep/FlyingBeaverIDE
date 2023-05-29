@@ -18,31 +18,33 @@ public class FileSaver
         WriteIndented = true
     };
 
+    public bool AllChangesSaved { get; private set; }
     private string _savedPath = null!;
 
     public void SaveFileWithDialog(Poem data)
     {
         // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-        if (_savedPath is null)
+        if (string.IsNullOrWhiteSpace(_savedPath))
         {
-            SaveFileAsWithDialog(data);
+            TrySaveFileAsWithDialog(data);
             return;
         }
 
         var serializedPoem = SerializePoem(data);
         SaveDataToFile(_savedPath, serializedPoem);
+        AllChangesSaved = true;
     }
 
-    private string SerializePoem(Poem poem) => JsonSerializer.Serialize(poem, _jsonOptions);
-
-    public void SaveFileAsWithDialog(Poem data)
+    public bool TrySaveFileAsWithDialog(Poem data)
     {
         var saveFileDialog = GetNewFileDialog<SaveFileDialog>();
-        if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+        if (saveFileDialog.ShowDialog() != DialogResult.OK) return false;
         
         var serializedPoem = SerializePoem(data);
         SaveDataToFile(saveFileDialog.FileName, serializedPoem);
         _savedPath = saveFileDialog.FileName;
+        AllChangesSaved = true;
+        return true;
     }
 
     public string? ChooseFilePathToOpen()
@@ -52,24 +54,32 @@ public class FileSaver
             return default;
         return openFileDialog.FileName;
     }
-    
+
     public Poem? LoadFileThroughDialog()
     {
         var openFileDialog = GetNewFileDialog<OpenFileDialog>();
         if (openFileDialog.ShowDialog() != DialogResult.OK) 
             return default;
+        _savedPath = openFileDialog.FileName;
+        AllChangesSaved = true;
         return LoadDataFromFile(openFileDialog.FileName);
     }
+
+    public void SignalUserInput() => 
+        AllChangesSaved = false;
 
     public Poem? LoadDataFromFile(string fileName)
     {
         var json = File.ReadAllText(fileName);
         _savedPath = fileName;
+        AllChangesSaved = true;
         return JsonSerializer.Deserialize<Poem>(json);
     }
 
     private static void SaveDataToFile(string path, string data) => 
         File.WriteAllText(path, data);
+
+    private string SerializePoem(Poem poem) => JsonSerializer.Serialize(poem, _jsonOptions);
 
     private T GetNewFileDialog<T>()
         where T : FileDialog, new()

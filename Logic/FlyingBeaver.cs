@@ -1,7 +1,4 @@
-﻿using System.Text.Encodings.Web;
-using System.Text.Json;
-using System.Text.Unicode;
-using Domain;
+﻿using Domain;
 
 namespace FlyingBeaverIDE.Logic;
 
@@ -30,6 +27,4 @@ public class FlyingBeaver
 
     private void SubscribeOnPoemUpdate() => 
         _poem.OnEdit += () => OnUpdated?.Invoke();
-
-    
 }
