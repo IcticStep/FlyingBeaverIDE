@@ -1,15 +1,26 @@
-﻿using System.Data;
+﻿using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Unicode;
 using Domain;
 
 namespace FlyingBeaverIDE.Logic;
 
 public class FlyingBeaver
 {
-    public FlyingBeaver() { }
-    public FlyingBeaver(string json) => _poem = DeserializePoem(json);
+    public FlyingBeaver() => 
+        SubscribeOnPoemUpdate();
 
-    public Poem _poem { get; set; } = new Poem();
+    public FlyingBeaver(Poem poem) : this()
+    {
+        _poem = poem;
+        SubscribeOnPoemUpdate();
+    }
+
+    private readonly Poem _poem = new Poem();
+
+    public event Action? OnUpdated;
+
+    public Poem Poem => (Poem)_poem.Clone();
 
     public string PoemText
     {
@@ -17,15 +28,8 @@ public class FlyingBeaver
         set => _poem.Text = value;
     }
 
-    public string GetSaveDataJSON() =>
-        JsonSerializer.Serialize(_poem);
+    private void SubscribeOnPoemUpdate() => 
+        _poem.OnEdit += () => OnUpdated?.Invoke();
 
-    private Poem DeserializePoem(string json)
-    {
-        var poem = JsonSerializer.Deserialize<Poem>(json);
-        if (poem is not null)
-            return poem;
-
-        throw new InvalidDataException();
-    }
+    
 }

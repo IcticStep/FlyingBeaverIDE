@@ -1,15 +1,20 @@
 ﻿namespace Domain;
 
 [Serializable]
-public class Poem
+public class Poem : ICloneable
 {
-    private string _text = String.Empty;
-    private Rythm _rythm = new();
-
-    public event Action<Poem> OnEdit;
-
     public Poem() { }
-    public Poem(string text) => Text = text;
+    
+    public Poem(string text) 
+        => Text = text;
+    
+    private Poem(string text, Rhythm rhythm) : this(text) => 
+        _rhythm = rhythm;
+
+    public event Action OnEdit;
+    
+    private string _text = string.Empty;
+    private Rhythm _rhythm = new();
 
     public string Text
     {
@@ -17,17 +22,19 @@ public class Poem
         set
         {
             _text = value;
-            OnEdit?.Invoke(this);
+            OnEdit?.Invoke();
         }
     }
 
-    public Rythm Rythm
+    public Rhythm Rhythm
     {
-        get => _rythm;
+        get => _rhythm;
         set
         {
-            _rythm = value;
-            OnEdit?.Invoke(this);
+            _rhythm = value;
+            OnEdit?.Invoke();
         }
     }
+
+    public object Clone() => new Poem(_text, _rhythm);
 }

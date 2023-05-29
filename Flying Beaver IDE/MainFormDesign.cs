@@ -42,5 +42,10 @@ namespace Flying_Beaver_IDE
         {
 
         }
+
+        private void HandleTextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

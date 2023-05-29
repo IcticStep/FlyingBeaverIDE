@@ -39,7 +39,7 @@
             this.ExitButton = new Syncfusion.Windows.Forms.BackStageButton();
             this.MainTab = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
             this.SettingsTab = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.PoemTextBox = new System.Windows.Forms.RichTextBox();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControlAdv1)).BeginInit();
             this.ribbonControlAdv1.SuspendLayout();
@@ -67,7 +67,6 @@
             // 
             // ribbonControlAdv1.OfficeMenu
             // 
-            this.ribbonControlAdv1.OfficeMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.ribbonControlAdv1.OfficeMenu.Name = "OfficeMenu";
             this.ribbonControlAdv1.OfficeMenu.ShowItemToolTips = true;
             this.ribbonControlAdv1.OfficeMenu.Size = new System.Drawing.Size(12, 65);
@@ -79,7 +78,7 @@
             this.ribbonControlAdv1.ShowMinimizeButton = false;
             this.ribbonControlAdv1.ShowQuickItemsDropDownButton = false;
             this.ribbonControlAdv1.ShowRibbonDisplayOptionButton = false;
-            this.ribbonControlAdv1.Size = new System.Drawing.Size(982, 162);
+            this.ribbonControlAdv1.Size = new System.Drawing.Size(982, 160);
             this.ribbonControlAdv1.SystemText.QuickAccessDialogDropDownName = "Start menu";
             this.ribbonControlAdv1.SystemText.RenameDisplayLabelText = "&Display Name:";
             this.ribbonControlAdv1.TabIndex = 0;
@@ -109,7 +108,7 @@
             this.backStage.Controls.Add(this.ExitButton);
             this.backStage.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.backStage.ItemSize = new System.Drawing.Size(160, 40);
-            this.backStage.Location = new System.Drawing.Point(0, 83);
+            this.backStage.Location = new System.Drawing.Point(0, 0);
             this.backStage.MinimumSize = new System.Drawing.Size(100, 20);
             this.backStage.Name = "backStage1";
             this.backStage.OfficeColorScheme = Syncfusion.Windows.Forms.Tools.ToolStripEx.ColorScheme.Black;
@@ -122,10 +121,10 @@
             // 
             this.NewFileButton.Accelerator = "";
             this.NewFileButton.BackColor = System.Drawing.Color.Transparent;
-            this.NewFileButton.Location = new System.Drawing.Point(0, 10);
+            this.NewFileButton.Location = new System.Drawing.Point(10, 10);
             this.NewFileButton.Name = "NewFileButton";
             this.NewFileButton.Placement = Syncfusion.Windows.Forms.BackStageItemPlacement.Top;
-            this.NewFileButton.Size = new System.Drawing.Size(159, 39);
+            this.NewFileButton.Size = new System.Drawing.Size(110, 25);
             this.NewFileButton.TabIndex = 2;
             this.NewFileButton.Text = "Новий";
             this.NewFileButton.Click += new System.EventHandler(this.CreateNewFile);
@@ -134,10 +133,10 @@
             // 
             this.OpenFileButton.Accelerator = "";
             this.OpenFileButton.BackColor = System.Drawing.Color.Transparent;
-            this.OpenFileButton.Location = new System.Drawing.Point(0, 41);
+            this.OpenFileButton.Location = new System.Drawing.Point(10, 35);
             this.OpenFileButton.Name = "OpenFileButton";
             this.OpenFileButton.Placement = Syncfusion.Windows.Forms.BackStageItemPlacement.Top;
-            this.OpenFileButton.Size = new System.Drawing.Size(159, 39);
+            this.OpenFileButton.Size = new System.Drawing.Size(110, 25);
             this.OpenFileButton.TabIndex = 3;
             this.OpenFileButton.Text = "Відкрити";
             this.OpenFileButton.Click += new System.EventHandler(this.OpenFile);
@@ -146,10 +145,10 @@
             // 
             this.SaveFileButton.Accelerator = "";
             this.SaveFileButton.BackColor = System.Drawing.Color.Transparent;
-            this.SaveFileButton.Location = new System.Drawing.Point(0, 72);
+            this.SaveFileButton.Location = new System.Drawing.Point(10, 60);
             this.SaveFileButton.Name = "SaveFileButton";
             this.SaveFileButton.Placement = Syncfusion.Windows.Forms.BackStageItemPlacement.Top;
-            this.SaveFileButton.Size = new System.Drawing.Size(159, 39);
+            this.SaveFileButton.Size = new System.Drawing.Size(110, 25);
             this.SaveFileButton.TabIndex = 4;
             this.SaveFileButton.Text = "Зберегти";
             this.SaveFileButton.Click += new System.EventHandler(this.SaveFile);
@@ -158,10 +157,10 @@
             // 
             this.SaveFileAsButton.Accelerator = "";
             this.SaveFileAsButton.BackColor = System.Drawing.Color.Transparent;
-            this.SaveFileAsButton.Location = new System.Drawing.Point(0, 103);
+            this.SaveFileAsButton.Location = new System.Drawing.Point(10, 85);
             this.SaveFileAsButton.Name = "SaveFileAsButton";
             this.SaveFileAsButton.Placement = Syncfusion.Windows.Forms.BackStageItemPlacement.Top;
-            this.SaveFileAsButton.Size = new System.Drawing.Size(159, 39);
+            this.SaveFileAsButton.Size = new System.Drawing.Size(110, 25);
             this.SaveFileAsButton.TabIndex = 5;
             this.SaveFileAsButton.Text = "Зберегти як";
             this.SaveFileAsButton.Click += new System.EventHandler(this.SaveFileAs);
@@ -170,10 +169,10 @@
             // 
             this.ExitButton.Accelerator = "";
             this.ExitButton.BackColor = System.Drawing.Color.Transparent;
-            this.ExitButton.Location = new System.Drawing.Point(0, 134);
+            this.ExitButton.Location = new System.Drawing.Point(10, 110);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Placement = Syncfusion.Windows.Forms.BackStageItemPlacement.Top;
-            this.ExitButton.Size = new System.Drawing.Size(159, 39);
+            this.ExitButton.Size = new System.Drawing.Size(110, 25);
             this.ExitButton.TabIndex = 6;
             this.ExitButton.Text = "Закрити";
             this.ExitButton.Click += new System.EventHandler(this.ExitProgram);
@@ -189,7 +188,7 @@
             this.MainTab.Panel.TabIndex = 2;
             this.MainTab.Panel.Text = "Головна";
             this.MainTab.Position = 0;
-            this.MainTab.Size = new System.Drawing.Size(109, 41);
+            this.MainTab.Size = new System.Drawing.Size(85, 30);
             this.MainTab.Tag = "1";
             this.MainTab.Text = "Головна";
             // 
@@ -204,25 +203,26 @@
             this.SettingsTab.Panel.TabIndex = 3;
             this.SettingsTab.Panel.Text = "Налаштування";
             this.SettingsTab.Position = 1;
-            this.SettingsTab.Size = new System.Drawing.Size(166, 41);
+            this.SettingsTab.Size = new System.Drawing.Size(131, 30);
             this.SettingsTab.Tag = "1";
             this.SettingsTab.Text = "Налаштування";
             // 
-            // richTextBox1
+            // PoemTextBox
             // 
-            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.DetectUrls = false;
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBox1.ForeColor = System.Drawing.Color.LightGray;
-            this.richTextBox1.HideSelection = false;
-            this.richTextBox1.Location = new System.Drawing.Point(1, 162);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(978, 637);
-            this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.WordWrap = false;
+            this.PoemTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
+            this.PoemTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.PoemTextBox.DetectUrls = false;
+            this.PoemTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PoemTextBox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.PoemTextBox.ForeColor = System.Drawing.Color.LightGray;
+            this.PoemTextBox.HideSelection = false;
+            this.PoemTextBox.Location = new System.Drawing.Point(0, 160);
+            this.PoemTextBox.Name = "PoemTextBox";
+            this.PoemTextBox.Size = new System.Drawing.Size(980, 641);
+            this.PoemTextBox.TabIndex = 3;
+            this.PoemTextBox.Text = "";
+            this.PoemTextBox.WordWrap = false;
+            this.PoemTextBox.TextChanged += new System.EventHandler(this.HandleTextChanged);
             // 
             // saveFileDialog
             // 
@@ -232,13 +232,13 @@
             // 
             // MainFormDesign
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.ClientSize = new System.Drawing.Size(980, 800);
             this.ColorScheme = Syncfusion.Windows.Forms.Tools.RibbonForm.ColorSchemeType.Black;
             this.Controls.Add(this.backStage);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.PoemTextBox);
             this.Controls.Add(this.ribbonControlAdv1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -272,7 +272,7 @@
         private Syncfusion.Windows.Forms.BackStageButton SaveFileButton;
         private Syncfusion.Windows.Forms.BackStageButton SaveFileAsButton;
         private Syncfusion.Windows.Forms.BackStageButton ExitButton;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox PoemTextBox;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

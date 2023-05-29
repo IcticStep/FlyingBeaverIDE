@@ -1,4 +1,9 @@
-﻿namespace FlyingBeaverIDE.UI.Services;
+﻿using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
+using Domain;
+
+namespace FlyingBeaverIDE.UI.Services;
 
 public class FileSaver
 {
@@ -7,29 +12,69 @@ public class FileSaver
     private const string FileFilter = $"{FilesDescription}|*.{FileExtension}|All files|*.*";
     private const string DialogTitle = "Зберегти вірш";
     
-    public void SaveFile(string data)
+    private readonly JsonSerializerOptions _jsonOptions = new()
     {
-        
+        Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+        WriteIndented = true
+    };
+
+    private string _savedPath = null!;
+
+    public void SaveFileWithDialog(Poem data)
+    {
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+        if (_savedPath is null)
+        {
+            SaveFileAsWithDialog(data);
+            return;
+        }
+
+        var serializedPoem = SerializePoem(data);
+        SaveDataToFile(_savedPath, serializedPoem);
     }
 
-    public void SaveFileAs(string data)
+    private string SerializePoem(Poem poem) => JsonSerializer.Serialize(poem, _jsonOptions);
+
+    public void SaveFileAsWithDialog(Poem data)
     {
-        var saveFileDialog = GetNewSaveDialog();
+        var saveFileDialog = GetNewFileDialog<SaveFileDialog>();
         if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
         
-        SaveDataToFile(data, saveFileDialog);
+        var serializedPoem = SerializePoem(data);
+        SaveDataToFile(saveFileDialog.FileName, serializedPoem);
+        _savedPath = saveFileDialog.FileName;
     }
 
-    private static void SaveDataToFile(string data, FileDialog saveFileDialog)
+    public string? ChooseFilePathToOpen()
     {
-        using var fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create);
-        using var writer = new StreamWriter(fileStream);
-        writer.WriteLine(data);
+        var openFileDialog = GetNewFileDialog<OpenFileDialog>();
+        if (openFileDialog.ShowDialog() != DialogResult.OK) 
+            return default;
+        return openFileDialog.FileName;
+    }
+    
+    public Poem? LoadFileThroughDialog()
+    {
+        var openFileDialog = GetNewFileDialog<OpenFileDialog>();
+        if (openFileDialog.ShowDialog() != DialogResult.OK) 
+            return default;
+        return LoadDataFromFile(openFileDialog.FileName);
     }
 
-    private SaveFileDialog GetNewSaveDialog()
+    public Poem? LoadDataFromFile(string fileName)
     {
-        var saveFileDialog = new SaveFileDialog();
+        var json = File.ReadAllText(fileName);
+        _savedPath = fileName;
+        return JsonSerializer.Deserialize<Poem>(json);
+    }
+
+    private static void SaveDataToFile(string path, string data) => 
+        File.WriteAllText(path, data);
+
+    private T GetNewFileDialog<T>()
+        where T : FileDialog, new()
+    {
+        var saveFileDialog = new T();
         saveFileDialog.Filter = FileFilter;
         saveFileDialog.Title = DialogTitle;
         saveFileDialog.DefaultExt = FileExtension;
