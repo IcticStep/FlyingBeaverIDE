@@ -18,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\WordSyllabler\WordSyllabler.csproj" />
+      <ProjectReference Include="..\PoemTokenizer\PoemTokenizer.csproj" />
     </ItemGroup>
 
 </Project>

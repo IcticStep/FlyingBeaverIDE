@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
 
-namespace DataAccess.Accentuations;
+namespace DataStorage.Accentuations;
 
 // ReSharper disable once ClassNeverInstantiated.Global
 public class AccentuationDto

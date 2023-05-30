@@ -1,4 +1,4 @@
-﻿namespace DataAccess;
+﻿namespace DataStorage;
 
 public class DataBaseCredentials
 {

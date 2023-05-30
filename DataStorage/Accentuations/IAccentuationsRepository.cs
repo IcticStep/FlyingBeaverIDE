@@ -1,6 +1,6 @@
 ﻿using Domain;
 
-namespace DataAccess.Accentuations;
+namespace DataStorage.Accentuations;
 
 public interface IAccentuationsRepository
 {

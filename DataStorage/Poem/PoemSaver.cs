@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text.Unicode;
 
-namespace DataAccess.Poem;
+namespace DataStorage.Poem;
 
 public class PoemSaver
 {

@@ -4,7 +4,7 @@ using System.Text.Unicode;
 using ConsoleHelpers.Core;
 using Domain;
 using HtmlParserSlovnyk.Domain;
-using WordSyllabler;
+using PoemTokenizer;
 
 namespace Converting.Logic;
 

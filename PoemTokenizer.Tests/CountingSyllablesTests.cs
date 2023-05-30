@@ -1,4 +1,4 @@
-namespace WordSyllabler.Tests;
+namespace PoemTokenizer.Tests;
 
 public class CountingSyllablesTests
 {

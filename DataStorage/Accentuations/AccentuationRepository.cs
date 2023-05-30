@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace DataAccess.Accentuations;
+namespace DataStorage.Accentuations;
 
 public class AccentuationRepository : IAccentuationsRepository
 {

@@ -1,4 +1,4 @@
-﻿namespace WordSyllabler;
+﻿namespace PoemTokenizer;
 
 public struct SyllableToken
 {

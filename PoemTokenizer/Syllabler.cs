@@ -1,4 +1,4 @@
-﻿namespace WordSyllabler;
+﻿namespace PoemTokenizer;
 
 public class Syllabler
 {

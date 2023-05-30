@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Common.Menu;
 using ConsoleHelpers.Core;
-using DataAccess.Accentuations;
+using DataStorage.Accentuations;
 using Microsoft.Extensions.Configuration;
 
 namespace DbConsoleConnector;
