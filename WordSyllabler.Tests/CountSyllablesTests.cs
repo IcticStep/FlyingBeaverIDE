@@ -1,6 +1,4 @@
-using WordSyllabler;
-
-namespace WordSyllabler_Tests;
+namespace WordSyllabler.Tests;
 
 public class CountSyllablesTests
 {
@@ -15,11 +13,11 @@ public class CountSyllablesTests
         TestResultIsExpected("", 0);
 
     [Test]
-    public void CheckZeroIfWhiteSpaceText() => 
+    public void CheckZeroIfWhiteSpace() => 
         TestResultIsExpected(" ", 0);
 
     [Test]
-    public void CheckExceptionIfNullText() =>
+    public void CheckExceptionIfNull() =>
         Assert.Throws<ArgumentNullException>(() => 
             _syllabler.CountSyllables(null!));
 
