@@ -12,7 +12,7 @@ internal static class Program
 
     private static readonly Menu _menu = new("Консольні утиліти конвертери", new[]
     {
-        new Option("Видалення записів з надмірною довжиною, очистка пробілів", _rawAccentuationClearer.Run),
+        new Option("Чистка записів(пробіли, дублікати, апострофи, некоректні дані)", _rawAccentuationClearer.Run),
         new Option("Підготовка наголосів Slovnyk UA до DB", _rawAccentuationsToDomainWorker.Run),
         new Option("Вийти", Exit)
     });

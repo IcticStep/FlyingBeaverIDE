@@ -35,4 +35,10 @@ public class AccentuationRepository : IAccentuationsRepository
         
         return new(result.Word, result.Accentuations);
     }
+
+    public IEnumerable<Accentuation> GetAll() =>
+        _data
+            .Find("{ }")
+            .ToEnumerable()
+            .Select(x => new Accentuation(x.Word, x.Accentuations));
 }

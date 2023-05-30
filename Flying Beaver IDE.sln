@@ -45,7 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleHelpers.Core", "Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleHelpers.Viewer", "ConsoleHelpers.Viewer\ConsoleHelpers.Viewer.csproj", "{FF1BC1E5-18FF-48C3-908B-5C1EF22723A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTester", "DbTester\DbTester.csproj", "{B64E75B8-E983-4AF1-A0DB-5737788BE5D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbConsoleConnector", "DbConsoleConnector\DbConsoleConnector.csproj", "{B64E75B8-E983-4AF1-A0DB-5737788BE5D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

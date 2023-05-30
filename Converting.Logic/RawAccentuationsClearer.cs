@@ -34,13 +34,29 @@ public class RawAccentuationsClearer : ILinearHelper
     
     public void Proceed() =>
         _result = _rawAccentuations
+            .Select(RemoveApostrophes)
             .Where(IsNotBroken)
             .Select(Trim)
+            .RemoveDuplicates()
             .ToList();
 
-    private static bool IsNotBroken(WordParsedContent parsed) => 
-        parsed.ParsedContent.Length <= parsed.Word.Length + MaxAccentuationsExpected;
+    private static WordParsedContent RemoveApostrophes(WordParsedContent parsed) => 
+        new(RemoveApostrophe(parsed.Word),
+            RemoveApostrophe(parsed.ParsedContent));
+
+    private static bool IsNotBroken(WordParsedContent parsed) =>
+        IsNotBrokenByLength(parsed);
 
     private static WordParsedContent Trim(WordParsedContent parsed) =>
         new(parsed.Word.Trim(), parsed.ParsedContent.Trim());
+
+    private static string RemoveApostrophe(string word) =>
+        word
+            .Replace("'", "")
+            .Replace("\u0027", "")
+            .Replace("’","")
+            .Replace("\u2019","");
+
+    private static bool IsNotBrokenByLength(WordParsedContent parsed) =>
+        parsed.ParsedContent.Length <= parsed.Word.Length + MaxAccentuationsExpected;
 }

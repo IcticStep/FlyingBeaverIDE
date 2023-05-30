@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ConsoleHelpers.Viewer\ConsoleHelpers.Viewer.csproj" />
       <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     </ItemGroup>
 
