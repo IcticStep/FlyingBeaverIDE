@@ -22,9 +22,10 @@ public class Syllabler
     public IEnumerable<SyllableToken> GetSyllableTokens(string text)
     {
         var vowelsPositions = GetVowelsPositions(text);
-        return vowelsPositions.Select(position => new SyllableToken(text[position].ToString(), position));
+        return vowelsPositions.Select(position => 
+            new SyllableToken(text[position].ToString(), position));
     }
 
     private bool IsVowel(char symbol) => 
-        Vowels.Contains(symbol);
+        Vowels.Contains(symbol, StringComparison.InvariantCultureIgnoreCase);
 }

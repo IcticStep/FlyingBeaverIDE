@@ -1,6 +1,6 @@
 ﻿namespace WordSyllabler.Tests;
 
-public class FindSyllablesTests
+public class CalculatingSyllableTokens
 {
     private Syllabler _syllabler = default!;
     
@@ -10,11 +10,11 @@ public class FindSyllablesTests
 
     [Test]
     public void CheckEmptyIfEmptyText() => 
-        TestResultIsExpected("", Enumerable.Empty<int>());
+        TestResultIsExpected("", Enumerable.Empty<SyllableToken>());
 
     [Test]
     public void CheckEmptyIfWhiteSpaceText() => 
-        TestResultIsExpected(" ", Enumerable.Empty<int>());
+        TestResultIsExpected(" ", Enumerable.Empty<SyllableToken>());
 
     [Test]
     public void CheckExceptionIfNull() => 
@@ -28,8 +28,8 @@ public class FindSyllablesTests
     [TestCase("првт")]
     [TestCase("впрнксмт")]
     [Test]
-    public void CheckNoPositionsIfNoVowels(string input) =>
-        TestResultIsExpected(input, Enumerable.Empty<int>());
+    public void CheckNoTokensIfNoVowels(string input) =>
+        TestResultIsExpected(input, Enumerable.Empty<SyllableToken>());
 
     [TestCase("я", new[]{0})]
     [TestCase("і", new[]{0})]
@@ -40,18 +40,29 @@ public class FindSyllablesTests
     [TestCase("оскільки", new[]{0,3,7})]
     [TestCase("інкапсуляція", new[]{0,3,6,8,10,11})]
     [Test]
-    public void CheckPositionsIfOneWord(string input, IEnumerable<int> expected) =>
-        TestResultIsExpected(input, expected);
+    public void CheckTokensIfOneWord(string input, IEnumerable<int> expectedVowels) => 
+        TestResultIsExpectedByVowelsPosition(input, expectedVowels);
 
     [TestCase("Знаєш, як болить...", new[]{2,3,7,11,13})]
     [TestCase("Ніяк не пройде.", new[]{1,2,6,10,13})]
     [Test]
     public void CheckPositionsIfText(string input, IEnumerable<int> expected) =>
-        TestResultIsExpected(input, expected);
-    
-    private void TestResultIsExpected(string input, IEnumerable<int> expected)
+        TestResultIsExpectedByVowelsPosition(input, expected);
+
+    private void TestResultIsExpectedByVowelsPosition(string input, IEnumerable<int> expectedVowels)
     {
-        var countSyllables =  _syllabler.GetVowelsPositions(input);
+        var expected = expectedVowels
+            .Select(index =>
+                new SyllableToken(
+                    input[index].ToString(),
+                    index));
+
+        TestResultIsExpected(input, expected);
+    }
+
+    private void TestResultIsExpected(string input, IEnumerable<SyllableToken> expected)
+    {
+        var countSyllables =  _syllabler.GetSyllableTokens(input);
         Assert.That(countSyllables, Is.EqualTo(expected));
     }
 }

@@ -1,6 +1,6 @@
 namespace WordSyllabler.Tests;
 
-public class CountSyllablesTests
+public class CountingSyllablesTests
 {
     private Syllabler _syllabler = default!;
     
