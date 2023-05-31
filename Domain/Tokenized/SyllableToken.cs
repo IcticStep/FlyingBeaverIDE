@@ -1,6 +1,6 @@
-﻿namespace PoemTokenizer;
+﻿namespace Domain.Tokenized;
 
-public struct SyllableToken
+public readonly struct SyllableToken
 {
     public SyllableToken(string vowel, int textPosition)
     {
@@ -8,8 +8,8 @@ public struct SyllableToken
         TextPosition = textPosition;
     }
 
-    public string Vowel { get; }
-    public int TextPosition { get; }
+    public readonly string Vowel;
+    public readonly int TextPosition;
 
     public override string ToString() => $"{Vowel}:{{{TextPosition}}}";
 }

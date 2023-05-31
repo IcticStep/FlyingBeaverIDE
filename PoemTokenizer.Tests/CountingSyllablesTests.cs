@@ -1,3 +1,5 @@
+using PoemTokenizer.Tokenizers;
+
 namespace PoemTokenizer.Tests;
 
 public class CountingSyllablesTests

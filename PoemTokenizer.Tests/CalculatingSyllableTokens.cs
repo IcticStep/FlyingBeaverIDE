@@ -1,4 +1,7 @@
-﻿namespace PoemTokenizer.Tests;
+﻿using Domain.Tokenized;
+using PoemTokenizer.Tokenizers;
+
+namespace PoemTokenizer.Tests;
 
 public class CalculatingSyllableTokens
 {
@@ -62,7 +65,7 @@ public class CalculatingSyllableTokens
 
     private void TestResultIsExpected(string input, IEnumerable<SyllableToken> expected)
     {
-        var countSyllables =  _syllabler.GetSyllableTokens(input);
+        var countSyllables =  _syllabler.Tokenize(input);
         Assert.That(countSyllables, Is.EqualTo(expected));
     }
 }

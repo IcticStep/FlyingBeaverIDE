@@ -5,6 +5,7 @@ using ConsoleHelpers.Core;
 using Domain;
 using HtmlParserSlovnyk.Domain;
 using PoemTokenizer;
+using PoemTokenizer.Tokenizers;
 
 namespace Converting.Logic;
 

@@ -1,4 +1,6 @@
-﻿namespace PoemTokenizer.Tests;
+﻿using PoemTokenizer.Tokenizers;
+
+namespace PoemTokenizer.Tests;
 
 public class FindingSyllablesTests
 {
