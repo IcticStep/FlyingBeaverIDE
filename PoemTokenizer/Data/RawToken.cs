@@ -2,14 +2,14 @@
 
 internal readonly struct RawToken
 {
-    public RawToken(string value, int position, bool loverValue = true)
+    public RawToken(string value, int position, bool lowerValue = true)
     {
-        Value = loverValue ? value.ToLowerInvariant() : value;
+        Value = lowerValue ? value.ToLowerInvariant() : value;
         Position = position;
     }
 
-    public string Value { get; }
-    public int Position { get; }
+    public readonly string Value;
+    public readonly int Position;
 
     public override string ToString() => $"{{{Value}}}:{Position}";
 }

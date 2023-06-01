@@ -35,11 +35,11 @@ public class CalculatingVersesTokensTests
               "Останні пси уже пішли\nМолити кращого життя...\nМені ж тюрми зостались дні\nІ зовсім не моя війна.",
         new[]
         {
-            "Останні дні такі дурні...\nЯ їх не звав - прийшли чому?\nІдуть вони до дна пусті:\nІ їм все гра - мені лиш гул.\n",
-            "Останні сни такі значні,\nАж наче той, хто їх писав,\nВгадав усі мої слабкі\nТа підло-гучно постріляв.\n",
+            "Останні дні такі дурні...\nЯ їх не звав - прийшли чому?\nІдуть вони до дна пусті:\nІ їм все гра - мені лиш гул.",
+            "Останні сни такі значні,\nАж наче той, хто їх писав,\nВгадав усі мої слабкі\nТа підло-гучно постріляв.",
             "Останні пси уже пішли\nМолити кращого життя...\nМені ж тюрми зостались дні\nІ зовсім не моя війна."
         },
-        new[]{0, 111, 212})]
+        new[]{0, 110, 211})]
     [Test]
     public void CheckSplittingRealPoem(string input, string[] expectedVerses, int[] expectedPositions)
     {
@@ -55,8 +55,8 @@ public class CalculatingVersesTokensTests
         
         Assert.That(actual, Has.Length.EqualTo(expectedVerses.Length));
         Assert.That(actual, Has.Length.EqualTo(expectedPositions.Length));
-        Assert.AreEqual(expectedVerses, actualVersesTexts);
-        Assert.AreEqual(expectedPositions, actualPositions);
+        Assert.That(actualVersesTexts, Is.EqualTo(expectedVerses));
+        Assert.That(actualPositions, Is.EqualTo(expectedPositions));
     }
     
     private void TestResultIsExpected(string input, IEnumerable<VerseToken> expected)

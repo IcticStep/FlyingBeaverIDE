@@ -8,8 +8,7 @@ public class SyllablesTokenizer
     
     public int CountSyllables(string text)
     {
-        if (text is null)
-            throw new ArgumentNullException();
+        ArgumentNullException.ThrowIfNull(text);
         
         var lower = text.ToLowerInvariant();
         return lower.Count(IsVowel);

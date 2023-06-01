@@ -14,8 +14,7 @@ public class WordsTokenizer
 
     public IEnumerable<WordToken> Tokenize(string text)
     {
-        if (text is null)
-            throw new ArgumentNullException(nameof(text));
+        ArgumentNullException.ThrowIfNull(text);
 
         if (string.IsNullOrWhiteSpace(text))
             return Enumerable.Empty<WordToken>();
