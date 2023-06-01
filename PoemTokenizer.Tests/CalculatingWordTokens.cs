@@ -78,11 +78,12 @@ public class CalculatingWordTokens
 
     [Test]
     [TestCase("Привіт тобі", new[] { 0, 7 })]
-    [TestCase("Щось дивні речі кояться", new[] { 0, 6, 12, 17 })]
-    [TestCase("Дивовижне речення ще одних слів", new[] { 0, 11, 19, 22, 28 })]
+    [TestCase("Щось дивні речі кояться", new[] { 0, 5, 11, 16 })]
+    [TestCase("Дивовижне речення ще одних слів", new[] { 0, 10, 18, 21, 27 })]
     public void CheckPositionsIfClearSentence(string input, int[] expected) =>
-        CheckPositionsAreExpected(input, new[] { 0 });
+        CheckPositionsAreExpected(input, expected);
 
+    [Test]
     public void CheckWholeToken()
     {
         var syllabler = new Syllabler();
@@ -91,19 +92,19 @@ public class CalculatingWordTokens
         List<WordToken> expected = new()
         {
             new("повна", syllabler.Tokenize("повна").ToList(), 0),
-            new("токено", syllabler.Tokenize("токено").ToList(), 9),
-            new("перевірка", syllabler.Tokenize("перевірка").ToList(), 16),
+            new("токено", syllabler.Tokenize("токено").ToList(), 8),
+            new("перевірка", syllabler.Tokenize("перевірка").ToList(), 15),
         };
         
         var wordTokens = _worder.Tokenize(input).ToList();
         Assert.That(wordTokens, Has.Count.EqualTo(expected.Count));
-        Assert.That(wordTokens.AsEnumerable(), Is.EqualTo(expected.AsEnumerable()));
+        Assert.That(wordTokens, Is.EqualTo(expected));
     }
 
     public void CheckPositionsAreExpected(string input, int[] expected)
     {
         var wordTokens = _worder.Tokenize(input).ToArray();
-        Assert.That(wordTokens, Has.Length.EqualTo(expected));
+        Assert.That(wordTokens, Has.Length.EqualTo(expected.Length));
         var resultedWordValues = wordTokens.Select(x => x.Position).ToArray();
         Assert.That(resultedWordValues, Is.EqualTo(expected));
     }
@@ -111,7 +112,7 @@ public class CalculatingWordTokens
     private void CheckWordsValuesAreExpected(string input, string[] expected)
     {
         var wordTokens = _worder.Tokenize(input).ToArray();
-        Assert.That(wordTokens, Has.Length.EqualTo(expected));
+        Assert.That(wordTokens, Has.Length.EqualTo(expected.Length));
         var resultedWordValues = wordTokens.Select(x => x.RawText).ToArray();
         Assert.That(resultedWordValues, Is.EqualTo(expected));
     }
