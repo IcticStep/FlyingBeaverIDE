@@ -8,7 +8,13 @@ public class VersesTokenizer
     private const int MinimalNewLinesCountBetweenVerses = 2;
     private readonly WordsTokenizer _wordsTokenizer = new();
     private string _input = string.Empty;
-    
+    private int _verseStartIndex = -1;
+    private int _newLinesCount;
+    private List<RawToken> _rawTokens = new();
+
+    private bool HasVerseToExtract => 
+        _verseStartIndex != -1;
+
     public IEnumerable<VerseToken> Tokenize(string input)
     {
         ArgumentNullException.ThrowIfNull(input);
@@ -16,62 +22,52 @@ public class VersesTokenizer
             return Enumerable.Empty<VerseToken>();
 
         _input = input;
-        var rawTokens = GetRowTokens();
-        return GetTokensFromRaw(rawTokens);
+        GetRowTokens();
+        return GetTokensFromRaw();
     }
 
-    private IReadOnlyList<RawToken> GetRowTokens()
+    private void GetRowTokens()
     {
-        var tokens = new List<RawToken>();
-
-        int startIndex = -1;
-        int newLinesCount = 0;
-
-        for (int i = 0; i < _input.Length; i++)
+        _rawTokens = new List<RawToken>();
+        for (var i = 0; i < _input.Length; i++)
         {
-            if (_input[i] == '\n')
+            if (IsNewLine(i))
             {
-                newLinesCount++;
+                _newLinesCount++;
+                continue;
             }
-            else
-            {
-                if (startIndex == -1)
-                    startIndex = i;
+
+            if (!HasVerseToExtract)
+                _verseStartIndex = i;
                 
-                if (newLinesCount >= 2)
-                {
-                    string part = _input.Substring(startIndex, i - startIndex - newLinesCount);
-                    tokens.Add(new RawToken(part, startIndex, lowerValue:false));
-                    startIndex = i;
-                }
+            if (_newLinesCount >= MinimalNewLinesCountBetweenVerses)
+                ExtractVerse(i);
 
-                newLinesCount = 0;
-            }
+            _newLinesCount = 0;
         }
 
-        // Check if there's a remaining part after the last occurrence of two or more consecutive newlines
-        if (startIndex != -1)
-        {
-            string part = _input.Substring(startIndex);
-            tokens.Add(new RawToken(part, startIndex, lowerValue:false));
-        }
-
-        return tokens;
+        if (!HasVerseToExtract)
+            return;
+        
+        ExtractVerse(_input.Length);
     }
 
-    private IEnumerable<VerseToken> GetTokensFromRaw(IReadOnlyList<RawToken> rawTokens) =>
-        rawTokens
+    private void ExtractVerse(int i)
+    {
+        var part = _input.Substring(_verseStartIndex, i - _verseStartIndex - _newLinesCount);
+        _rawTokens.Add(new RawToken(part, _verseStartIndex, lowerValue: false));
+        _verseStartIndex = i;
+    }
+
+    private bool IsNewLine(int i) => 
+        _input[i] == '\n';
+
+    private IEnumerable<VerseToken> GetTokensFromRaw() =>
+        _rawTokens
             .Select(token => new VerseToken(
                 token.Value,
                 token.Position,
                 _wordsTokenizer
                     .Tokenize(token.Value)
                     .ToList()));
-
-    private IReadOnlyList<int> FindIndexesOf(string text, char symbol) => 
-        text
-            .Select((x, index) => new CharRawToken(x, index))
-            .Where(token => token.Value == symbol)
-            .Select(token => token.Position)
-            .ToList();
 }
