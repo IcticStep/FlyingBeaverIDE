@@ -3,10 +3,10 @@ using PoemTokenizer.Data;
 
 namespace PoemTokenizer.Tokenizers;
 
-public class Worder
+public class WordsTokenizer
 {
-    private readonly Syllabler _syllabler = new();
-    private readonly List<RawWordToken> _rawWords = new();
+    private readonly SyllablesTokenizer _syllablesTokenizer = new();
+    private readonly List<RawToken> _rawWords = new();
     private string _inputText = string.Empty;
     private int _wordStart = -1;
 
@@ -48,7 +48,7 @@ public class Worder
         _rawWords.Select(raw => 
             new WordToken(
                 raw.Value, 
-                _syllabler.Tokenize(raw.Value).ToList(),
+                _syllablesTokenizer.Tokenize(raw.Value).ToList(),
                 raw.Position));
 
     private bool IsPartOfWord(int i) => 

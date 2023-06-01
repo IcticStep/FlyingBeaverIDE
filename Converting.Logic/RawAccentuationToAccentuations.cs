@@ -12,7 +12,7 @@ namespace Converting.Logic;
 public class RawAccentuationToAccentuations : ILinearHelper
 {
     private const char AccentuationSymbol = '$';
-    private readonly Syllabler _syllabler = new();
+    private readonly SyllablesTokenizer _syllablesTokenizer = new();
     private readonly JsonSerializerOptions _jsonOptions = new()
     {
         Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
@@ -62,7 +62,7 @@ public class RawAccentuationToAccentuations : ILinearHelper
     private int GetAccentedSyllable(string word, int accentuationIndex)
     {
         var beforeAccentuation = word.Substring(0, accentuationIndex);
-        return _syllabler.CountSyllables(beforeAccentuation);
+        return _syllablesTokenizer.CountSyllables(beforeAccentuation);
     }
 
 }

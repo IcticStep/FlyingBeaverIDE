@@ -1,10 +1,10 @@
 ﻿namespace PoemTokenizer.Data;
 
-internal readonly struct RawWordToken
+internal readonly struct RawToken
 {
-    public RawWordToken(string value, int position)
+    public RawToken(string value, int position, bool loverValue = true)
     {
-        Value = value.ToLowerInvariant();
+        Value = loverValue ? value.ToLowerInvariant() : value;
         Position = position;
     }
 

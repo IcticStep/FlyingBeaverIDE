@@ -3,13 +3,13 @@ using PoemTokenizer.Tokenizers;
 
 namespace PoemTokenizer.Tests;
 
-public class CalculatingSyllableTokens
+public class CalculatingSyllableTokensTests
 {
-    private Syllabler _syllabler = default!;
+    private SyllablesTokenizer _syllablesTokenizer = default!;
     
     [SetUp]
     public void SetUp() => 
-        _syllabler = new Syllabler();
+        _syllablesTokenizer = new SyllablesTokenizer();
 
     [Test]
     public void CheckEmptyIfEmptyText() => 
@@ -22,7 +22,7 @@ public class CalculatingSyllableTokens
     [Test]
     public void CheckExceptionIfNull() => 
         Assert.Throws<ArgumentNullException>(() => 
-            _syllabler.CountSyllables(null!));
+            _syllablesTokenizer.CountSyllables(null!));
 
     [TestCase("й")]
     [TestCase("з")]
@@ -65,7 +65,7 @@ public class CalculatingSyllableTokens
 
     private void TestResultIsExpected(string input, IEnumerable<SyllableToken> expected)
     {
-        var countSyllables =  _syllabler.Tokenize(input);
+        var countSyllables =  _syllablesTokenizer.Tokenize(input);
         Assert.That(countSyllables, Is.EqualTo(expected));
     }
 }

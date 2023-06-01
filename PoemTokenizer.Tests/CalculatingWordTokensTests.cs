@@ -3,13 +3,13 @@ using PoemTokenizer.Tokenizers;
 
 namespace PoemTokenizer.Tests;
 
-public class CalculatingWordTokens
+public class CalculatingWordTokensTests
 {
-    private Worder _worder = default!;
+    private WordsTokenizer _wordsTokenizer = default!;
 
     [SetUp]
     public void SetUp() =>
-        _worder = new Worder();
+        _wordsTokenizer = new WordsTokenizer();
 
     [Test]
     public void CheckEmptyIfEmptyText() =>
@@ -22,7 +22,7 @@ public class CalculatingWordTokens
     [Test]
     public void CheckExceptionIfNull() =>
         Assert.Throws<ArgumentNullException>(() =>
-            _worder.Tokenize(null!));
+            _wordsTokenizer.Tokenize(null!));
 
     [Test]
     [TestCase("Якесь")]
@@ -33,10 +33,10 @@ public class CalculatingWordTokens
     [TestCase("Інкапсуляція")]
     public void CheckWordValuesIfWord(string input)
     {
-        var wordTokens = _worder.Tokenize(input).ToArray();
+        var wordTokens = _wordsTokenizer.Tokenize(input).ToArray();
         Assert.That(wordTokens, Has.Length.EqualTo(1));
 
-        var actual = wordTokens.First().RawText.ToLower();
+        string actual = wordTokens.First().RawText.ToLower();
         Assert.That(actual, Is.EqualTo(input.ToLower()));
     }
 
@@ -86,7 +86,7 @@ public class CalculatingWordTokens
     [Test]
     public void CheckWholeToken()
     {
-        var syllabler = new Syllabler();
+        var syllabler = new SyllablesTokenizer();
         
         var input = "Повна,, токено-перевірка.\n";
         List<WordToken> expected = new()
@@ -96,14 +96,14 @@ public class CalculatingWordTokens
             new("перевірка", syllabler.Tokenize("перевірка").ToList(), 15),
         };
         
-        var wordTokens = _worder.Tokenize(input).ToList();
+        var wordTokens = _wordsTokenizer.Tokenize(input).ToList();
         Assert.That(wordTokens, Has.Count.EqualTo(expected.Count));
         Assert.That(wordTokens, Is.EqualTo(expected));
     }
 
     public void CheckPositionsAreExpected(string input, int[] expected)
     {
-        var wordTokens = _worder.Tokenize(input).ToArray();
+        var wordTokens = _wordsTokenizer.Tokenize(input).ToArray();
         Assert.That(wordTokens, Has.Length.EqualTo(expected.Length));
         var resultedWordValues = wordTokens.Select(x => x.Position).ToArray();
         Assert.That(resultedWordValues, Is.EqualTo(expected));
@@ -111,7 +111,7 @@ public class CalculatingWordTokens
 
     private void CheckWordsValuesAreExpected(string input, string[] expected)
     {
-        var wordTokens = _worder.Tokenize(input).ToArray();
+        var wordTokens = _wordsTokenizer.Tokenize(input).ToArray();
         Assert.That(wordTokens, Has.Length.EqualTo(expected.Length));
         var resultedWordValues = wordTokens.Select(x => x.RawText).ToArray();
         Assert.That(resultedWordValues, Is.EqualTo(expected));
@@ -119,7 +119,7 @@ public class CalculatingWordTokens
 
     private void CheckResultIsExpected(string input, IEnumerable<WordToken> expected)
     {
-        var wordTokens =  _worder.Tokenize(input);
+        var wordTokens =  _wordsTokenizer.Tokenize(input);
         Assert.That(wordTokens, Is.EqualTo(expected));
     }
 }

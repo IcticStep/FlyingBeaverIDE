@@ -2,7 +2,7 @@
 
 namespace PoemTokenizer.Tokenizers;
 
-public class Syllabler
+public class SyllablesTokenizer
 {
     private const string Vowels = "аоуиіеяюєї";
     

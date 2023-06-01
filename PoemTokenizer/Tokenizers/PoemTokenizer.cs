@@ -5,6 +5,6 @@ namespace PoemTokenizer.Tokenizers;
 
 public class PoemTokenizer
 {
-    public TokenizedPoem Tokenize(Poem poem) => 
+    public PoemToken Tokenize(Poem poem) => 
         throw new NotImplementedException();
 }

@@ -4,11 +4,11 @@ namespace PoemTokenizer.Tests;
 
 public class CountingSyllablesTests
 {
-    private Syllabler _syllabler = default!;
+    private SyllablesTokenizer _syllablesTokenizer = default!;
     
     [SetUp]
     public void SetUp() => 
-        _syllabler = new Syllabler();
+        _syllablesTokenizer = new SyllablesTokenizer();
 
     [Test]
     public void CheckZeroIfEmptyText() => 
@@ -21,7 +21,7 @@ public class CountingSyllablesTests
     [Test]
     public void CheckExceptionIfNull() =>
         Assert.Throws<ArgumentNullException>(() => 
-            _syllabler.CountSyllables(null!));
+            _syllablesTokenizer.CountSyllables(null!));
 
     [Test]
     [TestCase("Я",1)]
@@ -47,7 +47,7 @@ public class CountingSyllablesTests
 
     private void TestResultIsExpected(string input, int expected)
     {
-        var countSyllables =  _syllabler.CountSyllables(input);
+        var countSyllables =  _syllablesTokenizer.CountSyllables(input);
         Assert.That(countSyllables, Is.EqualTo(expected));
     }
 }
