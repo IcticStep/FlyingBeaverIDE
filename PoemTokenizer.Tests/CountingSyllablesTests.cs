@@ -11,15 +11,15 @@ public class CountingSyllablesTests
         _syllablesTokenizer = new SyllablesTokenizer();
 
     [Test]
-    public void CheckZeroIfEmptyText() => 
+    public void TestZeroIfEmptyText() => 
         TestResultIsExpected("", 0);
 
     [Test]
-    public void CheckZeroIfWhiteSpace() => 
+    public void TestZeroIfWhiteSpace() => 
         TestResultIsExpected(" ", 0);
 
     [Test]
-    public void CheckExceptionIfNull() =>
+    public void TestExceptionIfNull() =>
         Assert.Throws<ArgumentNullException>(() => 
             _syllablesTokenizer.CountSyllables(null!));
 
@@ -32,7 +32,7 @@ public class CountingSyllablesTests
     [TestCase("Інкапсуляція",6)]
     [TestCase("Непередбачувана",7)]
     [TestCase("Рентгеноелектрокардіографічного", 13)]
-    public void CheckVowelsCountIfOneWord(string text, int expectedVowelsCount) => 
+    public void TestVowelsCountIfOneWord(string text, int expectedVowelsCount) => 
         TestResultIsExpected(text, expectedVowelsCount);
     
     [Test]
@@ -42,7 +42,7 @@ public class CountingSyllablesTests
     [TestCase("Реве та стогне Дніпр широкий",9)]
     [TestCase("Бачу давній сон, в ньому давня ти",10)]
     [TestCase("Завтра прийде до кімнати твоїх друзів небагато",16)]
-    public void CheckVowelsCountIfText(string text, int expectedVowelsCount) => 
+    public void TestVowelsCountIfText(string text, int expectedVowelsCount) => 
         TestResultIsExpected(text, expectedVowelsCount);
 
     private void TestResultIsExpected(string input, int expected)

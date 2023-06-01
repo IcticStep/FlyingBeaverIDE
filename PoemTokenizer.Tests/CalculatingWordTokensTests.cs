@@ -12,15 +12,15 @@ public class CalculatingWordTokensTests
         _wordsTokenizer = new WordsTokenizer();
 
     [Test]
-    public void CheckEmptyIfEmptyText() =>
+    public void TestEmptyIfEmptyText() =>
         CheckResultIsExpected("", Enumerable.Empty<WordToken>());
 
     [Test]
-    public void CheckEmptyIfWhiteSpaceText() =>
+    public void TestEmptyIfWhiteSpaceText() =>
         CheckResultIsExpected(" ", Enumerable.Empty<WordToken>());
 
     [Test]
-    public void CheckExceptionIfNull() =>
+    public void TestExceptionIfNull() =>
         Assert.Throws<ArgumentNullException>(() =>
             _wordsTokenizer.Tokenize(null!));
 
@@ -31,7 +31,7 @@ public class CalculatingWordTokensTests
     [TestCase("Приклад")]
     [TestCase("Я")]
     [TestCase("Інкапсуляція")]
-    public void CheckWordValuesIfWord(string input)
+    public void TestWordValuesIfWord(string input)
     {
         var wordTokens = _wordsTokenizer.Tokenize(input).ToArray();
         Assert.That(wordTokens, Has.Length.EqualTo(1));
@@ -50,8 +50,8 @@ public class CalculatingWordTokensTests
     [TestCase(
         "Остання перевірка тому багато слів без розділових знаків",
         new[] { "остання", "перевірка", "тому", "багато", "слів", "без", "розділових", "знаків" })]
-    public void CheckWordsValueIfClearSentence(string input, string[] expected) =>
-        CheckWordsValuesAreExpected(input, expected);
+    public void TestWordsValueIfClearSentence(string input, string[] expected) =>
+        TestWordsValuesAreExpected(input, expected);
 
     [Test]
     [TestCase(
@@ -66,25 +66,25 @@ public class CalculatingWordTokensTests
     [TestCase(
         "Слова-слова дефісні. Окремо мають бути.",
         new[] { "слова", "слова", "дефісні", "окремо", "мають", "бути"})]
-    public void CheckWordsAreClearIfRealSentence(string input, string[] expected) =>
-        CheckWordsValuesAreExpected(input, expected);
+    public void TestWordsAreClearIfRealSentence(string input, string[] expected) =>
+        TestWordsValuesAreExpected(input, expected);
 
     [Test]
     [TestCase("Привіт")]
     [TestCase("Просто")]
     [TestCase("Слова")]
-    public void CheckPositionsIfWord(string input) =>
-        CheckPositionsAreExpected(input, new[] { 0 });
+    public void TestPositionsIfWord(string input) =>
+        TestPositionsAreExpected(input, new[] { 0 });
 
     [Test]
     [TestCase("Привіт тобі", new[] { 0, 7 })]
     [TestCase("Щось дивні речі кояться", new[] { 0, 5, 11, 16 })]
     [TestCase("Дивовижне речення ще одних слів", new[] { 0, 10, 18, 21, 27 })]
-    public void CheckPositionsIfClearSentence(string input, int[] expected) =>
-        CheckPositionsAreExpected(input, expected);
+    public void TestPositionsIfClearSentence(string input, int[] expected) =>
+        TestPositionsAreExpected(input, expected);
 
     [Test]
-    public void CheckWholeToken()
+    public void TestWholeToken()
     {
         var syllabler = new SyllablesTokenizer();
         
@@ -101,7 +101,7 @@ public class CalculatingWordTokensTests
         Assert.That(wordTokens, Is.EqualTo(expected));
     }
 
-    public void CheckPositionsAreExpected(string input, int[] expected)
+    private void TestPositionsAreExpected(string input, int[] expected)
     {
         var wordTokens = _wordsTokenizer.Tokenize(input).ToArray();
         Assert.That(wordTokens, Has.Length.EqualTo(expected.Length));
@@ -109,7 +109,7 @@ public class CalculatingWordTokensTests
         Assert.That(resultedWordValues, Is.EqualTo(expected));
     }
 
-    private void CheckWordsValuesAreExpected(string input, string[] expected)
+    private void TestWordsValuesAreExpected(string input, string[] expected)
     {
         var wordTokens = _wordsTokenizer.Tokenize(input).ToArray();
         Assert.That(wordTokens, Has.Length.EqualTo(expected.Length));

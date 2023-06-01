@@ -11,15 +11,15 @@ public class FindingSyllablesTests
         _syllablesTokenizer = new SyllablesTokenizer();
 
     [Test]
-    public void CheckEmptyIfEmptyText() => 
+    public void TestEmptyIfEmptyText() => 
         TestResultIsExpected("", Enumerable.Empty<int>());
 
     [Test]
-    public void CheckEmptyIfWhiteSpaceText() => 
+    public void TestEmptyIfWhiteSpaceText() => 
         TestResultIsExpected(" ", Enumerable.Empty<int>());
 
     [Test]
-    public void CheckExceptionIfNull() => 
+    public void TestExceptionIfNull() => 
         Assert.Throws<ArgumentNullException>(() => 
             _syllablesTokenizer.CountSyllables(null!));
 
@@ -30,7 +30,7 @@ public class FindingSyllablesTests
     [TestCase("првт")]
     [TestCase("впрнксмт")]
     [Test]
-    public void CheckNoPositionsIfNoVowels(string input) =>
+    public void TestNoPositionsIfNoVowels(string input) =>
         TestResultIsExpected(input, Enumerable.Empty<int>());
 
     [TestCase("я", new[]{0})]
@@ -42,13 +42,13 @@ public class FindingSyllablesTests
     [TestCase("оскільки", new[]{0,3,7})]
     [TestCase("інкапсуляція", new[]{0,3,6,8,10,11})]
     [Test]
-    public void CheckPositionsIfOneWord(string input, IEnumerable<int> expected) =>
+    public void TestPositionsIfOneWord(string input, IEnumerable<int> expected) =>
         TestResultIsExpected(input, expected);
 
     [TestCase("Знаєш, як болить...", new[]{2,3,7,11,13})]
     [TestCase("Ніяк не пройде.", new[]{1,2,6,10,13})]
     [Test]
-    public void CheckPositionsIfText(string input, IEnumerable<int> expected) =>
+    public void TestPositionsIfText(string input, IEnumerable<int> expected) =>
         TestResultIsExpected(input, expected);
     
     private void TestResultIsExpected(string input, IEnumerable<int> expected)

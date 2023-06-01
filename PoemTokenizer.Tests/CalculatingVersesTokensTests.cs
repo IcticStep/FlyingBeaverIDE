@@ -12,15 +12,15 @@ public class CalculatingVersesTokensTests
         _versesTokenizer = new VersesTokenizer();
     
     [Test]
-    public void CheckEmptyIfEmptyText() => 
+    public void TestEmptyIfEmptyText() => 
         TestResultIsExpected("", Enumerable.Empty<VerseToken>());
 
     [Test]
-    public void CheckEmptyIfWhiteSpaceText() => 
+    public void TestEmptyIfWhiteSpaceText() => 
         TestResultIsExpected(" ", Enumerable.Empty<VerseToken>());
 
     [Test]
-    public void CheckExceptionIfNull() => 
+    public void TestExceptionIfNull() => 
         Assert.Throws<ArgumentNullException>(() => 
             _versesTokenizer.Tokenize(null!));
 
@@ -41,7 +41,7 @@ public class CalculatingVersesTokensTests
         },
         new[]{0, 110, 211})]
     [Test]
-    public void CheckSplittingRealPoem(string input, string[] expectedVerses, int[] expectedPositions)
+    public void TestSplittingRealPoem(string input, string[] expectedVerses, int[] expectedPositions)
     {
         var actual = _versesTokenizer
             .Tokenize(input)

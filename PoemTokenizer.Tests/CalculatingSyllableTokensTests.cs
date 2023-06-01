@@ -12,15 +12,15 @@ public class CalculatingSyllableTokensTests
         _syllablesTokenizer = new SyllablesTokenizer();
 
     [Test]
-    public void CheckEmptyIfEmptyText() => 
+    public void TestEmptyIfEmptyText() => 
         TestResultIsExpected("", Enumerable.Empty<SyllableToken>());
 
     [Test]
-    public void CheckEmptyIfWhiteSpaceText() => 
+    public void TestEmptyIfWhiteSpaceText() => 
         TestResultIsExpected(" ", Enumerable.Empty<SyllableToken>());
 
     [Test]
-    public void CheckExceptionIfNull() => 
+    public void TestExceptionIfNull() => 
         Assert.Throws<ArgumentNullException>(() => 
             _syllablesTokenizer.CountSyllables(null!));
 
@@ -31,7 +31,7 @@ public class CalculatingSyllableTokensTests
     [TestCase("првт")]
     [TestCase("впрнксмт")]
     [Test]
-    public void CheckNoTokensIfNoVowels(string input) =>
+    public void TestNoTokensIfNoVowels(string input) =>
         TestResultIsExpected(input, Enumerable.Empty<SyllableToken>());
 
     [TestCase("я", new[]{0})]
@@ -43,13 +43,13 @@ public class CalculatingSyllableTokensTests
     [TestCase("оскільки", new[]{0,3,7})]
     [TestCase("інкапсуляція", new[]{0,3,6,8,10,11})]
     [Test]
-    public void CheckTokensIfOneWord(string input, IEnumerable<int> expectedVowels) => 
+    public void TestTokensIfOneWord(string input, IEnumerable<int> expectedVowels) => 
         TestResultIsExpectedByVowelsPosition(input, expectedVowels);
 
     [TestCase("Знаєш, як болить...", new[]{2,3,7,11,13})]
     [TestCase("Ніяк не пройде.", new[]{1,2,6,10,13})]
     [Test]
-    public void CheckPositionsIfText(string input, IEnumerable<int> expected) =>
+    public void TestPositionsIfText(string input, IEnumerable<int> expected) =>
         TestResultIsExpectedByVowelsPosition(input, expected);
 
     private void TestResultIsExpectedByVowelsPosition(string input, IEnumerable<int> expectedVowels)
