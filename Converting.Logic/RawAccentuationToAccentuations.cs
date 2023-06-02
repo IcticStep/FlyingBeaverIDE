@@ -4,8 +4,8 @@ using System.Text.Unicode;
 using ConsoleHelpers.Core;
 using Domain;
 using HtmlParserSlovnyk.Domain;
-using PoemTokenizer;
-using PoemTokenizer.Tokenizers;
+using PoemTokenization;
+using PoemTokenization.Tokenizers;
 
 namespace Converting.Logic;
 

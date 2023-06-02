@@ -1,4 +1,4 @@
-﻿namespace PoemTokenizer.Data;
+﻿namespace PoemTokenization.Data;
 
 internal readonly struct RawToken
 {

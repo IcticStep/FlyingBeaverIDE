@@ -1,8 +1,8 @@
 ﻿using Domain;
-using Domain.Tokenized;
-using PoemTokenizer.Data;
+using Domain.Tokens;
+using PoemTokenization.Data;
 
-namespace PoemTokenizer.Tokenizers;
+namespace PoemTokenization.Tokenizers;
 
 public class VersesTokenizer
 {

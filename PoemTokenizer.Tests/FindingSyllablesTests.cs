@@ -1,4 +1,4 @@
-﻿using PoemTokenizer.Tokenizers;
+﻿using PoemTokenization.Tokenizers;
 
 namespace PoemTokenizer.Tests;
 

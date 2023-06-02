@@ -18,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\PoemTokenizer\PoemTokenizer.csproj" />
+      <ProjectReference Include="..\PoemTokenization\PoemTokenization.csproj" />
     </ItemGroup>
 
 </Project>

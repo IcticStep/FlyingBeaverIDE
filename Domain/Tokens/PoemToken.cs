@@ -1,4 +1,4 @@
-﻿namespace Domain.Tokenized;
+﻿namespace Domain.Tokens;
 
 public class PoemToken
 {

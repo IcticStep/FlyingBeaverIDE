@@ -1,5 +1,5 @@
-﻿using Domain.Tokenized;
-using PoemTokenizer.Tokenizers;
+﻿using Domain.Tokens;
+using PoemTokenization.Tokenizers;
 
 namespace PoemTokenizer.Tests;
 

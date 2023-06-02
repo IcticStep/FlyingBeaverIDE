@@ -1,6 +1,6 @@
-﻿using Domain.Tokenized;
+﻿using Domain.Tokens;
 
-namespace PoemTokenizer.Tokenizers;
+namespace PoemTokenization.Tokenizers;
 
 public class SyllablesTokenizer
 {

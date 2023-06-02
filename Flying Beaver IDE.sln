@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStorage", "DataStorage\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlParserCore", "HtmlParserCore\HtmlParserCore.csproj", "{BCD9692F-C18F-4900-B125-D94140E73CC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoemTokenizer", "PoemTokenizer\PoemTokenizer.csproj", "{B87A2ADC-43BD-475F-8A4B-0EC138682CC6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoemTokenization", "PoemTokenization\PoemTokenization.csproj", "{B87A2ADC-43BD-475F-8A4B-0EC138682CC6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoemTokenizer.Tests", "PoemTokenizer.Tests\PoemTokenizer.Tests.csproj", "{3E9378EC-D2EB-4671-8DA8-8F56AD72DB50}"
 EndProject

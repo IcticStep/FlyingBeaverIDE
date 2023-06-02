@@ -10,7 +10,7 @@
       <ProjectReference Include="..\ConsoleHelpers.Core\ConsoleHelpers.Core.csproj" />
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\HtmlParserSlovnyk.Domain\HtmlParserSlovnyk.Domain.csproj" />
-      <ProjectReference Include="..\PoemTokenizer\PoemTokenizer.csproj" />
+      <ProjectReference Include="..\PoemTokenization\PoemTokenization.csproj" />
     </ItemGroup>
 
 </Project>
