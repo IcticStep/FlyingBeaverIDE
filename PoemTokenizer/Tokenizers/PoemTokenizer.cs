@@ -5,6 +5,11 @@ namespace PoemTokenizer.Tokenizers;
 
 public class PoemTokenizer
 {
-    public PoemToken Tokenize(Poem poem) => 
-        throw new NotImplementedException();
+    private readonly VersesTokenizer _versesTokenizer = new();
+
+    public PoemToken Tokenize(Poem poem) =>
+        new(poem,
+            _versesTokenizer
+                .Tokenize(poem)
+                .ToList());
 }

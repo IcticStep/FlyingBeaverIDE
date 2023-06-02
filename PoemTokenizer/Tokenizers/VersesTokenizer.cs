@@ -1,4 +1,5 @@
-﻿using Domain.Tokenized;
+﻿using Domain;
+using Domain.Tokenized;
 using PoemTokenizer.Data;
 
 namespace PoemTokenizer.Tokenizers;
@@ -15,6 +16,9 @@ public class VersesTokenizer
     private bool HasVerseToExtract => 
         _verseStartIndex != -1;
 
+    public IEnumerable<VerseToken> Tokenize(Poem poem) => 
+        Tokenize(poem.Text);
+
     public IEnumerable<VerseToken> Tokenize(string input)
     {
         ArgumentNullException.ThrowIfNull(input);
@@ -22,11 +26,11 @@ public class VersesTokenizer
             return Enumerable.Empty<VerseToken>();
 
         _input = input;
-        GetRowTokens();
+        GetRawTokens();
         return GetTokensFromRaw();
     }
 
-    private void GetRowTokens()
+    private void GetRawTokens()
     {
         _rawTokens = new List<RawToken>();
         for (var i = 0; i < _input.Length; i++)

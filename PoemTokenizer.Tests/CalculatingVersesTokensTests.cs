@@ -22,7 +22,7 @@ public class CalculatingVersesTokensTests
     [Test]
     public void TestExceptionIfNull() => 
         Assert.Throws<ArgumentNullException>(() => 
-            _versesTokenizer.Tokenize(null!));
+            _versesTokenizer.Tokenize((string)null!));
 
     [TestCase("А\n\nБ",
         new[]{"А","Б"},
