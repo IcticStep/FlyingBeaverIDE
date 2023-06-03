@@ -1,4 +1,5 @@
 ﻿using Domain.Tokens;
+using Domain.Tokens.Api;
 using PoemTokenization.Data;
 
 namespace PoemTokenization.Tokenizers;
@@ -12,12 +13,12 @@ public class WordsTokenizer
 
     private bool HasWordStart => _wordStart != -1;
 
-    public IEnumerable<WordToken> Tokenize(string text)
+    public IEnumerable<IWordToken> Tokenize(string text)
     {
         ArgumentNullException.ThrowIfNull(text);
 
         if (string.IsNullOrWhiteSpace(text))
-            return Enumerable.Empty<WordToken>();
+            return Enumerable.Empty<IWordToken>();
 
         _inputText = text;
         SplitSentence();
@@ -43,7 +44,7 @@ public class WordsTokenizer
             ExtractWord(_inputText.Length);
     }
 
-    private IEnumerable<WordToken> ConvertRawTokensToTokens() =>
+    private IEnumerable<IWordToken> ConvertRawTokensToTokens() =>
         _rawWords.Select(raw => 
             new WordToken(
                 raw.Value, 

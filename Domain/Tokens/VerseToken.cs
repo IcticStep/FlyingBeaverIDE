@@ -1,17 +1,39 @@
-﻿namespace Domain.Tokens;
+﻿using Domain.Tokens.Api;
 
-public readonly struct VerseToken
+namespace Domain.Tokens;
+
+public class VerseToken : IVerseToken
 {
-    public VerseToken(string rawVerse, int position, List<WordToken> words)
+    public VerseToken(string rawVerse, int position, List<IWordToken> words)
     {
         RawVerse = rawVerse;
         Position = position;
         _words = words;
     }
     
-    public readonly string RawVerse;
-    public readonly int Position;
-    private readonly List<WordToken> _words;
+    public string RawVerse { get; }
+    public int Position { get; }
+    private readonly List<IWordToken> _words;
 
-    public IReadOnlyList<WordToken> Words => _words;
+    public IReadOnlyList<IWordToken> Words => _words;
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is not IVerseToken other) 
+            return false;
+
+        if (RawVerse != other.RawVerse || Position != other.Position)
+            return false;
+        
+        if (Words.Count != other.Words.Count)
+            return false;
+        
+        for (var i = 0; i < Words.Count; i++)
+        {
+            if (!Words[i].Equals(other.Words[i]))
+                return false;
+        }
+
+        return true;
+    }
 }

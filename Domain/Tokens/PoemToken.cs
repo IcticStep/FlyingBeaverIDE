@@ -1,15 +1,17 @@
-﻿namespace Domain.Tokens;
+﻿using Domain.Tokens.Api;
+
+namespace Domain.Tokens;
 
 public class PoemToken
 {
-    public PoemToken(string rawText, Rhythm rhythm, IReadOnlyList<VerseToken> verses)
+    public PoemToken(string rawText, Rhythm rhythm, IReadOnlyList<IVerseToken> verses)
     {
         RawText = rawText;
         Rhythm = rhythm;
         Verses = verses;
     }
 
-    public PoemToken(Poem poem, IReadOnlyList<VerseToken> verses)
+    public PoemToken(Poem poem, IReadOnlyList<IVerseToken> verses)
         : this(poem.Text, poem.Rhythm, verses)
     {
         
@@ -17,5 +19,5 @@ public class PoemToken
 
     public readonly string RawText;
     public readonly Rhythm Rhythm;
-    public readonly IReadOnlyList<VerseToken> Verses;
+    public readonly IReadOnlyList<IVerseToken> Verses;
 }

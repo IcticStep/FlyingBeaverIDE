@@ -1,15 +1,26 @@
-﻿namespace Domain.Tokens;
+﻿using Domain.Tokens.Api;
 
-public readonly struct SyllableToken
+namespace Domain.Tokens;
+
+public class SyllableToken : ISyllableToken
 {
-    public SyllableToken(string vowel, int textPosition)
+    public SyllableToken(string vowel, int position)
     {
         Vowel = vowel;
-        TextPosition = textPosition;
+        Position = position;
     }
 
-    public readonly string Vowel;
-    public readonly int TextPosition;
+    public string Vowel { get; }
+    public int Position { get; }
 
-    public override string ToString() => $"{Vowel}:{{{TextPosition}}}";
+    public override string ToString() => $"{Vowel}:{{{Position}}}";
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is not ISyllableToken other) 
+            return false;
+
+        return Vowel == other.Vowel 
+               && Position == other.Position;
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Domain.Tokens;
+using Domain.Tokens.Api;
 using PoemTokenization.Data;
 
 namespace PoemTokenization.Tokenizers;
@@ -16,14 +17,14 @@ public class VersesTokenizer
     private bool HasVerseToExtract => 
         _verseStartIndex != -1;
 
-    public IEnumerable<VerseToken> Tokenize(Poem poem) => 
+    public IEnumerable<IVerseToken> Tokenize(Poem poem) => 
         Tokenize(poem.Text);
 
-    public IEnumerable<VerseToken> Tokenize(string input)
+    public IEnumerable<IVerseToken> Tokenize(string input)
     {
         ArgumentNullException.ThrowIfNull(input);
         if (string.IsNullOrWhiteSpace(input))
-            return Enumerable.Empty<VerseToken>();
+            return Enumerable.Empty<IVerseToken>();
 
         _input = input;
         GetRawTokens();
@@ -66,7 +67,7 @@ public class VersesTokenizer
     private bool IsNewLine(int i) => 
         _input[i] == '\n';
 
-    private IEnumerable<VerseToken> GetTokensFromRaw() =>
+    private IEnumerable<IVerseToken> GetTokensFromRaw() =>
         _rawTokens
             .Select(token => new VerseToken(
                 token.Value,

@@ -1,4 +1,5 @@
 ﻿using Domain.Tokens;
+using Domain.Tokens.Api;
 using PoemTokenization.Tokenizers;
 
 namespace PoemTokenizer.Tests;
@@ -13,11 +14,11 @@ public class CalculatingVersesTokensTests
     
     [Test]
     public void TestEmptyIfEmptyText() => 
-        TestResultIsExpected("", Enumerable.Empty<VerseToken>());
+        TestResultIsExpected("", Enumerable.Empty<IVerseToken>());
 
     [Test]
     public void TestEmptyIfWhiteSpaceText() => 
-        TestResultIsExpected(" ", Enumerable.Empty<VerseToken>());
+        TestResultIsExpected(" ", Enumerable.Empty<IVerseToken>());
 
     [Test]
     public void TestExceptionIfNull() => 
@@ -59,7 +60,7 @@ public class CalculatingVersesTokensTests
         Assert.That(actualPositions, Is.EqualTo(expectedPositions));
     }
     
-    private void TestResultIsExpected(string input, IEnumerable<VerseToken> expected)
+    private void TestResultIsExpected(string input, IEnumerable<IVerseToken> expected)
     {
         var countSyllables =  _versesTokenizer.Tokenize(input);
         Assert.That(countSyllables, Is.EqualTo(expected));

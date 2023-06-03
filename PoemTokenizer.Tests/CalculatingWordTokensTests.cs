@@ -1,4 +1,5 @@
 ﻿using Domain.Tokens;
+using Domain.Tokens.Api;
 using PoemTokenization.Tokenizers;
 
 namespace PoemTokenizer.Tests;
@@ -117,9 +118,9 @@ public class CalculatingWordTokensTests
         Assert.That(resultedWordValues, Is.EqualTo(expected));
     }
 
-    private void CheckResultIsExpected(string input, IEnumerable<WordToken> expected)
+    private void CheckResultIsExpected(string input, IEnumerable<IWordToken> expected)
     {
-        var wordTokens =  _wordsTokenizer.Tokenize(input);
+        var wordTokens =  _wordsTokenizer.Tokenize( input);
         Assert.That(wordTokens, Is.EqualTo(expected));
     }
 }

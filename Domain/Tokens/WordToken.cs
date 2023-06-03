@@ -1,26 +1,29 @@
-﻿namespace Domain.Tokens;
+﻿using Domain.Tokens.Api;
 
-public readonly struct WordToken
+namespace Domain.Tokens;
+
+public class WordToken : IWordToken
 {
-    public WordToken(string rawText, List<SyllableToken> syllableTokens, int position)
+    public WordToken(string rawText, List<ISyllableToken> syllableTokens, int position)
     {
         RawText = rawText;
         _syllableTokens = syllableTokens;
         Position = position;
     }
 
-    public readonly string RawText;
-    public readonly int Position;
-    private readonly List<SyllableToken> _syllableTokens;
+    private readonly List<ISyllableToken> _syllableTokens;
     
-    public IReadOnlyList<SyllableToken> SyllableTokens => _syllableTokens;
+    public string RawText { get; }
+    public int Position { get; }
+    
+    public IReadOnlyList<ISyllableToken> SyllableTokens => _syllableTokens;
 
     public override string ToString() => 
         $"{{{RawText}}} позиція:{Position} склади:{GetSyllableTokensAsString()}";
 
     public override bool Equals(object? obj)
     {
-        if (obj is not WordToken other) 
+        if (obj is not IWordToken other) 
             return false;
 
         if (RawText != other.RawText || Position != other.Position)

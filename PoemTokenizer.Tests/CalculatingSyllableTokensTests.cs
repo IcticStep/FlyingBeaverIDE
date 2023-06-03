@@ -1,4 +1,5 @@
 ﻿using Domain.Tokens;
+using Domain.Tokens.Api;
 using PoemTokenization.Tokenizers;
 
 namespace PoemTokenizer.Tests;
@@ -13,11 +14,11 @@ public class CalculatingSyllableTokensTests
 
     [Test]
     public void TestEmptyIfEmptyText() => 
-        TestResultIsExpected("", Enumerable.Empty<SyllableToken>());
+        TestResultIsExpected("", Enumerable.Empty<ISyllableToken>());
 
     [Test]
     public void TestEmptyIfWhiteSpaceText() => 
-        TestResultIsExpected(" ", Enumerable.Empty<SyllableToken>());
+        TestResultIsExpected(" ", Enumerable.Empty<ISyllableToken>());
 
     [Test]
     public void TestExceptionIfNull() => 
@@ -32,7 +33,7 @@ public class CalculatingSyllableTokensTests
     [TestCase("впрнксмт")]
     [Test]
     public void TestNoTokensIfNoVowels(string input) =>
-        TestResultIsExpected(input, Enumerable.Empty<SyllableToken>());
+        TestResultIsExpected(input, Enumerable.Empty<ISyllableToken>());
 
     [TestCase("я", new[]{0})]
     [TestCase("і", new[]{0})]
@@ -63,7 +64,7 @@ public class CalculatingSyllableTokensTests
         TestResultIsExpected(input, expected);
     }
 
-    private void TestResultIsExpected(string input, IEnumerable<SyllableToken> expected)
+    private void TestResultIsExpected(string input, IEnumerable<ISyllableToken> expected)
     {
         var countSyllables =  _syllablesTokenizer.Tokenize(input);
         Assert.That(countSyllables, Is.EqualTo(expected));
