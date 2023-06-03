@@ -20,6 +20,7 @@ public class WordsTokenizer
         if (string.IsNullOrWhiteSpace(text))
             return Enumerable.Empty<IWordToken>();
 
+        _rawWords.Clear();
         _inputText = text;
         SplitSentence();
         return ConvertRawTokensToTokens();

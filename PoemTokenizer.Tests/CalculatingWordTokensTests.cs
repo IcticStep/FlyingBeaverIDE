@@ -102,6 +102,7 @@ public class CalculatingWordTokensTests
         Assert.That(wordTokens, Is.EqualTo(expected));
     }
 
+
     private void TestPositionsAreExpected(string input, int[] expected)
     {
         var wordTokens = _wordsTokenizer.Tokenize(input).ToArray();

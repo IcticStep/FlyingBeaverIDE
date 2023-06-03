@@ -10,13 +10,21 @@ public class WordToken : IWordToken
         _syllableTokens = syllableTokens;
         Position = position;
     }
-
+    
     private readonly List<ISyllableToken> _syllableTokens;
     
     public string RawText { get; }
     public int Position { get; }
     
     public IReadOnlyList<ISyllableToken> SyllableTokens => _syllableTokens;
+    
+    public IWordToken GetWithAbsoluteSyllablesPositions() =>
+        new WordToken(
+            RawText, 
+            SyllableTokens
+                .Select(syllable => syllable.GetWithAbsolutePosition(Position))
+                .ToList(), 
+            Position);
 
     public override string ToString() => 
         $"{{{RawText}}} позиція:{Position} склади:{GetSyllableTokensAsString()}";

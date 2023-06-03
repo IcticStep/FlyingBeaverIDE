@@ -17,6 +17,12 @@ public class VerseToken : IVerseToken
 
     public IReadOnlyList<IWordToken> Words => _words;
 
+    public IReadOnlyList<ISyllableToken> AllSyllables =>
+        Words
+            .Select(word => word.GetWithAbsoluteSyllablesPositions())
+            .SelectMany(word => word.SyllableTokens)
+            .ToList();
+
     public override bool Equals(object? obj)
     {
         if (obj is not IVerseToken other) 

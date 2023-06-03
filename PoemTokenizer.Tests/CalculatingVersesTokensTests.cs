@@ -60,6 +60,24 @@ public class CalculatingVersesTokensTests
         Assert.That(actualPositions, Is.EqualTo(expectedPositions));
     }
     
+    [Test]
+    [TestCase("Аба.", new[]{"а", "а"}, new[]{0, 2})]
+    [TestCase("Привіт тобі.", new[]{"и", "і", "о", "і"}, new[]{2, 4, 8, 10})]
+    [TestCase("Навіщо? Чому?", new[]{"а", "і", "о", "о", "у"}, new[]{1, 3, 5, 9, 11})]
+    [TestCase("Якісь цікаві речі", new[]{"я", "і", "і", "а", "і", "е", "і"}, new[]{0, 2, 7, 9, 11, 14, 16})]
+    public void TestSyllablesAbsolutePositions(string input, string[] expectedValues, int[] expectedPositions)
+    {
+        var wordTokens = _versesTokenizer.Tokenize(input).ToArray();
+        var allSyllables = wordTokens.SelectMany(token => token.AllSyllables).ToArray();
+        Assert.That(allSyllables, Has.Length.EqualTo(expectedValues.Length));
+        Assert.That(allSyllables, Has.Length.EqualTo(expectedPositions.Length));
+        
+        var actualValues = allSyllables.Select(syllable => syllable.Vowel);
+        var actualPositions = allSyllables.Select(syllable => syllable.Position);
+        Assert.That(expectedValues, Is.EqualTo(actualValues));
+        Assert.That(expectedPositions, Is.EqualTo(actualPositions));
+    }
+    
     private void TestResultIsExpected(string input, IEnumerable<IVerseToken> expected)
     {
         var countSyllables =  _versesTokenizer.Tokenize(input);

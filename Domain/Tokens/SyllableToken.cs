@@ -12,6 +12,8 @@ public class SyllableToken : ISyllableToken
 
     public string Vowel { get; }
     public int Position { get; }
+    public ISyllableToken GetWithAbsolutePosition(int relativePosition) => 
+        new SyllableToken(Vowel, Position + relativePosition);
 
     public override string ToString() => $"{Vowel}:{{{Position}}}";
 
