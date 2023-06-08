@@ -20,4 +20,8 @@ public class PoemToken
     public readonly string RawText;
     public readonly Rhythm Rhythm;
     public readonly IReadOnlyList<IVerseToken> Verses;
+
+    public IReadOnlyList<ISyllableToken> AllSyllables => Verses
+        .SelectMany(verse => verse.GetAllSyllablesAbsolutePositioned)
+        .ToList();
 }
