@@ -1,5 +1,7 @@
 ﻿using Domain.Tokens;
 using Domain.Tokens.Api;
+using Domain.Tokens.Api.Concrete;
+using Domain.Tokens.Concrete;
 
 namespace PoemTokenization.Tokenizers;
 
@@ -21,11 +23,14 @@ public class SyllablesTokenizer
             .Where((token, index) => IsVowel(token.symbol))
             .Select(token => token.index);
 
-    public IEnumerable<ISyllableToken> Tokenize(string text)
+    public IEnumerable<ISyllableToken> Tokenize(string text, int absolutePositionAdjustment = 0)
     {
         var vowelsPositions = GetVowelsPositions(text);
         return vowelsPositions.Select(position => 
-            new SyllableToken(text[position].ToString(), position));
+            new SyllableToken(
+                text[position].ToString(), 
+                position,
+                position+absolutePositionAdjustment));
     }
 
     private bool IsVowel(char symbol) => 

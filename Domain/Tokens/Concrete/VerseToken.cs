@@ -1,25 +1,23 @@
-﻿using Domain.Tokens.Api;
+﻿using Domain.Tokens.Api.Concrete;
 
-namespace Domain.Tokens;
+namespace Domain.Tokens.Concrete;
 
-public class VerseToken : IVerseToken
+public class VerseToken : Token, IVerseToken
 {
-    public VerseToken(string rawVerse, int position, List<IWordToken> words)
+    public VerseToken(string rawVerse, List<IWordToken> words, int position, int absolutePosition = 0)
+    : base(position, absolutePosition)
     {
         RawVerse = rawVerse;
-        Position = position;
         _words = words;
     }
     
     public string RawVerse { get; }
-    public int Position { get; }
     private readonly List<IWordToken> _words;
 
     public IReadOnlyList<IWordToken> Words => _words;
 
     public IReadOnlyList<ISyllableToken> AllSyllables =>
         Words
-            .Select(word => word.GetWithAbsoluteSyllablesPositions())
             .SelectMany(word => word.SyllableTokens)
             .ToList();
 

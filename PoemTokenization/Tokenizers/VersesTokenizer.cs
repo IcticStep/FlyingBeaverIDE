@@ -1,6 +1,8 @@
 ﻿using Domain;
 using Domain.Tokens;
 using Domain.Tokens.Api;
+using Domain.Tokens.Api.Concrete;
+using Domain.Tokens.Concrete;
 using PoemTokenization.Data;
 
 namespace PoemTokenization.Tokenizers;
@@ -74,8 +76,8 @@ public class VersesTokenizer
         _rawTokens
             .Select(token => new VerseToken(
                 token.Value,
-                token.Position,
                 _wordsTokenizer
-                    .Tokenize(token.Value)
-                    .ToList()));
+                    .Tokenize(token.Value, token.Position)
+                    .ToList(), 
+                token.Position));
 }

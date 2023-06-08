@@ -1,5 +1,7 @@
 ﻿using Domain.Tokens;
 using Domain.Tokens.Api;
+using Domain.Tokens.Api.Concrete;
+using Domain.Tokens.Concrete;
 using PoemTokenization.Data;
 
 namespace PoemTokenization.Tokenizers;
@@ -10,18 +12,21 @@ public class WordsTokenizer
     private readonly List<RawToken> _rawWords = new();
     private string _inputText = string.Empty;
     private int _wordStart = -1;
+    private int _absolutePositionAdjustment;
 
     private bool HasWordStart => _wordStart != -1;
 
-    public IEnumerable<IWordToken> Tokenize(string text)
+    public IEnumerable<IWordToken> Tokenize(string text, int absolutePositionAdjustment = 0)
     {
         ArgumentNullException.ThrowIfNull(text);
 
         if (string.IsNullOrWhiteSpace(text))
             return Enumerable.Empty<IWordToken>();
-
+        
         _rawWords.Clear();
+        _absolutePositionAdjustment = absolutePositionAdjustment;
         _inputText = text;
+        
         SplitSentence();
         return ConvertRawTokensToTokens();
     }
@@ -49,8 +54,9 @@ public class WordsTokenizer
         _rawWords.Select(raw => 
             new WordToken(
                 raw.Value, 
-                _syllablesTokenizer.Tokenize(raw.Value).ToList(),
-                raw.Position));
+                _syllablesTokenizer.Tokenize(raw.Value, raw.Position + _absolutePositionAdjustment).ToList(),
+                raw.Position,
+                raw.Position+_absolutePositionAdjustment));
 
     private bool IsPartOfWord(int i) => 
         char.IsLetter(_inputText[i]);

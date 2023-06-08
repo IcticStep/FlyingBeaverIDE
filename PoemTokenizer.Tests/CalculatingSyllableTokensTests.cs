@@ -1,5 +1,7 @@
 ﻿using Domain.Tokens;
 using Domain.Tokens.Api;
+using Domain.Tokens.Api.Concrete;
+using Domain.Tokens.Concrete;
 using PoemTokenization.Tokenizers;
 
 namespace PoemTokenizer.Tests;
@@ -25,16 +27,17 @@ public class CalculatingSyllableTokensTests
         Assert.Throws<ArgumentNullException>(() => 
             _syllablesTokenizer.CountSyllables(null!));
 
+    [Test]
     [TestCase("й")]
     [TestCase("з")]
     [TestCase("в")]
     [TestCase("пфф")]
     [TestCase("првт")]
     [TestCase("впрнксмт")]
-    [Test]
     public void TestNoTokensIfNoVowels(string input) =>
         TestResultIsExpected(input, Enumerable.Empty<ISyllableToken>());
 
+    [Test]
     [TestCase("я", new[]{0})]
     [TestCase("і", new[]{0})]
     [TestCase("чому", new[]{1,3})]
@@ -43,13 +46,12 @@ public class CalculatingSyllableTokensTests
     [TestCase("бачиш", new[]{1,3})]
     [TestCase("оскільки", new[]{0,3,7})]
     [TestCase("інкапсуляція", new[]{0,3,6,8,10,11})]
-    [Test]
     public void TestTokensIfOneWord(string input, IEnumerable<int> expectedVowels) => 
         TestResultIsExpectedByVowelsPosition(input, expectedVowels);
 
+    [Test]
     [TestCase("Знаєш, як болить...", new[]{2,3,7,11,13})]
     [TestCase("Ніяк не пройде.", new[]{1,2,6,10,13})]
-    [Test]
     public void TestPositionsIfText(string input, IEnumerable<int> expected) =>
         TestResultIsExpectedByVowelsPosition(input, expected);
 

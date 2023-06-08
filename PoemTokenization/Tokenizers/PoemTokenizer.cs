@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Domain.Tokens;
+using Domain.Tokens.Concrete;
 
 namespace PoemTokenization.Tokenizers;
 

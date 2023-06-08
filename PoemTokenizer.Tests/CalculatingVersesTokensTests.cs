@@ -1,5 +1,6 @@
 ﻿using Domain.Tokens;
 using Domain.Tokens.Api;
+using Domain.Tokens.Api.Concrete;
 using PoemTokenization.Tokenizers;
 
 namespace PoemTokenizer.Tests;
@@ -73,7 +74,7 @@ public class CalculatingVersesTokensTests
         Assert.That(allSyllables, Has.Length.EqualTo(expectedPositions.Length));
         
         var actualValues = allSyllables.Select(syllable => syllable.Vowel);
-        var actualPositions = allSyllables.Select(syllable => syllable.Position);
+        var actualPositions = allSyllables.Select(syllable => syllable.AbsolutePosition);
         Assert.That(expectedValues, Is.EqualTo(actualValues));
         Assert.That(expectedPositions, Is.EqualTo(actualPositions));
     }

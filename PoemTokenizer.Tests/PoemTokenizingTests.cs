@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Domain.Tokens.Api;
+using Domain.Tokens.Api.Concrete;
 using PoemTokenization.Tokenizers;
 
 namespace PoemTokenizer.Tests;
@@ -57,7 +58,7 @@ public class PoemTokenizingTests
         var poem = new Poem(input);
         var tokenizedPoem =  _poemTokenizer.Tokenize(poem);
         var tokenizedSyllables = tokenizedPoem.AllSyllables;
-        var actualPositions = tokenizedSyllables.Select(syllable => syllable.Position);
+        var actualPositions = tokenizedSyllables.Select(syllable => syllable.AbsolutePosition);
         Assert.That(actualPositions, Is.EqualTo(expectedPositions));
     }
 }
