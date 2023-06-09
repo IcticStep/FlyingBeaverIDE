@@ -15,7 +15,7 @@ public class PoemToken
     public readonly Rhythm Rhythm;
     public readonly IReadOnlyList<IVerseToken> Verses;
 
-    public IReadOnlyList<IWordToken> Words =>
+    public IReadOnlyList<IWordToken> AllWords =>
         Verses
             .SelectMany(verse => verse.Words)
             .ToList();
