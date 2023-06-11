@@ -17,16 +17,27 @@ public class WordToken : Token, IWordToken
 
     public string RawText { get; }
     public IReadOnlyList<int> PossibleAccentuations => _possibleAccentuations;
+    public int? Accentuation { get; private set; }
     public IReadOnlyList<ISyllableToken> SyllableTokens => _syllableTokens;
     
     public void SetPossibleAccentuations(Accentuation accentuationData)
     {
         foreach (var accentuation in accentuationData.Accentuations)
-        {
-            if(accentuation < 0 || accentuation > SyllableTokens.Count)
-                throw new ArgumentOutOfRangeException();
-            _possibleAccentuations.Add(accentuation);
-        }
+            SetPossibleAccentuations(accentuation);
+    }
+
+    public void SetPossibleAccentuations(int accentuation)
+    {
+        if(accentuation < 0 || accentuation > SyllableTokens.Count)
+            throw new ArgumentOutOfRangeException();
+        _possibleAccentuations.Add(accentuation);
+    }
+
+    public void SetAccentuation(int index)
+    {
+        if (Accentuation is not null)
+            throw new InvalidOperationException("Не можна встановити наголос другий раз.");
+        Accentuation = index;
     }
 
     public override string ToString() =>

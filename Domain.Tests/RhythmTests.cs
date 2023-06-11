@@ -105,7 +105,7 @@ public class RhythmTests
         TestGivenRhythmsAccentuatedSyllablesIndex(testingRhythms, syllableIndex, expectedAccentuated);
     }
 
-    private void TestGivenRhythmsAccentuatedSyllablesIndex(Rhythm[] testingRhythms, int syllableIndex,
+    private void TestGivenRhythmsAccentuatedSyllablesIndex(IEnumerable<Rhythm> testingRhythms, int syllableIndex,
         bool expectedAccentuated)
     {
         foreach (var testingRhythm in testingRhythms)

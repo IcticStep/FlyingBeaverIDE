@@ -13,6 +13,11 @@ public class PreviousAccentsSetter
 
     public void SetPossibleAccentuations(IWordToken wordToken)
     {
+        if (wordToken.SyllableTokens.Count == 1)
+        {
+            wordToken.SetPossibleAccentuations(1);
+        }
+        
         var clearedWord = GetClearedWord(wordToken);
         var accentuation = _accentuationsRepository.GetAccentuationSyllable(clearedWord);
         if (accentuation is null)
