@@ -4,7 +4,7 @@ using Domain.Main.Rhythmics;
 
 namespace RhythmAnalysing;
 
-internal class RhythmAccentsSetter
+public class RhythmAccentsSetter
 {
     private int _currentSyllableIndex = 0;
     private Rhythm _rhythm = null!;
@@ -14,7 +14,7 @@ internal class RhythmAccentsSetter
     /// </summary>
     /// <param name="verse"></param>
     /// <param name="rhythm"></param>
-    public void SetAccentsByPrevious(VerseToken verse, Rhythm rhythm)
+    public void SetAccentsByPrevious(IVerseToken verse, Rhythm rhythm)
     {
         _currentSyllableIndex = 0;
         _rhythm = rhythm;     

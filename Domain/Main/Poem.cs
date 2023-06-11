@@ -10,7 +10,7 @@ public class Poem : ICloneable
     public Poem(string text) 
         => Text = text;
     
-    private Poem(string text, Rhythm rhythm) : this(text) => 
+    public Poem(string text, Rhythm rhythm) : this(text) => 
         _rhythm = rhythm;
 
     public event Action OnEdit;

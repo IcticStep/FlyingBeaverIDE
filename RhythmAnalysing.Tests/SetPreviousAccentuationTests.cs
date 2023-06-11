@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Configuration;
 using PoemTokenization.Tokenizers;
 using RhythmAnalysing.Tests.Services;
 
@@ -17,14 +16,14 @@ public class SetPreviousAccentuationTests
     }
 
     [Test]
-    [TestCase("Небо", new[]{1})]
-    [TestCase("небо", new[]{1})]
-    [TestCase("Земля", new[]{2})]
-    [TestCase("земля", new[]{2})]
-    [TestCase("Острів", new[]{1})]
-    [TestCase("Аберація", new[]{3})]
-    [TestCase("Кількаскладовий", new[]{4})]
-    public void SetAccentOfSimpleWord(string word, int[] expectedAccent)
+    [TestCase("Небо", new[]{0})]
+    [TestCase("небо", new[]{0})]
+    [TestCase("Земля", new[]{1})]
+    [TestCase("земля", new[]{1})]
+    [TestCase("Острів", new[]{0})]
+    [TestCase("Аберація", new[]{2})]
+    [TestCase("Кількаскладовий", new[]{3})]
+    public void TestSetPreviousAccentsOfSimpleWord(string word, int[] expectedAccent)
     {
         var tokenizedPoem = _poemTokenizer.Tokenize(new(word));
         var tokenizedWords = tokenizedPoem.AllWords;
@@ -35,9 +34,9 @@ public class SetPreviousAccentuationTests
     }
     
     [Test]
-    [TestCase("Небо земля", new[]{1, 2})]
-    [TestCase("Небо і земля", new[]{1, 1, 2})]
-    public void SetAccentOfSimpleSentence(string sentence, int[] expectedAccent)
+    [TestCase("Небо земля", new[]{0, 1})]
+    [TestCase("Небо і земля", new[]{0, 0, 1})]
+    public void TestSetPreviousAccentsOfSentence(string sentence, int[] expectedAccent)
     {
         var tokenizedPoem = _poemTokenizer.Tokenize(new(sentence));
         var tokenizedWords = tokenizedPoem.AllWords;

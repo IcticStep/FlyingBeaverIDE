@@ -15,7 +15,7 @@ public class PreviousAccentsSetter
     {
         if (wordToken.SyllableTokens.Count == 1)
         {
-            wordToken.SetPossibleAccentuations(1);
+            wordToken.SetPossibleAccentuations(0);
         }
         
         var clearedWord = GetClearedWord(wordToken);

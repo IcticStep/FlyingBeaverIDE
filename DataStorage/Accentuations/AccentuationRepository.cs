@@ -33,7 +33,9 @@ public class AccentuationRepository : IAccentuationsRepository
             .FirstOrDefault();
         if (result is null)
             return null;
-        
+
+        for (var i = 0; i < result.Accentuations.Count; i++)
+            result.Accentuations[i] -= 1;
         return new(result.Word, result.Accentuations);
     }
 
