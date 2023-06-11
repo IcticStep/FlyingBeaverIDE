@@ -12,16 +12,21 @@ public class WordToken : Token, IWordToken
     }
 
     private readonly List<ISyllableToken> _syllableTokens;
+    private readonly List<int> _possibleAccentuations = new();
 
     public string RawText { get; }
-
-    protected override void AdjustChildrenAbsolutePosition(int value)
-    {
-        foreach (var token in SyllableTokens)
-            token.AdjustAbsolutePosition(value);
-    }
-
+    public IReadOnlyList<int> PossibleAccentuations => _possibleAccentuations;
     public IReadOnlyList<ISyllableToken> SyllableTokens => _syllableTokens;
+    
+    public void SetPossibleAccentuations(Accentuation accentuationData)
+    {
+        foreach (var accentuation in accentuationData.Accentuations)
+        {
+            if(accentuation < 0 || accentuation > SyllableTokens.Count)
+                throw new ArgumentOutOfRangeException();
+            _possibleAccentuations.Add(accentuation);
+        }
+    }
 
     public override string ToString() =>
         $"{{{RawText}}} позиція:{Position} склади:{GetSyllableTokensAsString()}";

@@ -44,7 +44,7 @@ public class Program
             var find = Console.ReadLine();
             if (find == "0") return;
 
-            var result = _accentuations.GetAccentuation(find);
+            var result = _accentuations.GetAccentuationSyllable(find);
 
             if (result is null)
             {

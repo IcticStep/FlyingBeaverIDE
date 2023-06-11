@@ -1,9 +1,7 @@
 ﻿using Domain;
-using Domain.Tokens.Api;
 using Domain.Tokens.Api.Concrete;
-using PoemTokenization.Tokenizers;
 
-namespace PoemTokenizer.Tests;
+namespace PoemTokenization.Tests;
 
 public class PoemTokenizingTests
 {

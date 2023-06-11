@@ -12,17 +12,4 @@ public abstract class Token : IToken
 
     public int Position { get; }
     public int AbsolutePosition { get; private set; }
-    
-    public void AdjustAbsolutePosition(int value)
-    {
-        if(value < 0)
-            throw new ArgumentOutOfRangeException($"{nameof(value)} shoud not be less then zero.");
-        AbsolutePosition += value;
-        AdjustChildrenAbsolutePosition(value);
-    }
-
-    protected virtual void AdjustChildrenAbsolutePosition(int value)
-    {
-        
-    }
 }

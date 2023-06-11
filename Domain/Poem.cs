@@ -1,4 +1,6 @@
-﻿namespace Domain;
+﻿using Domain.Rhythmics;
+
+namespace Domain;
 
 [Serializable]
 public class Poem : ICloneable
@@ -14,7 +16,7 @@ public class Poem : ICloneable
     public event Action OnEdit;
     
     private string _text = string.Empty;
-    private Rhythm _rhythm = new();
+    private Rhythm _rhythm;
 
     public string Text
     {

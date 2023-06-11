@@ -1,6 +1,6 @@
 ﻿using PoemTokenization.Tokenizers;
 
-namespace PoemTokenizer.Tests;
+namespace PoemTokenization.Tests;
 
 public class FindingSyllablesTests
 {

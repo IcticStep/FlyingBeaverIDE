@@ -14,7 +14,6 @@ public class VersesTokenizer
     private string _input = string.Empty;
     private int _verseStartIndex = -1;
     private int _newLinesCount;
-    private int _lastExtractedEndIndex = -1;
     private List<RawToken> _rawTokens = new();
 
     private bool HasVerseToExtract => 

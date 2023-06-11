@@ -24,7 +24,7 @@ public class AccentuationRepository : IAccentuationsRepository
 
     public bool IsEmpty() => Count() > 0;
 
-    public Accentuation? GetAccentuation(string word)
+    public Accentuation? GetAccentuationSyllable(string word)
     {
         var filter = new BsonDocument { { "Word", word.ToLowerInvariant() } };
         var result = _data
