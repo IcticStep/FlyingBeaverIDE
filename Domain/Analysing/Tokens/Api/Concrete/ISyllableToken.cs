@@ -1,4 +1,4 @@
-﻿namespace Domain.Tokens.Api.Concrete;
+﻿namespace Domain.Analysing.Tokens.Api.Concrete;
 
 public interface ISyllableToken : IToken
 {

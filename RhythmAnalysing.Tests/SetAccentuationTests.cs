@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using PoemTokenization.Tokenizers;
 
-namespace RhythmAnalyzer.Tests;
+namespace RhythmAnalysing.Tests;
 
 public class SetAccentuationTests
 {
@@ -9,13 +9,13 @@ public class SetAccentuationTests
     private const string UserPasswordConfigKey = "UserPassword";
     private const string ConnectionStringConfigKey = "ConnectionString";
     
-    private AccentsAnalyzer _accentsAnalyzer = null!;
+    private PreviousAccentsAnalyzer _previousAccentsAnalyzer = null!;
     private PoemTokenizer _poemTokenizer = null!;
     
     [SetUp]
     public void Setup()
     {
-        _accentsAnalyzer = CreateAccentsAnalyzer();
+        _previousAccentsAnalyzer = CreateAccentsAnalyzer();
         _poemTokenizer = new();
     }
 
@@ -33,11 +33,11 @@ public class SetAccentuationTests
         var tokenizedWords = tokenizedPoem.AllWords;
         Assert.That(tokenizedWords, Has.Count.EqualTo(1));
         var tokenizedWord = tokenizedWords[0];
-        _accentsAnalyzer.SetPossibleAccentuations(tokenizedWord);
+        _previousAccentsAnalyzer.SetPossibleAccentuations(tokenizedWord);
         Assert.That(tokenizedWord.PossibleAccentuations, Is.EqualTo(expectedAccent));
     }
 
-    private static AccentsAnalyzer CreateAccentsAnalyzer()
+    private static PreviousAccentsAnalyzer CreateAccentsAnalyzer()
     {
         var configuration = BuildAppConfig();
         return InitAccentsAnalyzer(configuration);
@@ -48,7 +48,7 @@ public class SetAccentuationTests
             .AddUserSecrets<SetAccentuationTests>()
             .Build();
 
-    private static AccentsAnalyzer InitAccentsAnalyzer(IConfiguration configuration) =>
+    private static PreviousAccentsAnalyzer InitAccentsAnalyzer(IConfiguration configuration) =>
         new (new(
             configuration[ConnectionStringConfigKey]!,
             configuration[UserNameConfigKey]!,

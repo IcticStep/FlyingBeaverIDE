@@ -1,4 +1,4 @@
-﻿namespace Domain.Rhythmics;
+﻿namespace Domain.Main.Rhythmics;
 
 public static class RhythmBank
 {

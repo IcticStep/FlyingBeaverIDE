@@ -1,6 +1,6 @@
 ﻿using Domain;
-using Domain.Tokens;
-using Domain.Tokens.Concrete;
+using Domain.Analysing.Tokens.Concrete;
+using Domain.Main;
 
 namespace PoemTokenization.Tokenizers;
 

@@ -32,7 +32,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\PoemTokenization\PoemTokenization.csproj" />
-      <ProjectReference Include="..\RhythmAnalyzer\RhythmAnalyzer.csproj" />
+      <ProjectReference Include="..\RhythmAnalysing\RhythmAnalysing.csproj" />
     </ItemGroup>
 
 </Project>

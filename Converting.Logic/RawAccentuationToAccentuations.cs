@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Text.Unicode;
 using ConsoleHelpers.Core;
 using Domain;
+using Domain.Main;
 using HtmlParserSlovnyk.Domain;
 using PoemTokenization;
 using PoemTokenization.Tokenizers;

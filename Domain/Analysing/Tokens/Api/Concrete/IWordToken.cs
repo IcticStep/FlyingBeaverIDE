@@ -1,4 +1,6 @@
-﻿namespace Domain.Tokens.Api.Concrete;
+﻿using Domain.Main;
+
+namespace Domain.Analysing.Tokens.Api.Concrete;
 
 public interface IWordToken : IToken
 {

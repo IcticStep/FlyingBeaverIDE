@@ -1,4 +1,4 @@
-﻿namespace Domain.Rhythmics;
+﻿namespace Domain.Main.Rhythmics;
 
 [Serializable]
 public class RhythmSyllable

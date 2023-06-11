@@ -1,6 +1,7 @@
-﻿using Domain.Tokens.Api.Concrete;
+﻿using Domain.Analysing.Tokens.Api.Concrete;
+using Domain.Main;
 
-namespace Domain.Tokens.Concrete;
+namespace Domain.Analysing.Tokens.Concrete;
 
 public class WordToken : Token, IWordToken
 {

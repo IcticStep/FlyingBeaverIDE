@@ -1,6 +1,6 @@
-﻿using Domain.Tokens.Api;
+﻿using Domain.Analysing.Tokens.Api;
 
-namespace Domain.Tokens;
+namespace Domain.Analysing.Tokens;
 
 public abstract class Token : IToken
 {

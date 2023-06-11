@@ -1,6 +1,6 @@
-﻿using Domain.Rhythmics;
+﻿using Domain.Main.Rhythmics;
 
-namespace Domain;
+namespace Domain.Main;
 
 [Serializable]
 public class Poem : ICloneable

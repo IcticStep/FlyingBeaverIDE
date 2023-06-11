@@ -1,8 +1,6 @@
-﻿using Domain;
-using Domain.Tokens;
-using Domain.Tokens.Api;
-using Domain.Tokens.Api.Concrete;
-using Domain.Tokens.Concrete;
+﻿using Domain.Analysing.Tokens.Api.Concrete;
+using Domain.Analysing.Tokens.Concrete;
+using Domain.Main;
 using PoemTokenization.Data;
 
 namespace PoemTokenization.Tokenizers;

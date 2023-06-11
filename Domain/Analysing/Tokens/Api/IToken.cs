@@ -1,4 +1,4 @@
-﻿namespace Domain.Tokens.Api;
+﻿namespace Domain.Analysing.Tokens.Api;
 
 public interface IToken
 {

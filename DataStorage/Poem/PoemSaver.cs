@@ -12,13 +12,13 @@ public class PoemSaver
         WriteIndented = true
     };
     
-    public Domain.Poem? LoadFromFile(string path)
+    public Domain.Main.Poem? LoadFromFile(string path)
     {
         var json = File.ReadAllText(path);
-        return JsonSerializer.Deserialize<Domain.Poem>(json, _jsonOptions);
+        return JsonSerializer.Deserialize<Domain.Main.Poem>(json, _jsonOptions);
     }
 
-    public void SaveToFile(Domain.Poem poem, string path)
+    public void SaveToFile(Domain.Main.Poem poem, string path)
     {
         var json = JsonSerializer.Serialize(poem, _jsonOptions);
         File.WriteAllText(path, json);

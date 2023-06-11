@@ -1,6 +1,6 @@
-﻿using Domain.Tokens.Api.Concrete;
+﻿using Domain.Analysing.Tokens.Api.Concrete;
 
-namespace Domain.Tokens.Concrete;
+namespace Domain.Analysing.Tokens.Concrete;
 
 public class SyllableToken : Token, ISyllableToken
 {

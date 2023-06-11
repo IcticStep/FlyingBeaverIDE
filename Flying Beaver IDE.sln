@@ -47,9 +47,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleHelpers.Viewer", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbConsoleConnector", "DbConsoleConnector\DbConsoleConnector.csproj", "{B64E75B8-E983-4AF1-A0DB-5737788BE5D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhythmAnalyzer", "RhythmAnalyzer\RhythmAnalyzer.csproj", "{58FE7F3F-01BD-4823-AB37-78A1C1EAE047}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhythmAnalysing", "RhythmAnalysing\RhythmAnalysing.csproj", "{58FE7F3F-01BD-4823-AB37-78A1C1EAE047}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhythmAnalyzer.Tests", "RhythmAnalyzer.Tests\RhythmAnalyzer.Tests.csproj", "{5AD4B858-620C-40AE-9671-D765536828EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhythmAnalysing.Tests", "RhythmAnalysing.Tests\RhythmAnalysing.Tests.csproj", "{5AD4B858-620C-40AE-9671-D765536828EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

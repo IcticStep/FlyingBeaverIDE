@@ -1,7 +1,8 @@
-﻿using Domain.Rhythmics;
-using Domain.Tokens.Api.Concrete;
+﻿using Domain.Analysing.Tokens.Api.Concrete;
+using Domain.Main;
+using Domain.Main.Rhythmics;
 
-namespace Domain.Tokens.Concrete;
+namespace Domain.Analysing.Tokens.Concrete;
 
 public class PoemToken
 {

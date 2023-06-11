@@ -1,12 +1,12 @@
 ﻿using DataStorage;
 using DataStorage.Accentuations;
-using Domain.Tokens.Api.Concrete;
+using Domain.Analysing.Tokens.Api.Concrete;
 
-namespace RhythmAnalyzer;
+namespace RhythmAnalysing;
 
-public class AccentsAnalyzer
+public class PreviousAccentsAnalyzer
 {
-    public AccentsAnalyzer(DataBaseCredentials credentials) => 
+    public PreviousAccentsAnalyzer(DataBaseCredentials credentials) => 
         _accentuationsRepository = new AccentuationRepository(credentials);
 
     private readonly IAccentuationsRepository _accentuationsRepository;
