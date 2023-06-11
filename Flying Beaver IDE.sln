@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhythmAnalysing", "RhythmAn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhythmAnalysing.Tests", "RhythmAnalysing.Tests\RhythmAnalysing.Tests.csproj", "{5AD4B858-620C-40AE-9671-D765536828EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Tests", "Domain.Tests\Domain.Tests.csproj", "{39810342-5923-4CD9-B2F3-59465BA95DFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{5AD4B858-620C-40AE-9671-D765536828EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AD4B858-620C-40AE-9671-D765536828EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AD4B858-620C-40AE-9671-D765536828EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39810342-5923-4CD9-B2F3-59465BA95DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39810342-5923-4CD9-B2F3-59465BA95DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39810342-5923-4CD9-B2F3-59465BA95DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39810342-5923-4CD9-B2F3-59465BA95DFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -159,5 +165,6 @@ Global
 		{3AE0845E-88E0-4026-8338-1E19D93EAB44} = {CD7275B3-AD13-441B-A636-6498B6A0E4FD}
 		{58FE7F3F-01BD-4823-AB37-78A1C1EAE047} = {3AE0845E-88E0-4026-8338-1E19D93EAB44}
 		{5AD4B858-620C-40AE-9671-D765536828EE} = {3AE0845E-88E0-4026-8338-1E19D93EAB44}
+		{39810342-5923-4CD9-B2F3-59465BA95DFA} = {CD7275B3-AD13-441B-A636-6498B6A0E4FD}
 	EndGlobalSection
 EndGlobal

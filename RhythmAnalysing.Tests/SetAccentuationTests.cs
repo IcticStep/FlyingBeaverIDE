@@ -9,13 +9,13 @@ public class SetAccentuationTests
     private const string UserPasswordConfigKey = "UserPassword";
     private const string ConnectionStringConfigKey = "ConnectionString";
     
-    private PreviousAccentsAnalyzer _previousAccentsAnalyzer = null!;
+    private PreviousAccentsSetter _previousAccentsSetter = null!;
     private PoemTokenizer _poemTokenizer = null!;
     
     [SetUp]
     public void Setup()
     {
-        _previousAccentsAnalyzer = CreateAccentsAnalyzer();
+        _previousAccentsSetter = CreateAccentsAnalyzer();
         _poemTokenizer = new();
     }
 
@@ -33,11 +33,11 @@ public class SetAccentuationTests
         var tokenizedWords = tokenizedPoem.AllWords;
         Assert.That(tokenizedWords, Has.Count.EqualTo(1));
         var tokenizedWord = tokenizedWords[0];
-        _previousAccentsAnalyzer.SetPossibleAccentuations(tokenizedWord);
+        _previousAccentsSetter.SetPossibleAccentuations(tokenizedWord);
         Assert.That(tokenizedWord.PossibleAccentuations, Is.EqualTo(expectedAccent));
     }
 
-    private static PreviousAccentsAnalyzer CreateAccentsAnalyzer()
+    private static PreviousAccentsSetter CreateAccentsAnalyzer()
     {
         var configuration = BuildAppConfig();
         return InitAccentsAnalyzer(configuration);
@@ -48,7 +48,7 @@ public class SetAccentuationTests
             .AddUserSecrets<SetAccentuationTests>()
             .Build();
 
-    private static PreviousAccentsAnalyzer InitAccentsAnalyzer(IConfiguration configuration) =>
+    private static PreviousAccentsSetter InitAccentsAnalyzer(IConfiguration configuration) =>
         new (new(
             configuration[ConnectionStringConfigKey]!,
             configuration[UserNameConfigKey]!,

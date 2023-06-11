@@ -4,9 +4,9 @@ using Domain.Analysing.Tokens.Api.Concrete;
 
 namespace RhythmAnalysing;
 
-public class PreviousAccentsAnalyzer
+public class PreviousAccentsSetter
 {
-    public PreviousAccentsAnalyzer(DataBaseCredentials credentials) => 
+    public PreviousAccentsSetter(DataBaseCredentials credentials) => 
         _accentuationsRepository = new AccentuationRepository(credentials);
 
     private readonly IAccentuationsRepository _accentuationsRepository;

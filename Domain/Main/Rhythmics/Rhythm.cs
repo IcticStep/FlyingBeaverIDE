@@ -15,8 +15,6 @@ public class Rhythm
     public Rhythm(string name, string accents) : this(name, GetRhythmSyllables(accents))
     { }
 
-    
-        
     private IReadOnlyList<RhythmSyllable> _scheme;
     private string _name;
 
@@ -45,6 +43,9 @@ public class Rhythm
             _scheme = value;
         }
     }
+
+    public bool SyllableShouldBeAccentuated(int index) =>
+        Scheme[index % Scheme.Count].Accentuated;
 
     private static IReadOnlyList<RhythmSyllable> GetRhythmSyllables(bool[] accents) =>
         accents
