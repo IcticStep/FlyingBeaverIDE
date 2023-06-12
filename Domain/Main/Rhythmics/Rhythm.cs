@@ -44,6 +44,14 @@ public class Rhythm
         }
     }
 
+    public bool[] GenerateAccentuationScheme(int length)
+    {
+        var result = new bool[length];
+        for (var i = 0; i < length; i++)
+            result[i] = SyllableShouldBeAccentuated(i);
+        return result;
+    }
+
     public bool SyllableShouldBeAccentuated(int index) =>
         Scheme[index % Scheme.Count].Accentuated;
 

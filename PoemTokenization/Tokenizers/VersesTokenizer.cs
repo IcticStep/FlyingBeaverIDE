@@ -11,7 +11,7 @@ public class VersesTokenizer
     private readonly WordsTokenizer _wordsTokenizer = new();
     private string _input = string.Empty;
     private int _verseStartIndex = -1;
-    private int _newLinesCount;
+    private int _newLinesCount = 0;
     private List<RawToken> _rawTokens = new();
 
     private bool HasVerseToExtract => 
@@ -27,6 +27,8 @@ public class VersesTokenizer
             return Enumerable.Empty<IVerseToken>();
         
         _rawTokens.Clear();
+        _verseStartIndex = -1;
+        _newLinesCount = 0;
         _input = input;
         
         GetRawTokens();

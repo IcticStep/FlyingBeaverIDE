@@ -2,7 +2,7 @@
 using DataStorage.Accentuations;
 using Domain.Analysing.Tokens.Api.Concrete;
 
-namespace RhythmAnalysing;
+namespace RhythmAnalysing.Services;
 
 public class PreviousAccentsSetter
 {

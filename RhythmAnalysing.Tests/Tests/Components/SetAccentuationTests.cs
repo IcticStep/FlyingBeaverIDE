@@ -1,10 +1,12 @@
-﻿using Domain.Analysing.Tokens.Concrete;
+﻿using System.Collections;
+using Domain.Analysing.Tokens.Concrete;
 using Domain.Main;
 using Domain.Main.Rhythmics;
 using PoemTokenization.Tokenizers;
+using RhythmAnalysing.Services;
 using RhythmAnalysing.Tests.Services;
 
-namespace RhythmAnalysing.Tests;
+namespace RhythmAnalysing.Tests.Tests.Components;
 
 public class SetAccentuationTests
 {
@@ -29,8 +31,8 @@ public class SetAccentuationTests
     [TestCase("Замок закрили міцно.", new[]{1, 1, 0})]
     public void TestRealAccentuationsInIamb(string text, int[] expectedAccentuations)
         => TestRealAccentuations(text, RhythmBank.Iamb6, expectedAccentuations);
-    
-    public void TestRealAccentuations(string text, Rhythm rhythm, int[] expectedAccentuations)
+
+    private void TestRealAccentuations(string text, Rhythm rhythm, IEnumerable expectedAccentuations)
     {
         var poemTokenized = _poemTokenizer.Tokenize(new Poem(text, rhythm));
         SetPreviousAccents(poemTokenized);

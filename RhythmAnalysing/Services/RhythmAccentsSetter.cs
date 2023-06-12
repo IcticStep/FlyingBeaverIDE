@@ -1,8 +1,7 @@
 ﻿using Domain.Analysing.Tokens.Api.Concrete;
-using Domain.Analysing.Tokens.Concrete;
 using Domain.Main.Rhythmics;
 
-namespace RhythmAnalysing;
+namespace RhythmAnalysing.Services;
 
 public class RhythmAccentsSetter
 {

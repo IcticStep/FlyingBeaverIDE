@@ -9,6 +9,10 @@ public class SyllableToken : Token, ISyllableToken
         Vowel = vowel;
 
     public string Vowel { get; }
+    public bool IsAccentuated { get; private set; }
+
+    public void Accentuate() => 
+        IsAccentuated = true;
 
     public override string ToString() => $"{Vowel}:{{{Position}}}";
 

@@ -38,6 +38,7 @@ public class WordToken : Token, IWordToken
         if (Accentuation is not null)
             throw new InvalidOperationException("Не можна встановити наголос другий раз.");
         Accentuation = index;
+        _syllableTokens[index].Accentuate();
     }
 
     public override string ToString() =>

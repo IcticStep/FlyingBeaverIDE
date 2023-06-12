@@ -1,7 +1,8 @@
 using PoemTokenization.Tokenizers;
+using RhythmAnalysing.Services;
 using RhythmAnalysing.Tests.Services;
 
-namespace RhythmAnalysing.Tests;
+namespace RhythmAnalysing.Tests.Tests.Components;
 
 public class SetPreviousAccentuationTests
 {

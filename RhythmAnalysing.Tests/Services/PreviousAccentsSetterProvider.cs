@@ -1,32 +1,20 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using DataStorage;
+using Microsoft.Extensions.Configuration;
+using RhythmAnalysing.Services;
+using RhythmAnalysing.Tests.Tests.Components;
 
 namespace RhythmAnalysing.Tests.Services;
 
 public static class PreviousAccentsSetterProvider
 {
-    private const string UserNameConfigKey = "UserName";
-    private const string UserPasswordConfigKey = "UserPassword";
-    private const string ConnectionStringConfigKey = "ConnectionString";
-    
     private static readonly PreviousAccentsSetter _previousAccentsSetter;
 
     static PreviousAccentsSetterProvider()
     {
-        var configuration = BuildAppConfig();
-        _previousAccentsSetter = CreateAccentsAnalyzer(configuration);
+        var databaseCredentials = DatabaseCredentialsProvider.DatabaseCredentials;
+        _previousAccentsSetter = new(databaseCredentials);
     }
     
     public static PreviousAccentsSetter CreateAccentsAnalyzer() => 
         _previousAccentsSetter;
-
-    private static IConfigurationRoot BuildAppConfig() =>
-        new ConfigurationBuilder()
-            .AddUserSecrets<SetPreviousAccentuationTests>()
-            .Build();
-
-    private static PreviousAccentsSetter CreateAccentsAnalyzer(IConfiguration configuration) =>
-        new (new(
-            configuration[ConnectionStringConfigKey]!,
-            configuration[UserNameConfigKey]!,
-            configuration[UserPasswordConfigKey]!));
 }

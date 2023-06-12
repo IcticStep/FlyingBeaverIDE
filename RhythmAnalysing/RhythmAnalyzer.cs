@@ -1,31 +1,19 @@
-﻿using DataStorage;
-using Domain.Analysing.Results;
+﻿using Domain.Analysing.Results;
 using Domain.Analysing.Tokens.Concrete;
+using RhythmAnalysing.Api;
 
 namespace RhythmAnalysing;
 
-public class RhythmAnalyzer
+public sealed class RhythmAnalyzer
 {
-    public RhythmAnalyzer(DataBaseCredentials dataBaseCredentials)
-    {
-        _previousAccentsSetter = new(dataBaseCredentials);
-        _rhythmAccentsSetter = new();
-    }
+    public RhythmAnalyzer(IRhythmAnalyzer analyzer) => 
+        _analyzer = analyzer;
 
-    private readonly PreviousAccentsSetter _previousAccentsSetter;
-    private readonly RhythmAccentsSetter _rhythmAccentsSetter;
+    private IRhythmAnalyzer _analyzer;
 
-    public RhythmResult Analyze(PoemToken poem)
-    {
-        SetPreviousAccentuations(poem);
-
-        throw new NotImplementedException();
-    }
-
-    private void SetPreviousAccentuations(PoemToken poem)
-    {
-        var words = poem.AllWords;
-        foreach (var word in words)
-            _previousAccentsSetter.SetPossibleAccentuations(word);
-    }
+    public RhythmResult Analyze(PoemToken poem) =>
+        _analyzer.Analyze(poem);
+    
+    public void SwitchAnalyzer(IRhythmAnalyzer newAnalyzer) =>
+        _analyzer = newAnalyzer;
 }
