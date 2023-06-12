@@ -25,12 +25,12 @@ public class VersesTokenizer
         ArgumentNullException.ThrowIfNull(input);
         if (string.IsNullOrWhiteSpace(input))
             return Enumerable.Empty<IVerseToken>();
-        
-        _rawTokens.Clear();
+
+        _input = input;
         _verseStartIndex = -1;
         _newLinesCount = 0;
-        _input = input;
-        
+        _rawTokens.Clear();
+
         GetRawTokens();
         return GetTokensFromRaw();
     }

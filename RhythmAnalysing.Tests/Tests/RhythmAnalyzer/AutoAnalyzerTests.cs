@@ -23,6 +23,8 @@ public class AutoAnalyzerTests
 
     [Test]
     [TestCase("Впали дні всі", new int[0], new[]{2, 4, 8, 12})]
+    [TestCase("Впали дні усі", new int[0], new[]{2, 4, 8, 10, 12})]
+    [TestCase("Впали привіт", new[]{8, 10}, new[]{2, 4})]
     public void TestTrochee(string rawPoem, IEnumerable<int> expectedFails, IEnumerable<int> expectedCorrect) => 
         TestAllRhythmSchemes(rawPoem, RhythmBank.TrocheeGroup, expectedFails, expectedCorrect);
 

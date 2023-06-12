@@ -38,7 +38,7 @@ public class CorrectRhythmChecker
             if (currentSyllable.IsAccentuated != expectedScheme[i])
             {
                 _failedRhythmicPositions.Add(currentPosition);
-                break;
+                continue;
             }
 
             _correctRhythmicPositions.Add(currentPosition);

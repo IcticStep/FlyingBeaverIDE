@@ -22,9 +22,10 @@ public class WordsTokenizer
             return Enumerable.Empty<IWordToken>();
         
         _rawWords.Clear();
-        _absolutePositionAdjustment = absolutePositionAdjustment;
         _inputText = text;
-        
+        _wordStart = -1;
+        _absolutePositionAdjustment = absolutePositionAdjustment;
+
         SplitSentence();
         return ConvertRawTokensToTokens();
     }
