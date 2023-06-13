@@ -11,6 +11,7 @@
       <ProjectReference Include="..\DataStorage\DataStorage.csproj" />
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\PoemTokenization\PoemTokenization.csproj" />
+      <ProjectReference Include="..\RhythmAnalysing\RhythmAnalysing.csproj" />
     </ItemGroup>
 
     <ItemGroup>

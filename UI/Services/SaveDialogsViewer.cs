@@ -12,7 +12,7 @@ public class SaveDialogsViewer
     public string? ChooseFilePathToOpen()
         => ChoosePath<OpenFileDialog>();
 
-    public string ChooseFilePathToSave() 
+    public string? ChooseFilePathToSave() 
         => ChoosePath<SaveFileDialog>();
 
     public DialogResult AskSaveBeforeClosing() =>
@@ -22,7 +22,7 @@ public class SaveDialogsViewer
             MessageBoxButtons.YesNoCancel,
             MessageBoxIcon.Warning);
 
-    private string ChoosePath<T>()
+    private string? ChoosePath<T>()
         where T : FileDialog, new()
     {
         var openFileDialog = GetNewFileDialog<T>();

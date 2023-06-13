@@ -11,15 +11,18 @@ namespace FlyingBeaverIDE.UI
         {
             InitializeComponent();
             FinishInitializingCoreComponents();
-
+            DebugConsole.Init();
+            
             var configurationProvider = new ConfigurationProvider();
             var dataBaseCredentials = configurationProvider.GetDataBaseCredentials();
-            _flyingBeaver = new FlyingBeaver(dataBaseCredentials);
+            var localAccentuationsSavePath = configurationProvider.GetLocalAccentuationsSavePath;
+            _flyingBeaver = new FlyingBeaver(dataBaseCredentials, localAccentuationsSavePath);
             _fileSaver = new(_flyingBeaver);
             _backStageMenu = new(_fileSaver, backStageView);
+            _flyingBeaver.OnRhythmResult += result => Console.WriteLine(result.ToString());
         }
 
-        public MainForm(string path) : this()
+        public MainForm(string? path) : this()
         {
             _flyingBeaver.LoadFromFile(path);
             ShowPoemText();

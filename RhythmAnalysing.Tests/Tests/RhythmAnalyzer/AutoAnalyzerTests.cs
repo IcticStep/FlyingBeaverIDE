@@ -1,4 +1,5 @@
-﻿using Domain.Analysing.Results;
+﻿using DataStorage.Accentuations;
+using Domain.Analysing.Results;
 using Domain.Analysing.Tokens.Concrete;
 using Domain.Main;
 using Domain.Main.Rhythmics;
@@ -17,7 +18,8 @@ public class AutoAnalyzerTests
     public void Setup()
     {
         _poemTokenizer = new();
-        var schemeAnalyzer = new SchemeAutoAnalyzer(DatabaseCredentialsProvider.DatabaseCredentials);
+        var schemeAnalyzer = new SchemeAutoAnalyzer(
+            new AccentuationsRemoteRepository(DatabaseCredentialsProvider.DatabaseCredentials));
         _analyzer = new RhythmAnalysing.RhythmAnalyzer(schemeAnalyzer);
     }
 

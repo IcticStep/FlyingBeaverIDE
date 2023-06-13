@@ -14,11 +14,16 @@ public class ConfigurationProvider
     private const string UserNameConfigKey = "UserName";
     private const string UserPasswordConfigKey = "UserPassword";
     private const string ConnectionStringConfigKey = "ConnectionString";
+    private const string LocalAccentuationsSavePath = "LocalAccentuationDictionaryPath";
 
     private static readonly IConfigurationRoot _configuration;
 
     public string? GetSyncfusionKey() => 
         _configuration[LicenceKey];
+
+    public string? GetLocalAccentuationsSavePath =>
+        AppDomain.CurrentDomain.BaseDirectory +
+            _configuration[LocalAccentuationsSavePath];
 
     public DataBaseCredentials GetDataBaseCredentials() =>
         new(_configuration[ConnectionStringConfigKey]!,

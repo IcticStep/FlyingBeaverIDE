@@ -1,7 +1,5 @@
-﻿using DataStorage;
-using Microsoft.Extensions.Configuration;
+﻿using DataStorage.Accentuations;
 using RhythmAnalysing.Services;
-using RhythmAnalysing.Tests.Tests.Components;
 
 namespace RhythmAnalysing.Tests.Services;
 
@@ -12,7 +10,7 @@ public static class PreviousAccentsSetterProvider
     static PreviousAccentsSetterProvider()
     {
         var databaseCredentials = DatabaseCredentialsProvider.DatabaseCredentials;
-        _previousAccentsSetter = new(databaseCredentials);
+        _previousAccentsSetter = new(new AccentuationsRemoteRepository(databaseCredentials));
     }
     
     public static PreviousAccentsSetter CreateAccentsAnalyzer() => 

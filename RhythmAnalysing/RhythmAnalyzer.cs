@@ -13,7 +13,10 @@ public sealed class RhythmAnalyzer
 
     public RhythmResult Analyze(PoemToken poem) =>
         _analyzer.Analyze(poem);
-    
+
+    public async Task<RhythmResult> AnalyzeAsync(PoemToken poem) =>
+        await Task.Run(() => Analyze(poem));
+
     public void SwitchAnalyzer(IRhythmAnalyzer newAnalyzer) =>
         _analyzer = newAnalyzer;
 }

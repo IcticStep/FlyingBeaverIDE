@@ -1,9 +1,8 @@
-﻿using Domain;
-using Domain.Main;
+﻿using Domain.Main;
 
-namespace DataStorage.Accentuations;
+namespace DataStorage.Accentuations.Api;
 
-public interface IAccentuationsRepository
+public interface IReadOnlyAccentuationsRepository
 {
     public int Count();
     public bool IsEmpty();

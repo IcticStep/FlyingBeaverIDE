@@ -2,6 +2,7 @@
 using Common.Menu;
 using ConsoleHelpers.Core;
 using DataStorage.Accentuations;
+using DataStorage.Accentuations.Api;
 using Microsoft.Extensions.Configuration;
 
 namespace DbConsoleConnector;
@@ -12,7 +13,7 @@ public class Program
     private const string UserPasswordConfigKey = "UserPassword";
     private const string ConnectionStringConfigKey = "ConnectionString";
     
-    private static IAccentuationsRepository _accentuations = default!;
+    private static IReadOnlyAccentuationsRepository _readOnlyAccentuations = default!;
     private static readonly Menu _menu = new("Взаємодія з БД наголосів через консоль", new[]
     {
         new Option("Пошук дублікатів у БД", FindDuplicates),
@@ -44,7 +45,7 @@ public class Program
             var find = Console.ReadLine();
             if (find == "0") return;
 
-            var result = _accentuations.GetAccentuationSyllable(find);
+            var result = _readOnlyAccentuations.GetAccentuationSyllable(find);
 
             if (result is null)
             {
@@ -61,7 +62,7 @@ public class Program
     private static void FindDuplicates()
     {
         Console.WriteLine("Пошук слів-дублікатів...");
-        var all = _accentuations.GetAll();
+        var all = _readOnlyAccentuations.GetAll();
         var duplicated = all
             .GroupBy(accentuation => accentuation.Word)
             .Where(group => group.Count() > 1)
@@ -97,7 +98,7 @@ public class Program
             .Build();
 
     private static void InitAccentuationsRepository(IConfiguration configuration) =>
-        _accentuations = new AccentuationRepository(new(
+        _readOnlyAccentuations = new AccentuationsRemoteRepository(new(
             configuration[ConnectionStringConfigKey]!,
             configuration[UserNameConfigKey]!,
             configuration[UserPasswordConfigKey]!));

@@ -1,4 +1,5 @@
 ﻿using DataStorage;
+using DataStorage.Accentuations.Api;
 using Domain.Analysing.Results;
 using Domain.Analysing.Tokens.Concrete;
 using RhythmAnalysing.Services;
@@ -7,8 +8,8 @@ namespace RhythmAnalysing.Api;
 
 public abstract class BasicSchemeAnalyzer : IRhythmAnalyzer
 {
-    protected BasicSchemeAnalyzer(DataBaseCredentials dataBaseCredentials) => 
-        _previousAccentsSetter = new(dataBaseCredentials);
+    protected BasicSchemeAnalyzer(IReadOnlyAccentuationsRepository accentuationsRepository) => 
+        _previousAccentsSetter = new(accentuationsRepository);
 
     private readonly PreviousAccentsSetter _previousAccentsSetter;
 

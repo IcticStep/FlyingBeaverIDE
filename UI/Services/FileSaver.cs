@@ -64,6 +64,6 @@ public class FileSaver
     public static string ShieldPath(string path)
         => path.Replace(" ", PathWhiteSpaceShield);
     
-    public static string UnshieldPath(string path)
+    public static string? UnshieldPath(string path)
         => path.Replace(PathWhiteSpaceShield, " ");
 }

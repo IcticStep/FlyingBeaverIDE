@@ -1,13 +1,13 @@
-﻿using Domain;
+﻿using DataStorage.Accentuations.Api;
 using Domain.Main;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace DataStorage.Accentuations;
 
-public class AccentuationRepository : IAccentuationsRepository
+public class AccentuationsRemoteRepository : IReadOnlyAccentuationsRepository
 {
-    public AccentuationRepository(DataBaseCredentials credentials)
+    public AccentuationsRemoteRepository(DataBaseCredentials credentials)
     {
         _client = new(credentials.ConnectionString);
         _database = _client.GetDatabase(DataBaseName);

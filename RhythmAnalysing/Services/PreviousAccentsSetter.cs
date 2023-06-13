@@ -1,15 +1,16 @@
 ﻿using DataStorage;
 using DataStorage.Accentuations;
+using DataStorage.Accentuations.Api;
 using Domain.Analysing.Tokens.Api.Concrete;
 
 namespace RhythmAnalysing.Services;
 
 public class PreviousAccentsSetter
 {
-    public PreviousAccentsSetter(DataBaseCredentials credentials) => 
-        _accentuationsRepository = new AccentuationRepository(credentials);
+    public PreviousAccentsSetter(IReadOnlyAccentuationsRepository accentuationsRepository) => 
+        _accentuationsRepository = accentuationsRepository;
 
-    private readonly IAccentuationsRepository _accentuationsRepository;
+    private readonly IReadOnlyAccentuationsRepository _accentuationsRepository;
 
     public void SetPossibleAccentuations(IWordToken wordToken)
     {

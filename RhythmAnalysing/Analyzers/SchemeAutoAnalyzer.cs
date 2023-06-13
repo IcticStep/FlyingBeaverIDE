@@ -1,5 +1,8 @@
-﻿using DataStorage;
+﻿using System.Collections;
+using DataStorage;
+using DataStorage.Accentuations.Api;
 using Domain.Analysing.Results;
+using Domain.Analysing.Tokens.Api.Concrete;
 using Domain.Analysing.Tokens.Concrete;
 using RhythmAnalysing.Api;
 using RhythmAnalysing.Services;
@@ -8,8 +11,8 @@ namespace RhythmAnalysing.Analyzers;
 
 public class SchemeAutoAnalyzer : BasicSchemeAnalyzer
 {
-    public SchemeAutoAnalyzer(DataBaseCredentials dataBaseCredentials) 
-        : base(dataBaseCredentials)
+    public SchemeAutoAnalyzer(IReadOnlyAccentuationsRepository accentuationsRepository) 
+        : base(accentuationsRepository)
     {
         
     }
@@ -19,9 +22,17 @@ public class SchemeAutoAnalyzer : BasicSchemeAnalyzer
     
     protected override RhythmResult FinishAnalyzing(PoemToken poem)
     {
+        var failedWords = GetFailedWords(poem);
+        if (failedWords.Any())
+            return new RhythmResult(failedWords);
+        
         SetAccentuations(poem);
         return _correctRhythmChecker.Analyze(poem);
     }
+
+    private IEnumerable<IWordToken> GetFailedWords(PoemToken poemToken) =>
+        poemToken.AllWords
+            .Where(word => !word.PossibleAccentuations.Any());
 
     private void SetAccentuations(PoemToken poem)
     {

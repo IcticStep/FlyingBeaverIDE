@@ -1,21 +1,21 @@
-﻿using DataStorage.Poem;
+﻿using DataStorage;
 using Domain.Main;
-using FlyingBeaverIDE.Logic.API;
+using FlyingBeaverIDE.Logic.Api;
 
 namespace FlyingBeaverIDE.Logic.Services;
 
-internal class Saver
+internal class PoemSaver
 {
-    public Saver(IRawDataReceivedSignaller dataChangeSignaller) => 
-        dataChangeSignaller.OnRawDataReceived += HandleDataChanged;
+    public PoemSaver(IDataReceiver<Poem> receiver) => 
+        receiver.OnDataReceived += HandleDataChanged;
 
-    private readonly PoemSaver _poemSaver = new();
-    private string _savedPath = null!;
+    private readonly FileSaver<Poem> _fileSaver = new();
+    private string? _savedPath = null!;
 
     public bool AllChangesSaved { get; private set; }
     public bool HasSavedPath => !string.IsNullOrWhiteSpace(_savedPath);
     
-    public void SavePoemToFile(Poem poem, string path = default!)
+    public void SavePoemToFile(Poem poem, string? path = default!)
     {
         if (string.IsNullOrEmpty(path))
         {
@@ -26,17 +26,17 @@ internal class Saver
         SaveToFile(poem, path);
     }
     
-    public Poem? LoadFromFile(string path)
+    public Poem? LoadFromFile(string? path)
     {
         _savedPath = path;
         AllChangesSaved = true;
-        return _poemSaver.LoadFromFile(path);
+        return _fileSaver.TryLoadFromFile(path);
     }
 
-    private void HandleDataChanged() => 
+    private void HandleDataChanged(object o) => 
         AllChangesSaved = false;
 
-    private void SaveToFile(Poem poem, string path = default!)
+    private void SaveToFile(Poem poem, string? path = default!)
     {
         var pathWasGiven = !string.IsNullOrWhiteSpace(path);
         if(!pathWasGiven && !HasSavedPath)
@@ -46,11 +46,11 @@ internal class Saver
         
         if (!pathWasGiven)
         {
-            _poemSaver.SaveToFile(poem, _savedPath);
+            _fileSaver.SaveToFile(poem, _savedPath);
             return;
         }
         
         _savedPath = path;
-        _poemSaver.SaveToFile(poem, path);
+        _fileSaver.SaveToFile(poem, path);
     }
 }
