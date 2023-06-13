@@ -48,7 +48,6 @@ namespace FlyingBeaverIDE.UI
         {
             var textBox = (RichTextBox)sender!;
             _flyingBeaver.PoemText = textBox.Text;
-            _flyingBeaver.SignalUserInput();
         }
 
         private void HandleClosingAttempt(object sender, FormClosingEventArgs e) => 

@@ -38,5 +38,6 @@ public class Poem : ICloneable
         }
     }
 
-    public object Clone() => new Poem(_text, _rhythm);
+    public object Clone() =>
+        new Poem(_text, _rhythm);
 }

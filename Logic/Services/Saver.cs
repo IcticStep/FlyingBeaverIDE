@@ -1,15 +1,30 @@
 ﻿using DataStorage.Poem;
-using Domain;
 using Domain.Main;
+using FlyingBeaverIDE.Logic.API;
 
-namespace FlyingBeaverIDE.Logic;
+namespace FlyingBeaverIDE.Logic.Services;
 
 internal class Saver
 {
+    public Saver(IRawDataReceivedSignaller dataChangeSignaller) => 
+        dataChangeSignaller.OnRawDataReceived += HandleDataChanged;
+
     private readonly PoemSaver _poemSaver = new();
     private string _savedPath = null!;
+
     public bool AllChangesSaved { get; private set; }
     public bool HasSavedPath => !string.IsNullOrWhiteSpace(_savedPath);
+    
+    public void SavePoemToFile(Poem poem, string path = default!)
+    {
+        if (string.IsNullOrEmpty(path))
+        {
+            SaveToFile(poem);
+            return;
+        }
+        
+        SaveToFile(poem, path);
+    }
     
     public Poem? LoadFromFile(string path)
     {
@@ -18,7 +33,10 @@ internal class Saver
         return _poemSaver.LoadFromFile(path);
     }
 
-    public void SaveToFile(Poem poem, string path = default!)
+    private void HandleDataChanged() => 
+        AllChangesSaved = false;
+
+    private void SaveToFile(Poem poem, string path = default!)
     {
         var pathWasGiven = !string.IsNullOrWhiteSpace(path);
         if(!pathWasGiven && !HasSavedPath)
@@ -35,7 +53,4 @@ internal class Saver
         _savedPath = path;
         _poemSaver.SaveToFile(poem, path);
     }
-
-    public void SignalDataChanged() => 
-        AllChangesSaved = false;
 }
