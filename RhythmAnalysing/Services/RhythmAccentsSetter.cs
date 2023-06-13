@@ -1,4 +1,5 @@
-﻿using Domain.Analysing.Tokens.Api.Concrete;
+﻿using Domain.Analysing.Exceptions;
+using Domain.Analysing.Tokens.Api.Concrete;
 using Domain.Main.Rhythmics;
 
 namespace RhythmAnalysing.Services;
@@ -22,8 +23,12 @@ public class RhythmAccentsSetter
         {
             var shouldBeAccentuated = GetShouldBeAccentuated(word);
             var couldBeAccentuated = word.PossibleAccentuations;
-
-            SetAccentuation(word, shouldBeAccentuated, couldBeAccentuated);
+            if (!couldBeAccentuated.Any())
+                throw new UnknownAccentuationException(word);
+            
+            var setAccentuation = TrySetAccentuation(word, shouldBeAccentuated, couldBeAccentuated);
+            if (!setAccentuation && word.SyllableTokens.Count > 1)
+                word.SetAccentuation(couldBeAccentuated[0]);
             _currentSyllableIndex += word.SyllableTokens.Count;
         }
     }
@@ -38,12 +43,17 @@ public class RhythmAccentsSetter
         return shouldBeAccentuated;
     }
 
-    private static void SetAccentuation(IWordToken word, List<int> shouldBeAccentuated, IReadOnlyList<int> couldBeAccentuated)
+    private static bool TrySetAccentuation(IWordToken word, List<int> shouldBeAccentuated, IReadOnlyList<int> couldBeAccentuated)
     {
         foreach (var should in shouldBeAccentuated)
         {
-            if (couldBeAccentuated.Contains(should))
-                word.SetAccentuation(should);
+            if (!couldBeAccentuated.Contains(should)) 
+                continue;
+            
+            word.SetAccentuation(should);
+            return true;
         }
+
+        return false;
     }
 }

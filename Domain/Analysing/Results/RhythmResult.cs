@@ -1,4 +1,7 @@
-﻿namespace Domain.Analysing.Results;
+﻿using System.Collections;
+using System.Text;
+
+namespace Domain.Analysing.Results;
 
 public class RhythmResult
 {
@@ -21,5 +24,24 @@ public class RhythmResult
 
         return FailedRhythmicPositions.SequenceEqual(other.FailedRhythmicPositions)
                && CorrectRhythmicPositions.SequenceEqual(other.CorrectRhythmicPositions);
+    }
+
+    public override string ToString() => 
+        $"Правильно: {{{GetStringOfCollection(CorrectRhythmicPositions)}}} " +
+        $"Неправильно: {{{GetStringOfCollection(FailedRhythmicPositions)}}}";
+
+    private string GetStringOfCollection(IEnumerable collection)
+    {
+        var builder = new StringBuilder();
+        foreach (var element in collection)
+        {
+            builder.Append(element);
+            builder.Append(' ');
+        }
+
+        if(builder.Length > 0)
+            builder.Remove(builder.Length - 1, 1);
+
+        return builder.ToString();
     }
 }

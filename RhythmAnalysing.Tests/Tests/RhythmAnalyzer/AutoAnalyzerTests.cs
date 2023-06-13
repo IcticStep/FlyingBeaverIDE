@@ -22,11 +22,30 @@ public class AutoAnalyzerTests
     }
 
     [Test]
-    [TestCase("Впали дні всі", new int[0], new[]{2, 4, 8, 12})]
-    [TestCase("Впали дні усі", new int[0], new[]{2, 4, 8, 10, 12})]
-    [TestCase("Впали привіт", new[]{8, 10}, new[]{2, 4})]
+    [TestCase("Впали дні всі", 
+    new int[0], 
+    new[]{2, 4, 8, 12})]
+    [TestCase("Впали дні усі", 
+    new int[0], 
+    new[]{2, 4, 8, 10, 12})]
+    [TestCase("Впали привіт", 
+    new[]{8, 10}, 
+    new[]{2, 4})]
+    [TestCase("Чорний день і чорна хмара", 
+    new int[0], 
+    new[]{1, 4, 8, 12, 15, 18, 22, 24})]
     public void TestTrochee(string rawPoem, IEnumerable<int> expectedFails, IEnumerable<int> expectedCorrect) => 
         TestAllRhythmSchemes(rawPoem, RhythmBank.TrocheeGroup, expectedFails, expectedCorrect);
+    
+    [Test]
+    [TestCase("Чому ти знову плачеш", 
+        new int[0], 
+        new[]{1, 3, 6, 10, 12, 16, 18})]
+    [TestCase("Чому ти ти знову плачеш", 
+        new[]{13, 15, 19, 21}, 
+        new[]{1, 3, 6, 9})]
+    public void TestIamb(string rawPoem, IEnumerable<int> expectedFails, IEnumerable<int> expectedCorrect) => 
+        TestAllRhythmSchemes(rawPoem, RhythmBank.IambGroup, expectedFails, expectedCorrect);
 
     private void TestAllRhythmSchemes(string rawPoem, Rhythm[] rhythms, 
         IEnumerable<int> expectedFails, IEnumerable<int> expectedCorrect)
