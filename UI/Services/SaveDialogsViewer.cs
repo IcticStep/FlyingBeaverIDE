@@ -6,6 +6,8 @@ public class SaveDialogsViewer
     private const string FileExtension = "beaverpoem";
     private const string FileFilter = $"{FilesDescription}|*.{FileExtension}|All files|*.*";
     private const string DialogTitle = "Зберегти вірш";
+    private const string SaveOnCloseMessage = "Зберегти зміни?";
+    private const string SaveOnCloseLabel = "Незбережені зміни";
 
     public string? ChooseFilePathToOpen()
         => ChoosePath<OpenFileDialog>();
@@ -15,8 +17,8 @@ public class SaveDialogsViewer
 
     public DialogResult AskSaveBeforeClosing() =>
         MessageBox.Show(
-            "Зберегти зміни?",
-            "Незбереженні зміни",
+            SaveOnCloseMessage,
+            SaveOnCloseLabel,
             MessageBoxButtons.YesNoCancel,
             MessageBoxIcon.Warning);
 

@@ -1,19 +1,14 @@
 ﻿using Syncfusion.Licensing;
-using Microsoft.Extensions.Configuration;
 
 namespace FlyingBeaverIDE.UI.Services;
 
-public static class SyncfusionActivator
+public class SyncfusionActivator
 {
-    private const string LicenceKey = "SyncfusionKey";
-
-    public static void Activate()
+    private readonly ConfigurationProvider _configurationProvider = new();
+    
+    public void Activate()
     {
-        var config = new ConfigurationBuilder()
-            .AddUserSecrets<MainForm>()
-            .Build();
-
-        var key = config[LicenceKey];
+        var key = _configurationProvider.GetSyncfusionKey();
         if(string.IsNullOrEmpty(key))
             return;
         

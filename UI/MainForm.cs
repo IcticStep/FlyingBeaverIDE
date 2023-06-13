@@ -12,6 +12,9 @@ namespace FlyingBeaverIDE.UI
             InitializeComponent();
             FinishInitializingCoreComponents();
 
+            var configurationProvider = new ConfigurationProvider();
+            var dataBaseCredentials = configurationProvider.GetDataBaseCredentials();
+            _flyingBeaver = new FlyingBeaver(dataBaseCredentials);
             _fileSaver = new(_flyingBeaver);
             _backStageMenu = new(_fileSaver, backStageView);
         }
@@ -25,7 +28,7 @@ namespace FlyingBeaverIDE.UI
                 PoemTextBox.Text = _flyingBeaver.PoemText;
         }
 
-        private readonly FlyingBeaver _flyingBeaver = new();
+        private readonly FlyingBeaver _flyingBeaver;
         private readonly FileSaver _fileSaver;
         private readonly BackStageMenu _backStageMenu;
 

@@ -1,4 +1,5 @@
-﻿using Domain.Main;
+﻿using DataStorage;
+using Domain.Main;
 using FlyingBeaverIDE.Logic.API;
 using FlyingBeaverIDE.Logic.Services;
 using PoemTokenization.Tokenizers;
@@ -7,7 +8,7 @@ namespace FlyingBeaverIDE.Logic;
 
 public class FlyingBeaver : IRawDataReceivedSignaller
 {
-    public FlyingBeaver()
+    public FlyingBeaver(DataBaseCredentials dataBaseCredentials)
     {
         _saver = new Saver(this);
         SubscribeOnPoemUpdate();
