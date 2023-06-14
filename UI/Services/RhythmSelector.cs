@@ -16,6 +16,7 @@ public class RhythmSelector
         
         _viewer.Items.Clear();
         _viewer.Items.AddRange(_availableRhythms.ToArray());
+        _viewer.SelectedItem = 0;
         _viewer.SelectedIndexChanged += HandleIndexChanged;
     }
 

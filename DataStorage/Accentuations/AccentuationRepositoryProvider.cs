@@ -1,15 +1,21 @@
-﻿using DataStorage;
-using DataStorage.Accentuations;
+﻿using DataStorage.Accentuations.Api;
 
-namespace FlyingBeaverIDE.Logic.Services;
+namespace DataStorage.Accentuations;
 
-public class AccentuationRepositoryProvider
+public static class AccentuationRepositoryProvider
 {
+    private static IReadOnlyAccentuationsRepository? _remote;
+    private static IAccentuationsRepository? _local;
+
+    public static IReadOnlyAccentuationsRepository? Remote => _remote;
+    public static IAccentuationsRepository? Local => _local;
+
     public static AccentuationsRepository Create(DataBaseCredentials dataBaseCredentials,
         string? localRepositorySavePath)
     {
-        var remoteRepository = new AccentuationsRemoteRepository(dataBaseCredentials);
-        var localRepository = new AccentuationsLocalRepository(localRepositorySavePath);
-        return new(remoteRepository, localRepository);
+        _remote ??= new AccentuationsRemoteRepository(dataBaseCredentials);
+        _local ??= new AccentuationsLocalRepository(localRepositorySavePath);
+        
+        return new(_remote, _local);
     }
 }

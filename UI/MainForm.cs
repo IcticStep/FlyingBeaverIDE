@@ -13,16 +13,12 @@ namespace FlyingBeaverIDE.UI
             FinishInitializingCoreComponents();
             DebugConsole.Init();
 
-            var configurationProvider = new ConfigurationProvider();
-            var dataBaseCredentials = configurationProvider.GetDataBaseCredentials();
-            var localAccentuationsSavePath = configurationProvider.GetLocalAccentuationsSavePath;
-            _flyingBeaver = new FlyingBeaver(dataBaseCredentials, localAccentuationsSavePath);
+            _flyingBeaver = CreateFlyingBeaver();
             _fileSaver = new(_flyingBeaver);
             _backStageMenu = new(_fileSaver, backStageView);
             _flyingBeaver.OnRhythmResult += result => Console.WriteLine(result.ToString());
-            _rhythmSelector = new(_flyingBeaver.AvailableRhythms, RhythmsComboBox);
-            _rhythmSelector.OnUpdated += rhythm => _flyingBeaver.CurrentRhythm = rhythm;
-            _flyingBeaver.OnRhythmLoaded += rhythm => _rhythmSelector.Set(rhythm);
+            CreateRhythmSelector();
+            _rhythmSelector = CreateRhythmSelector();
         }
 
         public MainForm(string? path) : this()
@@ -32,6 +28,22 @@ namespace FlyingBeaverIDE.UI
 
             void ShowPoemText() =>
                 PoemTextBox.Text = _flyingBeaver.PoemText;
+        }
+
+        private FlyingBeaver CreateFlyingBeaver()
+        {
+            var configurationProvider = new ConfigurationProvider();
+            var dataBaseCredentials = configurationProvider.GetDataBaseCredentials();
+            var localAccentuationsSavePath = configurationProvider.GetLocalAccentuationsSavePath;
+            return new FlyingBeaver(dataBaseCredentials, localAccentuationsSavePath);
+        }
+
+        private RhythmSelector CreateRhythmSelector()
+        {
+            var rhythmSelector = new RhythmSelector(_flyingBeaver.AvailableRhythms, RhythmsComboBox);
+            rhythmSelector.OnUpdated += rhythm => _flyingBeaver.CurrentRhythm = rhythm;
+            rhythmSelector.Set(_flyingBeaver.CurrentRhythm);
+            return rhythmSelector;
         }
 
         private readonly FlyingBeaver _flyingBeaver;
