@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFormDesign));
             this.ribbonControlAdv1 = new Syncfusion.Windows.Forms.Tools.RibbonControlAdv();
             this.backStageView = new Syncfusion.Windows.Forms.BackStageView(this.components);
             this.backStage = new Syncfusion.Windows.Forms.BackStage();
@@ -301,7 +302,7 @@
             // openPersonalDictionaryButton
             // 
             this.openPersonalDictionaryButton.AutoSize = false;
-            this.openPersonalDictionaryButton.Image = global::Flying_Beaver_IDE.Properties.Resources.DictionaryTransperentIcon;
+            this.openPersonalDictionaryButton.Image = ((System.Drawing.Image)(resources.GetObject("openPersonalDictionaryButton.Image")));
             this.openPersonalDictionaryButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openPersonalDictionaryButton.Name = "openPersonalDictionaryButton";
             this.openPersonalDictionaryButton.Size = new System.Drawing.Size(218, 30);
