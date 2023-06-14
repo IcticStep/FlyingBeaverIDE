@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 
-namespace FlyingBeaverIDE.UI.Services;
+namespace FlyingBeaverIDE.UI.Services.System;
 
 public static class DebugConsole
 {

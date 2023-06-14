@@ -16,5 +16,10 @@ namespace Flying_Beaver_IDE
         {
             InitializeComponent();
         }
+
+        private void SubmitAccentuation(object sender, EventArgs e)
+        {
+
+        }
     }
 }

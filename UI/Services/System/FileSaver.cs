@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
 using FlyingBeaverIDE.Logic;
+using FlyingBeaverIDE.UI.Services.UI;
 
-namespace FlyingBeaverIDE.UI.Services;
+namespace FlyingBeaverIDE.UI.Services.System;
 
 public class FileSaver
 {

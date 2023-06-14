@@ -31,11 +31,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.suggestionsPanel = new System.Windows.Forms.Panel();
-            this.middlePanel = new System.Windows.Forms.Panel();
             this.CurrentWord = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.suggestionsComboBox = new System.Windows.Forms.ComboBox();
+            this.middlePanel = new System.Windows.Forms.Panel();
             this.submitButton = new System.Windows.Forms.Button();
+            this.syllablesComboBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.suggestionsPanel.SuspendLayout();
             this.middlePanel.SuspendLayout();
@@ -70,17 +70,6 @@
             this.suggestionsPanel.Size = new System.Drawing.Size(644, 40);
             this.suggestionsPanel.TabIndex = 1;
             // 
-            // middlePanel
-            // 
-            this.middlePanel.Controls.Add(this.submitButton);
-            this.middlePanel.Controls.Add(this.suggestionsComboBox);
-            this.middlePanel.Controls.Add(this.label2);
-            this.middlePanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.middlePanel.Location = new System.Drawing.Point(0, 75);
-            this.middlePanel.Name = "middlePanel";
-            this.middlePanel.Size = new System.Drawing.Size(644, 46);
-            this.middlePanel.TabIndex = 4;
-            // 
             // CurrentWord
             // 
             this.CurrentWord.Dock = System.Windows.Forms.DockStyle.Top;
@@ -92,31 +81,16 @@
             this.CurrentWord.Text = "Поточне слово";
             this.CurrentWord.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label2
+            // middlePanel
             // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(222, 46);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Виберіть наголос:";
-            // 
-            // suggestionsComboBox
-            // 
-            this.suggestionsComboBox.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.suggestionsComboBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.suggestionsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.suggestionsComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.suggestionsComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.suggestionsComboBox.FormattingEnabled = true;
-            this.suggestionsComboBox.ItemHeight = 29;
-            this.suggestionsComboBox.Location = new System.Drawing.Point(222, 0);
-            this.suggestionsComboBox.Margin = new System.Windows.Forms.Padding(0);
-            this.suggestionsComboBox.MaxDropDownItems = 15;
-            this.suggestionsComboBox.Name = "suggestionsComboBox";
-            this.suggestionsComboBox.Size = new System.Drawing.Size(221, 37);
-            this.suggestionsComboBox.TabIndex = 11;
+            this.middlePanel.Controls.Add(this.submitButton);
+            this.middlePanel.Controls.Add(this.syllablesComboBox);
+            this.middlePanel.Controls.Add(this.label2);
+            this.middlePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.middlePanel.Location = new System.Drawing.Point(0, 75);
+            this.middlePanel.Name = "middlePanel";
+            this.middlePanel.Size = new System.Drawing.Size(644, 46);
+            this.middlePanel.TabIndex = 4;
             // 
             // submitButton
             // 
@@ -130,6 +104,33 @@
             this.submitButton.TabIndex = 12;
             this.submitButton.Text = "Наголосити";
             this.submitButton.UseVisualStyleBackColor = true;
+            this.submitButton.Click += new System.EventHandler(this.SubmitAccentuation);
+            // 
+            // syllablesComboBox
+            // 
+            this.syllablesComboBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.syllablesComboBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.syllablesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.syllablesComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.syllablesComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.syllablesComboBox.FormattingEnabled = true;
+            this.syllablesComboBox.ItemHeight = 29;
+            this.syllablesComboBox.Location = new System.Drawing.Point(222, 0);
+            this.syllablesComboBox.Margin = new System.Windows.Forms.Padding(0);
+            this.syllablesComboBox.MaxDropDownItems = 15;
+            this.syllablesComboBox.Name = "syllablesComboBox";
+            this.syllablesComboBox.Size = new System.Drawing.Size(221, 37);
+            this.syllablesComboBox.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(222, 46);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Виберіть наголос:";
             // 
             // WordAccentuationSettingForm
             // 
@@ -158,7 +159,7 @@
         private System.Windows.Forms.Panel suggestionsPanel;
         private System.Windows.Forms.Panel middlePanel;
         private System.Windows.Forms.Label CurrentWord;
-        private System.Windows.Forms.ComboBox suggestionsComboBox;
+        private System.Windows.Forms.ComboBox syllablesComboBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button submitButton;
     }

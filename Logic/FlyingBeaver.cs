@@ -31,10 +31,12 @@ public class FlyingBeaver : IDataReceiver<Poem>
         _analyzeTimer = new Timer(AnalyzeInterval);
         _analyzeTimer.AutoReset = true;
         _analyzeTimer.Elapsed += TryAnalyzePoem;
+        _analyzeTimer.Elapsed += LogTimer;
         _analyzeTimer.Start();
     }
 
     public readonly double MinAnalyzeInterval = 300;
+
     public readonly double MaxAnalyzeInterval = 10000;
 
     public Rhythm[] AvailableRhythms =>
@@ -86,6 +88,9 @@ public class FlyingBeaver : IDataReceiver<Poem>
 
     public bool AllChangesSaved => _poemSaver.AllChangesSaved;
 
+    public IAccentuationsRepository LocalAccentuationsDictionary => 
+        AccentuationRepositoryProvider.Local!;
+
     private Poem Poem
     {
         get => (Poem)_poem.Clone();
@@ -93,8 +98,11 @@ public class FlyingBeaver : IDataReceiver<Poem>
     }
 
     public event Action<Poem>? OnDataReceived;
-    public event Action<RhythmResult>? OnRhythmResult;
+    public event Action<AnalyzeResult>? OnAnalyzeCompleted;
     public event Action<Rhythm> OnRhythmLoaded;
+
+    public void ForceReanalyze() =>
+        _lastAnalyzedHash = default;
 
     public void LoadFromFile(string? path)
     {
@@ -104,7 +112,10 @@ public class FlyingBeaver : IDataReceiver<Poem>
 
     public void SavePoemToFile(string? path = default!) =>
         _poemSaver.SavePoemToFile(_poem, path);
-
+    
+    private void LogTimer(object? sender, ElapsedEventArgs e) => 
+        Console.WriteLine("Timer ticked.");
+    
     private void TryAnalyzePoem(object? sender, ElapsedEventArgs elapsedEventArgs)
     {
         if(_analyzeIsBusy)
@@ -150,8 +161,8 @@ public class FlyingBeaver : IDataReceiver<Poem>
             }
 
             var rhythmResult = await _rhythmAnalyzer.AnalyzeAsync(poemToken);
-            OnRhythmResult?.Invoke(rhythmResult);
             _analyzeIsBusy = false;
+            OnAnalyzeCompleted?.Invoke(new(rhythmResult));
         };
     }
 }

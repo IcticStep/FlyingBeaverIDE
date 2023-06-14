@@ -18,9 +18,9 @@ public class RhythmResult
         _correctRhythmicPositions = correctRhythmicPositions.ToList();
     }
 
-    private readonly List<int> _failedRhythmicPositions;
-    private readonly List<int> _correctRhythmicPositions;
-    private readonly List<IWordToken> _unknownWords;
+    private readonly List<int> _failedRhythmicPositions = new();
+    private readonly List<int> _correctRhythmicPositions = new();
+    private readonly List<IWordToken> _unknownWords = new();
 
     public readonly bool Failed;
     public IReadOnlyList<int> FailedRhythmicPositions => _failedRhythmicPositions;

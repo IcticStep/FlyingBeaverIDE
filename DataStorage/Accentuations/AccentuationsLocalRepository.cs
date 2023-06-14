@@ -21,8 +21,16 @@ public class AccentuationsLocalRepository : IAccentuationsRepository
     public bool IsEmpty() => 
         !_accentuations.Any();
 
-    public Accentuation? GetAccentuationSyllable(string word) => 
-        _accentuations.FirstOrDefault(x => WordsAreSame(word, x.Word));
+    public Accentuation? GetAccentuationSyllable(string word)
+    {
+        foreach (var accentuation in _accentuations)
+        {
+            if (WordsAreSame(accentuation.Word, word))
+                return accentuation;
+        }
+        
+        return null;
+    }
 
     public IEnumerable<Accentuation> GetAll() => 
         _accentuations.ToList();
@@ -47,6 +55,7 @@ public class AccentuationsLocalRepository : IAccentuationsRepository
     {
         var index = FindAccentuationIndex(word);
         _accentuations.RemoveAt(index);
+        Save();
     }
 
     private void Save() => 
@@ -57,7 +66,7 @@ public class AccentuationsLocalRepository : IAccentuationsRepository
         var clearedWord = RemoveApostrophe(a);
         var compareResult = string.Compare(b, clearedWord,
                    StringComparison.InvariantCultureIgnoreCase);
-        return compareResult == 1;
+        return compareResult == 0;
     }
 
     private int FindAccentuationIndex(Accentuation accentuation) =>

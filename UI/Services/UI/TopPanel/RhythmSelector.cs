@@ -1,11 +1,11 @@
 ﻿using Domain.Main.Rhythmics;
 
-namespace FlyingBeaverIDE.UI.Services;
+namespace FlyingBeaverIDE.UI.Services.UI.TopPanel;
 
 public class RhythmSelector
 {
-    private List<Rhythm> _availableRhythms;
-    private ToolStripComboBox _viewer;
+    private readonly List<Rhythm> _availableRhythms;
+    private readonly ToolStripComboBox _viewer;
 
     public Action<Rhythm> OnUpdated;
 

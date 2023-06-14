@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Logic\Logic.csproj" />
+    <ProjectReference Include="..\PoemTokenization.Tests\PoemTokenization.Tests.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using DataStorage;
 using Microsoft.Extensions.Configuration;
 
-namespace FlyingBeaverIDE.UI.Services;
+namespace FlyingBeaverIDE.UI.Services.System;
 
 public class ConfigurationProvider
 {

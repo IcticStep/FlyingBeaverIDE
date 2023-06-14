@@ -31,15 +31,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.suggestionsPanel = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.suggestionsComboBox = new System.Windows.Forms.ComboBox();
             this.suggestionAddButton = new System.Windows.Forms.Button();
+            this.suggestionsComboBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.knownWords = new System.Windows.Forms.DataGridView();
             this.middlePanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.deleteCurrentWordButton = new System.Windows.Forms.Button();
             this.editCurrentWordButton = new System.Windows.Forms.Button();
             this.CurrentWord = new System.Windows.Forms.Label();
-            this.deleteCurrentWordButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.newWordInput = new System.Windows.Forms.TextBox();
             this.newWordAddButton = new System.Windows.Forms.Button();
@@ -81,15 +81,19 @@
             this.suggestionsPanel.Size = new System.Drawing.Size(644, 40);
             this.suggestionsPanel.TabIndex = 1;
             // 
-            // label2
+            // suggestionAddButton
             // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(220, 40);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Необхідні слова:";
+            this.suggestionAddButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.suggestionAddButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.suggestionAddButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.suggestionAddButton.Location = new System.Drawing.Point(480, 0);
+            this.suggestionAddButton.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.suggestionAddButton.Name = "suggestionAddButton";
+            this.suggestionAddButton.Size = new System.Drawing.Size(164, 40);
+            this.suggestionAddButton.TabIndex = 2;
+            this.suggestionAddButton.Text = "Додати";
+            this.suggestionAddButton.UseVisualStyleBackColor = true;
+            this.suggestionAddButton.Click += new System.EventHandler(this.AddSuggestedWord);
             // 
             // suggestionsComboBox
             // 
@@ -107,18 +111,15 @@
             this.suggestionsComboBox.Size = new System.Drawing.Size(255, 37);
             this.suggestionsComboBox.TabIndex = 1;
             // 
-            // suggestionAddButton
+            // label2
             // 
-            this.suggestionAddButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.suggestionAddButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.suggestionAddButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.suggestionAddButton.Location = new System.Drawing.Point(480, 0);
-            this.suggestionAddButton.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.suggestionAddButton.Name = "suggestionAddButton";
-            this.suggestionAddButton.Size = new System.Drawing.Size(164, 40);
-            this.suggestionAddButton.TabIndex = 2;
-            this.suggestionAddButton.Text = "Додати";
-            this.suggestionAddButton.UseVisualStyleBackColor = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(220, 40);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Необхідні слова:";
             // 
             // knownWords
             // 
@@ -162,6 +163,20 @@
             this.panel4.Size = new System.Drawing.Size(237, 250);
             this.panel4.TabIndex = 4;
             // 
+            // deleteCurrentWordButton
+            // 
+            this.deleteCurrentWordButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.deleteCurrentWordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteCurrentWordButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deleteCurrentWordButton.Location = new System.Drawing.Point(0, 77);
+            this.deleteCurrentWordButton.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.deleteCurrentWordButton.Name = "deleteCurrentWordButton";
+            this.deleteCurrentWordButton.Size = new System.Drawing.Size(237, 40);
+            this.deleteCurrentWordButton.TabIndex = 6;
+            this.deleteCurrentWordButton.Text = "Видалити";
+            this.deleteCurrentWordButton.UseVisualStyleBackColor = true;
+            this.deleteCurrentWordButton.Click += new System.EventHandler(this.DeleteSelectedWord);
+            // 
             // editCurrentWordButton
             // 
             this.editCurrentWordButton.Dock = System.Windows.Forms.DockStyle.Top;
@@ -185,19 +200,6 @@
             this.CurrentWord.TabIndex = 4;
             this.CurrentWord.Text = "Поточне слово";
             this.CurrentWord.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // deleteCurrentWordButton
-            // 
-            this.deleteCurrentWordButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.deleteCurrentWordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteCurrentWordButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.deleteCurrentWordButton.Location = new System.Drawing.Point(0, 77);
-            this.deleteCurrentWordButton.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.deleteCurrentWordButton.Name = "deleteCurrentWordButton";
-            this.deleteCurrentWordButton.Size = new System.Drawing.Size(237, 40);
-            this.deleteCurrentWordButton.TabIndex = 6;
-            this.deleteCurrentWordButton.Text = "Видалити";
-            this.deleteCurrentWordButton.UseVisualStyleBackColor = true;
             // 
             // label3
             // 

@@ -1,4 +1,4 @@
-﻿namespace FlyingBeaverIDE.UI.Services;
+﻿namespace FlyingBeaverIDE.UI.Services.UI;
 
 public class SaveDialogsViewer
 {

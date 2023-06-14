@@ -19,7 +19,7 @@ public class Accentuation
             case null when b is null:
                 return null;
             case null:
-                return a;
+                return b;
             case not null when b is null:
                 return a;
         }

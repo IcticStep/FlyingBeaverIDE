@@ -16,5 +16,15 @@ namespace Flying_Beaver_IDE
         {
             InitializeComponent();
         }
+
+        private void AddSuggestedWord(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DeleteSelectedWord(object sender, EventArgs e)
+        {
+
+        }
     }
 }

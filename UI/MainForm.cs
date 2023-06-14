@@ -1,6 +1,9 @@
 using Syncfusion.Windows.Forms.Tools;
 using FlyingBeaverIDE.Logic;
-using FlyingBeaverIDE.UI.Services;
+using FlyingBeaverIDE.UI.Services.AnalyzeResultsView;
+using FlyingBeaverIDE.UI.Services.System;
+using FlyingBeaverIDE.UI.Services.UI;
+using FlyingBeaverIDE.UI.Services.UI.TopPanel;
 using EventArgs = System.EventArgs;
 
 namespace FlyingBeaverIDE.UI
@@ -16,9 +19,12 @@ namespace FlyingBeaverIDE.UI
             _flyingBeaver = CreateFlyingBeaver();
             _fileSaver = new(_flyingBeaver);
             _backStageMenu = new(_fileSaver, backStageView);
-            _flyingBeaver.OnRhythmResult += result => Console.WriteLine(result.ToString());
-            CreateRhythmSelector();
+            _localDictionaryPreviewer = new(personalDictionaryStatus);
+            _analyzeResultsViewer = new(_localDictionaryPreviewer);
+            _flyingBeaver.OnAnalyzeCompleted += _analyzeResultsViewer.ShowResults;
             _rhythmSelector = CreateRhythmSelector();
+            _localDictionaryEditorViewer = new(_flyingBeaver.LocalAccentuationsDictionary);
+            _localDictionaryEditorViewer.Edited += _flyingBeaver.ForceReanalyze;
         }
 
         public MainForm(string? path) : this()
@@ -29,6 +35,14 @@ namespace FlyingBeaverIDE.UI
             void ShowPoemText() =>
                 PoemTextBox.Text = _flyingBeaver.PoemText;
         }
+
+        private readonly FlyingBeaver _flyingBeaver;
+        private readonly FileSaver _fileSaver;
+        private readonly BackStageMenu _backStageMenu;
+        private readonly RhythmSelector _rhythmSelector;
+        private readonly AnalyzeResultsViewer _analyzeResultsViewer;
+        private readonly LocalDictionaryPreviewer _localDictionaryPreviewer;
+        private readonly LocalDictionaryEditorViewer _localDictionaryEditorViewer;
 
         private FlyingBeaver CreateFlyingBeaver()
         {
@@ -45,11 +59,6 @@ namespace FlyingBeaverIDE.UI
             rhythmSelector.Set(_flyingBeaver.CurrentRhythm);
             return rhythmSelector;
         }
-
-        private readonly FlyingBeaver _flyingBeaver;
-        private readonly FileSaver _fileSaver;
-        private readonly BackStageMenu _backStageMenu;
-        private readonly RhythmSelector _rhythmSelector;
 
         private void CreateNewFile(object sender, EventArgs e) =>
             _backStageMenu.CreateNewFile();
@@ -75,10 +84,7 @@ namespace FlyingBeaverIDE.UI
         private void HandleClosingAttempt(object sender, FormClosingEventArgs e) =>
             _fileSaver.TrySaveOnClose(e);
 
-        private void OpenPersonalDictionary(object? sender, EventArgs e)
-        {
-            var dictionaryForm = new LocalDictionaryForm();
-            dictionaryForm.ShowDialog();
-        }
+        private void OpenPersonalDictionary(object? sender, EventArgs e) => 
+            _localDictionaryEditorViewer.Show(_analyzeResultsViewer.UnknownWords);
     }
 }

@@ -1,6 +1,7 @@
-﻿using Syncfusion.Windows.Forms;
+﻿using FlyingBeaverIDE.UI.Services.System;
+using Syncfusion.Windows.Forms;
 
-namespace FlyingBeaverIDE.UI.Services;
+namespace FlyingBeaverIDE.UI.Services.UI;
 
 public class BackStageMenu
 {
