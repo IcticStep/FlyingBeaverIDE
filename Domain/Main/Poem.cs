@@ -38,6 +38,9 @@ public class Poem : ICloneable
         }
     }
 
+    public override int GetHashCode() => 
+        HashCode.Combine(Text.GetHashCode(), Rhythm.GetHashCode());
+
     public object Clone() =>
         new Poem(_text, _rhythm);
 }

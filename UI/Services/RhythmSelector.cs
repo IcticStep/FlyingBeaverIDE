@@ -4,14 +4,14 @@ namespace FlyingBeaverIDE.UI.Services;
 
 public class RhythmSelector
 {
-    private Rhythm[] _availableRhythms;
+    private List<Rhythm> _availableRhythms;
     private ToolStripComboBox _viewer;
 
     public Action<Rhythm> OnUpdated;
 
-    public RhythmSelector(Rhythm[] availableRhythms, ToolStripComboBox viewer)
+    public RhythmSelector(IEnumerable<Rhythm> availableRhythms, ToolStripComboBox viewer)
     {
-        _availableRhythms = availableRhythms;
+        _availableRhythms = availableRhythms.ToList();
         _viewer = viewer;
         
         _viewer.Items.Clear();
@@ -21,4 +21,12 @@ public class RhythmSelector
 
     private void HandleIndexChanged(object? sender, EventArgs eventArgs) => 
         OnUpdated?.Invoke((Rhythm)_viewer.SelectedItem);
+
+    public void Set(Rhythm rhythm)
+    {
+        var index = _availableRhythms
+            .FindIndex(data => data.Equals(rhythm));
+
+        _viewer.SelectedIndex = index;
+    }
 }

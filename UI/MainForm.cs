@@ -22,6 +22,7 @@ namespace FlyingBeaverIDE.UI
             _flyingBeaver.OnRhythmResult += result => Console.WriteLine(result.ToString());
             _rhythmSelector = new(_flyingBeaver.AvailableRhythms, RhythmsComboBox);
             _rhythmSelector.OnUpdated += rhythm => _flyingBeaver.CurrentRhythm = rhythm;
+            _flyingBeaver.OnRhythmLoaded += rhythm => _rhythmSelector.Set(rhythm);
         }
 
         public MainForm(string? path) : this()

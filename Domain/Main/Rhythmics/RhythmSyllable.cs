@@ -7,4 +7,15 @@ public class RhythmSyllable
         Accentuated = accentuated;
 
     public bool Accentuated { get; }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is not RhythmSyllable other)
+            return false;
+
+        return Accentuated == other.Accentuated;
+    }
+
+    public override int GetHashCode() => 
+        Accentuated.GetHashCode();
 }

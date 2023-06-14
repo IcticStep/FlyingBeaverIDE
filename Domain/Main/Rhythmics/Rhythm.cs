@@ -1,8 +1,11 @@
-﻿namespace Domain.Main.Rhythmics;
+﻿using System.Text.Json.Serialization;
+
+namespace Domain.Main.Rhythmics;
 
 [Serializable]
 public class Rhythm
 {
+    [JsonConstructor]
     public Rhythm(string name, IReadOnlyList<RhythmSyllable> scheme)
     {
         Scheme = scheme;
@@ -57,11 +60,30 @@ public class Rhythm
     public bool SyllableShouldBeAccentuated(int index) =>
         Scheme[index % Scheme.Count].Accentuated;
 
+    public override string ToString() => $"{Name}";
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is not Rhythm other)
+            return false;
+
+        if (Scheme.Count != other.Scheme.Count)
+            return false;
+        
+        for (var i = 0; i < Scheme.Count; i++)
+            if (!_scheme[i].Equals(other.Scheme[i]))
+                return false;
+        return true;
+    }
+
+    public override int GetHashCode() => 
+        HashCode.Combine(Name.GetHashCode(), Scheme.GetHashCode());
+
     private static IReadOnlyList<RhythmSyllable> GetRhythmSyllables(bool[] accents) =>
         accents
             .Select(x => new RhythmSyllable(x))
             .ToList();
-    
+
     private static IReadOnlyList<RhythmSyllable> GetRhythmSyllables(string accents) =>
         accents
             .Select(GetRhythmSyllable)
@@ -73,7 +95,4 @@ public class Rhythm
             throw new ArgumentException("Should be string of 1 and 0 only.");
         return new(symbol == '1');
     }
-    
-    public override string ToString() => 
-        $"{Name}";
 }

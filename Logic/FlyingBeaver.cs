@@ -51,12 +51,6 @@ public class FlyingBeaver : IDataReceiver<Poem>
     private int _lastAnalyzedHash = string.Empty.GetHashCode();
     private bool _analyzeIsBusy;
 
-    private Poem Poem
-    {
-        get => (Poem)_poem.Clone();
-        set => _poem = value;
-    }
-
     public string PoemText
     {
         get => _poem.Text;
@@ -91,11 +85,21 @@ public class FlyingBeaver : IDataReceiver<Poem>
 
     public bool AllChangesSaved => _poemSaver.AllChangesSaved;
 
+    private Poem Poem
+    {
+        get => (Poem)_poem.Clone();
+        set => _poem = value;
+    }
+
     public event Action<Poem>? OnDataReceived;
     public event Action<RhythmResult>? OnRhythmResult;
+    public event Action<Rhythm> OnRhythmLoaded;
 
-    public void LoadFromFile(string? path) =>
+    public void LoadFromFile(string? path)
+    {
         Poem = _poemSaver.LoadFromFile(path) ?? Poem;
+        OnRhythmLoaded?.Invoke(Poem.Rhythm);
+    }
 
     public void SavePoemToFile(string? path = default!) =>
         _poemSaver.SavePoemToFile(_poem, path);
@@ -128,6 +132,13 @@ public class FlyingBeaver : IDataReceiver<Poem>
                 _analyzeIsBusy = false;
                 return;
             }
+
+            if (Poem.Rhythm is null)
+            {
+                _analyzeIsBusy = false;
+                return;
+            }
+            
             var cloned = (Poem)Poem.Clone();
 
             var poemToken = await _poemTokenizer.TokenizeAsync(cloned);
