@@ -33,7 +33,7 @@ internal class PoemSaver
         return _fileSaver.TryLoadFromFile(path);
     }
 
-    private void HandleDataChanged(object o) => 
+    private void HandleDataChanged(Poem o) => 
         AllChangesSaved = false;
 
     private void SaveToFile(Poem poem, string? path = default!)

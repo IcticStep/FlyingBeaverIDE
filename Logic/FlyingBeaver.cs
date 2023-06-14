@@ -1,4 +1,5 @@
-﻿using DataStorage;
+﻿using System.Timers;
+using DataStorage;
 using DataStorage.Accentuations.Api;
 using Domain.Analysing.Results;
 using Domain.Main;
@@ -8,6 +9,7 @@ using FlyingBeaverIDE.Logic.Services;
 using PoemTokenization.Tokenizers;
 using RhythmAnalysing;
 using RhythmAnalysing.Analyzers;
+using Timer = System.Timers.Timer;
 
 namespace FlyingBeaverIDE.Logic;
 
@@ -15,33 +17,39 @@ public class FlyingBeaver : IDataReceiver<Poem>
 {
     public FlyingBeaver(DataBaseCredentials dataBaseCredentials, string? localAccentuationsSavePath)
     {
-        _poem.OnEdit += InvokeOnUpdated;
         _poemSaver = new PoemSaver(this);
-        _receivingDelayer = new(this);
         _poemTokenizer = new();
-        //_receivingDelayer.OnDelayedReceive += ProceedPoem;
         _accentuationsRepository = AccentuationRepositoryProvider.Create(
             dataBaseCredentials, localAccentuationsSavePath);
         _rhythmAnalyzer = new(new SchemeAutoAnalyzer(_accentuationsRepository));
+        InitTimer();
     }
 
+    private void InitTimer()
+    {
+        _analyzeTimer = new Timer(AnalyzeInterval);
+        _analyzeTimer.AutoReset = true;
+        _analyzeTimer.Elapsed += TryAnalyzePoem;
+        _analyzeTimer.Start();
+    }
+
+    public readonly double MinAnalyzeInterval = 300;
+    public readonly double MaxAnalyzeInterval = 10000;
+    private Timer _analyzeTimer;
     private readonly PoemSaver _poemSaver;
     private readonly PoemTokenizer _poemTokenizer;
-    private readonly DataReceivingDelayer<Poem> _receivingDelayer;
     private readonly RhythmAnalyzer _rhythmAnalyzer;
     private readonly IAccentuationsRepository _accentuationsRepository;
-
+    
     private Poem _poem = new("", RhythmBank.Trochee2);
+    private double _analyzeInterval = 1500;
+    private int _lastAnalyzedHash = string.Empty.GetHashCode();
+    private bool _analyzeIsBusy;
 
-    public Poem Poem
+    private Poem Poem
     {
         get => (Poem)_poem.Clone();
-        private set
-        {
-            _poem.OnEdit -= InvokeOnUpdated;
-            _poem = value;
-            _poem.OnEdit += InvokeOnUpdated;
-        }
+        set => _poem = value;
     }
 
     public string PoemText
@@ -49,19 +57,29 @@ public class FlyingBeaver : IDataReceiver<Poem>
         get => _poem.Text;
         set
         {
-            if (_poem.Text.GetHashCode() == value.GetHashCode())
+            if (Poem.Text.GetHashCode() == value.GetHashCode())
                 return;
 
-            _poem.Text = value;
+            Poem = new Poem(value, Poem.Rhythm);
             OnDataReceived?.Invoke(Poem);
-            ProceedPoem(_poem);
+        }
+    }
+
+    public double AnalyzeInterval
+    {
+        get => _analyzeInterval;
+        set
+        {
+            if(value < MinAnalyzeInterval || value > MaxAnalyzeInterval)
+                throw new ArgumentOutOfRangeException(nameof(AnalyzeInterval));
+            _analyzeInterval = value;
         }
     }
 
     public bool HasSavedPath => _poemSaver.HasSavedPath;
+
     public bool AllChangesSaved => _poemSaver.AllChangesSaved;
 
-    public event Action? OnUpdated;
     public event Action<Poem>? OnDataReceived;
     public event Action<RhythmResult>? OnRhythmResult;
 
@@ -71,17 +89,46 @@ public class FlyingBeaver : IDataReceiver<Poem>
     public void SavePoemToFile(string? path = default!) =>
         _poemSaver.SavePoemToFile(_poem, path);
 
-    private async void ProceedPoem(Poem poem)
+    private void TryAnalyzePoem(object? sender, ElapsedEventArgs elapsedEventArgs)
     {
-        if (poem is null) 
+        if(_analyzeIsBusy)
             return;
+
+        _analyzeIsBusy = true;
+        var currentHash = Poem.GetHashCode();
+        if (currentHash == _lastAnalyzedHash)
+        {
+            _analyzeIsBusy = false;
+            return;
+        }
+
+        _lastAnalyzedHash = currentHash;
         
-        var poemClone = poem.Clone() as Poem;
-        var poemToken = await _poemTokenizer.TokenizeAsync(poemClone);
-        var rhythmResult = await _rhythmAnalyzer.AnalyzeAsync(poemToken);
-        OnRhythmResult?.Invoke(rhythmResult);
+        Console.WriteLine("Processing");
+        Task.Run(AnalyzePoem());
     }
-    
-    private void InvokeOnUpdated() =>
-        OnUpdated?.Invoke();
+
+    private Func<Task?> AnalyzePoem()
+    {
+        return async () =>
+        {
+            if (string.IsNullOrWhiteSpace(Poem.Text))
+            {
+                _analyzeIsBusy = false;
+                return;
+            }
+            var cloned = (Poem)Poem.Clone();
+
+            var poemToken = await _poemTokenizer.TokenizeAsync(cloned);
+            if (!poemToken.AllSyllables.Any())
+            {
+                _analyzeIsBusy = false;
+                return;
+            }
+
+            var rhythmResult = await _rhythmAnalyzer.AnalyzeAsync(poemToken);
+            OnRhythmResult?.Invoke(rhythmResult);
+            _analyzeIsBusy = false;
+        };
+    }
 }

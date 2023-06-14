@@ -40,9 +40,9 @@ public class RhythmResult
     public override string ToString() => 
         $"Правильно: {{{GetStringOfCollection(CorrectRhythmicPositions)}}} " +
         $"Неправильно: {{{GetStringOfCollection(FailedRhythmicPositions)}}}" +
-        $"Невідомі слова {{{GetStringOfCollection(UnknownWords)}}}";
+        $"Невідомі слова {{{GetStringOfCollection(UnknownWords, WordToString)}}}";
 
-    private string GetStringOfCollection(IEnumerable collection)
+    private string GetStringOfCollection(IEnumerable collection, Func<object?, string> converter = null)
     {
         if (collection is null)
             return string.Empty;
@@ -50,7 +50,8 @@ public class RhythmResult
         var builder = new StringBuilder();
         foreach (var element in collection)
         {
-            builder.Append(element);
+            var stringedElement = converter is null ? element : converter.Invoke(element);
+            builder.Append(stringedElement);
             builder.Append(' ');
         }
 
@@ -59,4 +60,9 @@ public class RhythmResult
 
         return builder.ToString();
     }
+
+    private string WordToString(object? wordObject) => 
+        wordObject is not IWordToken wordToken 
+            ? string.Empty
+            : wordToken.RawText;
 }
