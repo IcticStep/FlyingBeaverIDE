@@ -54,13 +54,11 @@ namespace FlyingBeaverIDE.UI
             if (!localWords.Any())
             {
                 knownWords.Enabled = false;
-                editCurrentWordButton.Enabled = false;
                 deleteCurrentWordButton.Enabled = false;
                 return;
             }
             
             knownWords.Enabled = true;
-            editCurrentWordButton.Enabled = true;
             deleteCurrentWordButton.Enabled = true;
 
             knownWords.DataSource = null;

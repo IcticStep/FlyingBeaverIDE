@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.suggestionsPanel = new System.Windows.Forms.Panel();
@@ -38,7 +40,6 @@
             this.middlePanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.deleteCurrentWordButton = new System.Windows.Forms.Button();
-            this.editCurrentWordButton = new System.Windows.Forms.Button();
             this.CurrentWord = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.newWordInput = new System.Windows.Forms.TextBox();
@@ -127,6 +128,11 @@
             this.knownWords.AllowUserToDeleteRows = false;
             this.knownWords.AllowUserToResizeColumns = false;
             this.knownWords.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.knownWords.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.knownWords.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.knownWords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.knownWords.Dock = System.Windows.Forms.DockStyle.Left;
@@ -137,6 +143,15 @@
             this.knownWords.ReadOnly = true;
             this.knownWords.RowHeadersWidth = 51;
             this.knownWords.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.DimGray;
+            this.knownWords.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.knownWords.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.knownWords.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            this.knownWords.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.DarkGray;
+            this.knownWords.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.knownWords.RowTemplate.Height = 24;
             this.knownWords.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.knownWords.Size = new System.Drawing.Size(407, 250);
@@ -155,7 +170,6 @@
             // panel4
             // 
             this.panel4.Controls.Add(this.deleteCurrentWordButton);
-            this.panel4.Controls.Add(this.editCurrentWordButton);
             this.panel4.Controls.Add(this.CurrentWord);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(407, 0);
@@ -168,7 +182,7 @@
             this.deleteCurrentWordButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.deleteCurrentWordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteCurrentWordButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.deleteCurrentWordButton.Location = new System.Drawing.Point(0, 77);
+            this.deleteCurrentWordButton.Location = new System.Drawing.Point(0, 37);
             this.deleteCurrentWordButton.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.deleteCurrentWordButton.Name = "deleteCurrentWordButton";
             this.deleteCurrentWordButton.Size = new System.Drawing.Size(237, 40);
@@ -176,19 +190,6 @@
             this.deleteCurrentWordButton.Text = "Видалити";
             this.deleteCurrentWordButton.UseVisualStyleBackColor = true;
             this.deleteCurrentWordButton.Click += new System.EventHandler(this.DeleteSelectedWord);
-            // 
-            // editCurrentWordButton
-            // 
-            this.editCurrentWordButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.editCurrentWordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.editCurrentWordButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.editCurrentWordButton.Location = new System.Drawing.Point(0, 37);
-            this.editCurrentWordButton.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.editCurrentWordButton.Name = "editCurrentWordButton";
-            this.editCurrentWordButton.Size = new System.Drawing.Size(237, 40);
-            this.editCurrentWordButton.TabIndex = 5;
-            this.editCurrentWordButton.Text = "Редагувати";
-            this.editCurrentWordButton.UseVisualStyleBackColor = true;
             // 
             // CurrentWord
             // 
@@ -275,7 +276,6 @@
         private System.Windows.Forms.Panel middlePanel;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button deleteCurrentWordButton;
-        private System.Windows.Forms.Button editCurrentWordButton;
         private System.Windows.Forms.Label CurrentWord;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox newWordInput;
