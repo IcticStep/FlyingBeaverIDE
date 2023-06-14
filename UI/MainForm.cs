@@ -62,5 +62,11 @@ namespace FlyingBeaverIDE.UI
 
         private void HandleClosingAttempt(object sender, FormClosingEventArgs e) =>
             _fileSaver.TrySaveOnClose(e);
+
+        private void OpenPersonalDictionary(object? sender, EventArgs e)
+        {
+            var dictionaryForm = new LocalDictionaryForm();
+            dictionaryForm.ShowDialog();
+        }
     }
 }

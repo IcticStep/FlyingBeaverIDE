@@ -45,13 +45,13 @@
             this.PersonalDictionaryPanel = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.personalDictionaryStatus = new System.Windows.Forms.ToolStripLabel();
+            this.openPersonalDictionaryButton = new System.Windows.Forms.ToolStripButton();
             this.SettingsTab = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
             this.PoemTextBox = new System.Windows.Forms.RichTextBox();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolStripPanelItem1 = new Syncfusion.Windows.Forms.Tools.ToolStripPanelItem();
             this.toolStripPanelItem2 = new Syncfusion.Windows.Forms.Tools.ToolStripPanelItem();
             this.toolStripPanelItem3 = new Syncfusion.Windows.Forms.Tools.ToolStripPanelItem();
-            this.openPersonalDictionaryButton = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControlAdv1)).BeginInit();
             this.ribbonControlAdv1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.backStage)).BeginInit();
@@ -207,7 +207,7 @@
             this.MainTab.Panel.TabIndex = 2;
             this.MainTab.Panel.Text = "Головна";
             this.MainTab.Position = 0;
-            this.MainTab.Size = new System.Drawing.Size(95, 34);
+            this.MainTab.Size = new System.Drawing.Size(109, 41);
             this.MainTab.Tag = "1";
             this.MainTab.Text = "Головна";
             // 
@@ -298,6 +298,17 @@
             this.personalDictionaryStatus.Size = new System.Drawing.Size(218, 28);
             this.personalDictionaryStatus.Text = "Незнайомі слова: 0";
             // 
+            // openPersonalDictionaryButton
+            // 
+            this.openPersonalDictionaryButton.AutoSize = false;
+            this.openPersonalDictionaryButton.Image = Properties.Resources.DictionaryTransperentIcon;
+            this.openPersonalDictionaryButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openPersonalDictionaryButton.Name = "openPersonalDictionaryButton";
+            this.openPersonalDictionaryButton.Size = new System.Drawing.Size(218, 30);
+            this.openPersonalDictionaryButton.Text = "Редагувати";
+            this.openPersonalDictionaryButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.openPersonalDictionaryButton.Click += new System.EventHandler(this.OpenPersonalDictionary);
+            // 
             // SettingsTab
             // 
             this.SettingsTab.Name = "SettingsTab";
@@ -309,7 +320,7 @@
             this.SettingsTab.Panel.TabIndex = 3;
             this.SettingsTab.Panel.Text = "Налаштування";
             this.SettingsTab.Position = 1;
-            this.SettingsTab.Size = new System.Drawing.Size(152, 34);
+            this.SettingsTab.Size = new System.Drawing.Size(166, 41);
             this.SettingsTab.Tag = "1";
             this.SettingsTab.Text = "Налаштування";
             // 
@@ -365,17 +376,6 @@
             this.toolStripPanelItem3.Size = new System.Drawing.Size(23, 23);
             this.toolStripPanelItem3.Text = "toolStripPanelItem3";
             this.toolStripPanelItem3.Transparent = true;
-            // 
-            // openPersonalDictionaryButton
-            // 
-            this.openPersonalDictionaryButton.AutoSize = false;
-            this.openPersonalDictionaryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.openPersonalDictionaryButton.Image = Properties.Resources.DictionaryTransperentIcon;
-            this.openPersonalDictionaryButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openPersonalDictionaryButton.Name = "openPersonalDictionaryButton";
-            this.openPersonalDictionaryButton.Size = new System.Drawing.Size(218, 30);
-            this.openPersonalDictionaryButton.Text = "Редагувати";
-            this.openPersonalDictionaryButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             // 
             // MainFormDesign
             // 
