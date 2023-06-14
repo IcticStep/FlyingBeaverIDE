@@ -6,11 +6,15 @@ namespace FlyingBeaverIDE.UI.Services.AnalyzeResultsView;
 public class AnalyzeResultsViewer
 {
     private readonly LocalDictionaryPreviewer _localDictionaryPreviewer;
+    private readonly RhythmResultDrawer _rhythmResultDrawer;
     private RhythmResult _rhythmResult;
     private List<string> _unknownWords = new();
 
-    public AnalyzeResultsViewer(LocalDictionaryPreviewer localDictionaryPreviewer) => 
+    public AnalyzeResultsViewer(LocalDictionaryPreviewer localDictionaryPreviewer, RichTextBox poemViewer)
+    {
         _localDictionaryPreviewer = localDictionaryPreviewer;
+        _rhythmResultDrawer = new(poemViewer);
+    }
 
     public IReadOnlyList<string> UnknownWords => _unknownWords;
 
@@ -19,6 +23,7 @@ public class AnalyzeResultsViewer
         _rhythmResult = analyzeResult.RhythmResult;
         CacheUnknownWords(analyzeResult);
         ShowUnknownWordsCount();
+        _rhythmResultDrawer.Draw(analyzeResult);
         Console.WriteLine($"Result: {{{analyzeResult.RhythmResult}}}");
     }
 

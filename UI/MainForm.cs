@@ -20,7 +20,7 @@ namespace FlyingBeaverIDE.UI
             _fileSaver = new(_flyingBeaver);
             _backStageMenu = new(_fileSaver, backStageView);
             _localDictionaryPreviewer = new(personalDictionaryStatus);
-            _analyzeResultsViewer = new(_localDictionaryPreviewer);
+            _analyzeResultsViewer = new(_localDictionaryPreviewer, PoemTextBox);
             _flyingBeaver.OnAnalyzeCompleted += _analyzeResultsViewer.ShowResults;
             _rhythmSelector = CreateRhythmSelector();
             _localDictionaryEditorViewer = new(_flyingBeaver.LocalAccentuationsDictionary);

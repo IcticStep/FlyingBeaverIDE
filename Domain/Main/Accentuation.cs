@@ -1,4 +1,6 @@
-﻿namespace Domain.Main;
+﻿using System.ComponentModel;
+
+namespace Domain.Main;
 
 [Serializable]
 public class Accentuation
@@ -9,9 +11,10 @@ public class Accentuation
         Accentuations = accentuations;
     }
 
+    [DisplayName("Слово")]
     public string Word { get; set; }
     public List<int> Accentuations { get; set; }
-
+    
     public static Accentuation? Combine(Accentuation? a, Accentuation? b)
     {
         switch (a)
