@@ -20,6 +20,8 @@ namespace FlyingBeaverIDE.UI
             _fileSaver = new(_flyingBeaver);
             _backStageMenu = new(_fileSaver, backStageView);
             _flyingBeaver.OnRhythmResult += result => Console.WriteLine(result.ToString());
+            _rhythmSelector = new(_flyingBeaver.AvailableRhythms, RhythmsComboBox);
+            _rhythmSelector.OnUpdated += rhythm => _flyingBeaver.CurrentRhythm = rhythm;
         }
 
         public MainForm(string? path) : this()
@@ -34,6 +36,7 @@ namespace FlyingBeaverIDE.UI
         private readonly FlyingBeaver _flyingBeaver;
         private readonly FileSaver _fileSaver;
         private readonly BackStageMenu _backStageMenu;
+        private readonly RhythmSelector _rhythmSelector;
 
         private void CreateNewFile(object sender, EventArgs e) => 
             _backStageMenu.CreateNewFile();

@@ -9,10 +9,12 @@ public class Rhythm
         Name = name;
     }
 
-    public Rhythm(string name, params bool[] accents) : this(name, GetRhythmSyllables(accents))
+    public Rhythm(string name, params bool[] accents)
+        : this(name, GetRhythmSyllables(accents))
     { }
     
-    public Rhythm(string name, string accents) : this(name, GetRhythmSyllables(accents))
+    public Rhythm(string name, string accents) 
+        : this(name, GetRhythmSyllables(accents))
     { }
 
     private IReadOnlyList<RhythmSyllable> _scheme;
@@ -71,4 +73,7 @@ public class Rhythm
             throw new ArgumentException("Should be string of 1 and 0 only.");
         return new(symbol == '1');
     }
+    
+    public override string ToString() => 
+        $"{Name}";
 }

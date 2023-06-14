@@ -35,6 +35,11 @@ public class FlyingBeaver : IDataReceiver<Poem>
 
     public readonly double MinAnalyzeInterval = 300;
     public readonly double MaxAnalyzeInterval = 10000;
+
+    public Rhythm[] AvailableRhythms =>
+        RhythmBank.TrocheeGroup.Concat(
+            RhythmBank.IambGroup).ToArray();
+    
     private Timer _analyzeTimer;
     private readonly PoemSaver _poemSaver;
     private readonly PoemTokenizer _poemTokenizer;
@@ -63,6 +68,12 @@ public class FlyingBeaver : IDataReceiver<Poem>
             Poem = new Poem(value, Poem.Rhythm);
             OnDataReceived?.Invoke(Poem);
         }
+    }
+
+    public Rhythm CurrentRhythm
+    {
+        get => _poem.Rhythm;
+        set => _poem.Rhythm = value;
     }
 
     public double AnalyzeInterval

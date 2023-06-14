@@ -38,13 +38,23 @@
             this.SaveFileAsButton = new Syncfusion.Windows.Forms.BackStageButton();
             this.ExitButton = new Syncfusion.Windows.Forms.BackStageButton();
             this.MainTab = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
+            this.CurrentPoemToolStripGroup = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.RhythmsComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripEx1 = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
             this.SettingsTab = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
             this.PoemTextBox = new System.Windows.Forms.RichTextBox();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripPanelItem1 = new Syncfusion.Windows.Forms.Tools.ToolStripPanelItem();
+            this.toolStripPanelItem2 = new Syncfusion.Windows.Forms.Tools.ToolStripPanelItem();
+            this.toolStripPanelItem3 = new Syncfusion.Windows.Forms.Tools.ToolStripPanelItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControlAdv1)).BeginInit();
             this.ribbonControlAdv1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.backStage)).BeginInit();
             this.backStage.SuspendLayout();
+            this.MainTab.Panel.SuspendLayout();
+            this.CurrentPoemToolStripGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // ribbonControlAdv1
@@ -67,6 +77,7 @@
             // 
             // ribbonControlAdv1.OfficeMenu
             // 
+            this.ribbonControlAdv1.OfficeMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.ribbonControlAdv1.OfficeMenu.Name = "OfficeMenu";
             this.ribbonControlAdv1.OfficeMenu.ShowItemToolTips = true;
             this.ribbonControlAdv1.OfficeMenu.Size = new System.Drawing.Size(12, 65);
@@ -78,7 +89,7 @@
             this.ribbonControlAdv1.ShowMinimizeButton = false;
             this.ribbonControlAdv1.ShowQuickItemsDropDownButton = false;
             this.ribbonControlAdv1.ShowRibbonDisplayOptionButton = false;
-            this.ribbonControlAdv1.Size = new System.Drawing.Size(982, 160);
+            this.ribbonControlAdv1.Size = new System.Drawing.Size(982, 187);
             this.ribbonControlAdv1.SystemText.QuickAccessDialogDropDownName = "Start menu";
             this.ribbonControlAdv1.SystemText.RenameDisplayLabelText = "&Display Name:";
             this.ribbonControlAdv1.TabIndex = 0;
@@ -121,10 +132,10 @@
             // 
             this.NewFileButton.Accelerator = "";
             this.NewFileButton.BackColor = System.Drawing.Color.Transparent;
-            this.NewFileButton.Location = new System.Drawing.Point(10, 10);
+            this.NewFileButton.Location = new System.Drawing.Point(25, 10);
             this.NewFileButton.Name = "NewFileButton";
             this.NewFileButton.Placement = Syncfusion.Windows.Forms.BackStageItemPlacement.Top;
-            this.NewFileButton.Size = new System.Drawing.Size(110, 25);
+            this.NewFileButton.Size = new System.Drawing.Size(158, 31);
             this.NewFileButton.TabIndex = 2;
             this.NewFileButton.Text = "Новий";
             this.NewFileButton.Click += new System.EventHandler(this.CreateNewFile);
@@ -133,10 +144,10 @@
             // 
             this.OpenFileButton.Accelerator = "";
             this.OpenFileButton.BackColor = System.Drawing.Color.Transparent;
-            this.OpenFileButton.Location = new System.Drawing.Point(10, 35);
+            this.OpenFileButton.Location = new System.Drawing.Point(25, 35);
             this.OpenFileButton.Name = "OpenFileButton";
             this.OpenFileButton.Placement = Syncfusion.Windows.Forms.BackStageItemPlacement.Top;
-            this.OpenFileButton.Size = new System.Drawing.Size(110, 25);
+            this.OpenFileButton.Size = new System.Drawing.Size(158, 31);
             this.OpenFileButton.TabIndex = 3;
             this.OpenFileButton.Text = "Відкрити";
             this.OpenFileButton.Click += new System.EventHandler(this.OpenFile);
@@ -145,10 +156,10 @@
             // 
             this.SaveFileButton.Accelerator = "";
             this.SaveFileButton.BackColor = System.Drawing.Color.Transparent;
-            this.SaveFileButton.Location = new System.Drawing.Point(10, 60);
+            this.SaveFileButton.Location = new System.Drawing.Point(25, 60);
             this.SaveFileButton.Name = "SaveFileButton";
             this.SaveFileButton.Placement = Syncfusion.Windows.Forms.BackStageItemPlacement.Top;
-            this.SaveFileButton.Size = new System.Drawing.Size(110, 25);
+            this.SaveFileButton.Size = new System.Drawing.Size(158, 31);
             this.SaveFileButton.TabIndex = 4;
             this.SaveFileButton.Text = "Зберегти";
             this.SaveFileButton.Click += new System.EventHandler(this.SaveFile);
@@ -157,10 +168,10 @@
             // 
             this.SaveFileAsButton.Accelerator = "";
             this.SaveFileAsButton.BackColor = System.Drawing.Color.Transparent;
-            this.SaveFileAsButton.Location = new System.Drawing.Point(10, 85);
+            this.SaveFileAsButton.Location = new System.Drawing.Point(25, 85);
             this.SaveFileAsButton.Name = "SaveFileAsButton";
             this.SaveFileAsButton.Placement = Syncfusion.Windows.Forms.BackStageItemPlacement.Top;
-            this.SaveFileAsButton.Size = new System.Drawing.Size(110, 25);
+            this.SaveFileAsButton.Size = new System.Drawing.Size(158, 31);
             this.SaveFileAsButton.TabIndex = 5;
             this.SaveFileAsButton.Text = "Зберегти як";
             this.SaveFileAsButton.Click += new System.EventHandler(this.SaveFileAs);
@@ -169,10 +180,10 @@
             // 
             this.ExitButton.Accelerator = "";
             this.ExitButton.BackColor = System.Drawing.Color.Transparent;
-            this.ExitButton.Location = new System.Drawing.Point(10, 110);
+            this.ExitButton.Location = new System.Drawing.Point(25, 110);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Placement = Syncfusion.Windows.Forms.BackStageItemPlacement.Top;
-            this.ExitButton.Size = new System.Drawing.Size(110, 25);
+            this.ExitButton.Size = new System.Drawing.Size(158, 31);
             this.ExitButton.TabIndex = 6;
             this.ExitButton.Text = "Закрити";
             this.ExitButton.Click += new System.EventHandler(this.ExitProgram);
@@ -183,14 +194,85 @@
             // 
             // ribbonControlAdv1.ribbonPanel1
             // 
+            this.MainTab.Panel.Controls.Add(this.CurrentPoemToolStripGroup);
+            this.MainTab.Panel.Controls.Add(this.toolStripEx1);
             this.MainTab.Panel.Name = "ribbonPanel1";
             this.MainTab.Panel.ScrollPosition = 0;
             this.MainTab.Panel.TabIndex = 2;
             this.MainTab.Panel.Text = "Головна";
             this.MainTab.Position = 0;
-            this.MainTab.Size = new System.Drawing.Size(85, 30);
+            this.MainTab.Size = new System.Drawing.Size(109, 41);
             this.MainTab.Tag = "1";
             this.MainTab.Text = "Головна";
+            // 
+            // CurrentPoemToolStripGroup
+            // 
+            this.CurrentPoemToolStripGroup.AllowMerge = false;
+            this.CurrentPoemToolStripGroup.AutoSize = false;
+            this.CurrentPoemToolStripGroup.CaptionAlignment = Syncfusion.Windows.Forms.Tools.CaptionAlignment.Center;
+            this.CurrentPoemToolStripGroup.Dock = System.Windows.Forms.DockStyle.Left;
+            this.CurrentPoemToolStripGroup.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CurrentPoemToolStripGroup.ForeColor = System.Drawing.Color.Black;
+            this.CurrentPoemToolStripGroup.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.CurrentPoemToolStripGroup.Image = null;
+            this.CurrentPoemToolStripGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.CurrentPoemToolStripGroup.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.CurrentPoemToolStripGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel2,
+            this.toolStripLabel1,
+            this.RhythmsComboBox});
+            this.CurrentPoemToolStripGroup.LauncherStyle = Syncfusion.Windows.Forms.Tools.LauncherStyle.Office12;
+            this.CurrentPoemToolStripGroup.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.CurrentPoemToolStripGroup.Location = new System.Drawing.Point(0, 1);
+            this.CurrentPoemToolStripGroup.Name = "CurrentPoemToolStripGroup";
+            this.CurrentPoemToolStripGroup.Office12Mode = false;
+            this.CurrentPoemToolStripGroup.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.CurrentPoemToolStripGroup.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.CurrentPoemToolStripGroup.ShowCaption = false;
+            this.CurrentPoemToolStripGroup.Size = new System.Drawing.Size(178, 99);
+            this.CurrentPoemToolStripGroup.TabIndex = 0;
+            this.CurrentPoemToolStripGroup.ThemeName = "Office2016Black";
+            this.ribbonControlAdv1.SetUseInCustomQuickAccessDialog(this.CurrentPoemToolStripGroup, false);
+            this.CurrentPoemToolStripGroup.VisualStyle = Syncfusion.Windows.Forms.Tools.ToolStripExStyle.Office2016Black;
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(165, 28);
+            this.toolStripLabel2.Text = "Поточний вірш";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(165, 28);
+            this.toolStripLabel1.Text = "Ритм вірша";
+            // 
+            // RhythmsComboBox
+            // 
+            this.RhythmsComboBox.BackColor = System.Drawing.Color.Black;
+            this.RhythmsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.RhythmsComboBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.RhythmsComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.RhythmsComboBox.MaxDropDownItems = 20;
+            this.RhythmsComboBox.Name = "RhythmsComboBox";
+            this.RhythmsComboBox.Size = new System.Drawing.Size(130, 28);
+            // 
+            // toolStripEx1
+            // 
+            this.toolStripEx1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.toolStripEx1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toolStripEx1.ForeColor = System.Drawing.Color.Black;
+            this.toolStripEx1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripEx1.Image = null;
+            this.toolStripEx1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStripEx1.Location = new System.Drawing.Point(202, 1);
+            this.toolStripEx1.Name = "toolStripEx1";
+            this.toolStripEx1.Office12Mode = false;
+            this.toolStripEx1.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.toolStripEx1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolStripEx1.Size = new System.Drawing.Size(46, 85);
+            this.toolStripEx1.TabIndex = 1;
             // 
             // SettingsTab
             // 
@@ -203,7 +285,7 @@
             this.SettingsTab.Panel.TabIndex = 3;
             this.SettingsTab.Panel.Text = "Налаштування";
             this.SettingsTab.Position = 1;
-            this.SettingsTab.Size = new System.Drawing.Size(131, 30);
+            this.SettingsTab.Size = new System.Drawing.Size(166, 41);
             this.SettingsTab.Tag = "1";
             this.SettingsTab.Text = "Налаштування";
             // 
@@ -216,12 +298,12 @@
             this.PoemTextBox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.PoemTextBox.ForeColor = System.Drawing.Color.LightGray;
             this.PoemTextBox.HideSelection = false;
-            this.PoemTextBox.Location = new System.Drawing.Point(0, 160);
+            this.PoemTextBox.Location = new System.Drawing.Point(0, 187);
             this.PoemTextBox.Name = "PoemTextBox";
-            this.PoemTextBox.Size = new System.Drawing.Size(980, 641);
+            this.PoemTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.PoemTextBox.Size = new System.Drawing.Size(980, 614);
             this.PoemTextBox.TabIndex = 3;
             this.PoemTextBox.Text = "";
-            this.PoemTextBox.WordWrap = false;
             this.PoemTextBox.TextChanged += new System.EventHandler(this.HandleTextChanged);
             // 
             // saveFileDialog
@@ -230,9 +312,39 @@
             this.saveFileDialog.Filter = "\"Flying Beaver poem files|*beaverpoem|All files|*.*\"";
             this.saveFileDialog.Title = "Зберегти вірш";
             // 
+            // toolStripPanelItem1
+            // 
+            this.toolStripPanelItem1.CausesValidation = false;
+            this.toolStripPanelItem1.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.toolStripPanelItem1.Name = "toolStripPanelItem1";
+            this.toolStripPanelItem1.Size = new System.Drawing.Size(23, 23);
+            this.toolStripPanelItem1.Text = "toolStripPanelItem1";
+            this.toolStripPanelItem1.Transparent = true;
+            this.toolStripPanelItem1.UseStandardLayout = true;
+            // 
+            // toolStripPanelItem2
+            // 
+            this.toolStripPanelItem2.CausesValidation = false;
+            this.toolStripPanelItem2.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.toolStripPanelItem2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.toolStripPanelItem2.Name = "toolStripPanelItem2";
+            this.toolStripPanelItem2.Size = new System.Drawing.Size(23, 23);
+            this.toolStripPanelItem2.Text = "toolStripPanelItem2";
+            this.toolStripPanelItem2.Transparent = true;
+            this.toolStripPanelItem2.UseStandardLayout = true;
+            // 
+            // toolStripPanelItem3
+            // 
+            this.toolStripPanelItem3.CausesValidation = false;
+            this.toolStripPanelItem3.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.toolStripPanelItem3.Name = "toolStripPanelItem3";
+            this.toolStripPanelItem3.Size = new System.Drawing.Size(23, 23);
+            this.toolStripPanelItem3.Text = "toolStripPanelItem3";
+            this.toolStripPanelItem3.Transparent = true;
+            // 
             // MainFormDesign
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.ClientSize = new System.Drawing.Size(980, 800);
@@ -252,6 +364,10 @@
             this.ribbonControlAdv1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.backStage)).EndInit();
             this.backStage.ResumeLayout(false);
+            this.MainTab.Panel.ResumeLayout(false);
+            this.MainTab.Panel.PerformLayout();
+            this.CurrentPoemToolStripGroup.ResumeLayout(false);
+            this.CurrentPoemToolStripGroup.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -274,5 +390,13 @@
         private Syncfusion.Windows.Forms.BackStageButton ExitButton;
         private System.Windows.Forms.RichTextBox PoemTextBox;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private Syncfusion.Windows.Forms.Tools.ToolStripEx CurrentPoemToolStripGroup;
+        private Syncfusion.Windows.Forms.Tools.ToolStripPanelItem toolStripPanelItem1;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripComboBox RhythmsComboBox;
+        private Syncfusion.Windows.Forms.Tools.ToolStripPanelItem toolStripPanelItem2;
+        private Syncfusion.Windows.Forms.Tools.ToolStripPanelItem toolStripPanelItem3;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private Syncfusion.Windows.Forms.Tools.ToolStripEx toolStripEx1;
     }
 }
