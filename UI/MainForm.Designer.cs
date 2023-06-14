@@ -42,19 +42,23 @@
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.RhythmsComboBox = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripEx1 = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
+            this.PersonalDictionaryPanel = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.personalDictionaryStatus = new System.Windows.Forms.ToolStripLabel();
             this.SettingsTab = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
             this.PoemTextBox = new System.Windows.Forms.RichTextBox();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolStripPanelItem1 = new Syncfusion.Windows.Forms.Tools.ToolStripPanelItem();
             this.toolStripPanelItem2 = new Syncfusion.Windows.Forms.Tools.ToolStripPanelItem();
             this.toolStripPanelItem3 = new Syncfusion.Windows.Forms.Tools.ToolStripPanelItem();
+            this.openPersonalDictionaryButton = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControlAdv1)).BeginInit();
             this.ribbonControlAdv1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.backStage)).BeginInit();
             this.backStage.SuspendLayout();
             this.MainTab.Panel.SuspendLayout();
             this.CurrentPoemToolStripGroup.SuspendLayout();
+            this.PersonalDictionaryPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ribbonControlAdv1
@@ -89,12 +93,13 @@
             this.ribbonControlAdv1.ShowMinimizeButton = false;
             this.ribbonControlAdv1.ShowQuickItemsDropDownButton = false;
             this.ribbonControlAdv1.ShowRibbonDisplayOptionButton = false;
-            this.ribbonControlAdv1.Size = new System.Drawing.Size(982, 187);
+            this.ribbonControlAdv1.Size = new System.Drawing.Size(982, 183);
             this.ribbonControlAdv1.SystemText.QuickAccessDialogDropDownName = "Start menu";
             this.ribbonControlAdv1.SystemText.RenameDisplayLabelText = "&Display Name:";
             this.ribbonControlAdv1.TabIndex = 0;
             this.ribbonControlAdv1.Text = "ribbonControlAdv1";
             this.ribbonControlAdv1.ThemeName = "Office2016";
+            this.ribbonControlAdv1.ThemeStyle.MoreCommandsStyle.PropertyGridViewBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(171)))), ((int)(((byte)(171)))));
             this.ribbonControlAdv1.TitleColor = System.Drawing.Color.Black;
             this.ribbonControlAdv1.TitleFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             // 
@@ -126,6 +131,7 @@
             this.backStage.Size = new System.Drawing.Size(978, 748);
             this.backStage.TabIndex = 1;
             this.backStage.ThemeName = "BackStage2016Renderer";
+            this.backStage.ThemeStyle.PrimitiveButtonStyle.DisabledNextPageImage = null;
             this.backStage.Visible = false;
             // 
             // NewFileButton
@@ -195,13 +201,13 @@
             // ribbonControlAdv1.ribbonPanel1
             // 
             this.MainTab.Panel.Controls.Add(this.CurrentPoemToolStripGroup);
-            this.MainTab.Panel.Controls.Add(this.toolStripEx1);
+            this.MainTab.Panel.Controls.Add(this.PersonalDictionaryPanel);
             this.MainTab.Panel.Name = "ribbonPanel1";
             this.MainTab.Panel.ScrollPosition = 0;
             this.MainTab.Panel.TabIndex = 2;
             this.MainTab.Panel.Text = "Головна";
             this.MainTab.Position = 0;
-            this.MainTab.Size = new System.Drawing.Size(109, 41);
+            this.MainTab.Size = new System.Drawing.Size(95, 34);
             this.MainTab.Tag = "1";
             this.MainTab.Text = "Головна";
             // 
@@ -229,7 +235,7 @@
             this.CurrentPoemToolStripGroup.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.CurrentPoemToolStripGroup.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.CurrentPoemToolStripGroup.ShowCaption = false;
-            this.CurrentPoemToolStripGroup.Size = new System.Drawing.Size(178, 99);
+            this.CurrentPoemToolStripGroup.Size = new System.Drawing.Size(178, 95);
             this.CurrentPoemToolStripGroup.TabIndex = 0;
             this.CurrentPoemToolStripGroup.ThemeName = "Office2016Black";
             this.ribbonControlAdv1.SetUseInCustomQuickAccessDialog(this.CurrentPoemToolStripGroup, false);
@@ -239,13 +245,13 @@
             // 
             this.toolStripLabel2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(165, 28);
+            this.toolStripLabel2.Size = new System.Drawing.Size(171, 28);
             this.toolStripLabel2.Text = "Поточний вірш";
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(165, 28);
+            this.toolStripLabel1.Size = new System.Drawing.Size(171, 28);
             this.toolStripLabel1.Text = "Ритм вірша";
             // 
             // RhythmsComboBox
@@ -256,23 +262,41 @@
             this.RhythmsComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.RhythmsComboBox.MaxDropDownItems = 20;
             this.RhythmsComboBox.Name = "RhythmsComboBox";
-            this.RhythmsComboBox.Size = new System.Drawing.Size(130, 28);
+            this.RhythmsComboBox.Size = new System.Drawing.Size(169, 28);
             // 
-            // toolStripEx1
+            // PersonalDictionaryPanel
             // 
-            this.toolStripEx1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.toolStripEx1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.toolStripEx1.ForeColor = System.Drawing.Color.Black;
-            this.toolStripEx1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStripEx1.Image = null;
-            this.toolStripEx1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStripEx1.Location = new System.Drawing.Point(202, 1);
-            this.toolStripEx1.Name = "toolStripEx1";
-            this.toolStripEx1.Office12Mode = false;
-            this.toolStripEx1.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.toolStripEx1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripEx1.Size = new System.Drawing.Size(46, 85);
-            this.toolStripEx1.TabIndex = 1;
+            this.PersonalDictionaryPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.PersonalDictionaryPanel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.PersonalDictionaryPanel.ForeColor = System.Drawing.Color.Black;
+            this.PersonalDictionaryPanel.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.PersonalDictionaryPanel.Image = null;
+            this.PersonalDictionaryPanel.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.PersonalDictionaryPanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel3,
+            this.personalDictionaryStatus,
+            this.openPersonalDictionaryButton});
+            this.PersonalDictionaryPanel.Location = new System.Drawing.Point(180, 1);
+            this.PersonalDictionaryPanel.Name = "PersonalDictionaryPanel";
+            this.PersonalDictionaryPanel.Office12Mode = false;
+            this.PersonalDictionaryPanel.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.PersonalDictionaryPanel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.PersonalDictionaryPanel.ShowCaption = false;
+            this.PersonalDictionaryPanel.Size = new System.Drawing.Size(229, 95);
+            this.PersonalDictionaryPanel.TabIndex = 1;
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(218, 28);
+            this.toolStripLabel3.Text = "Особистий словничок";
+            // 
+            // personalDictionaryStatus
+            // 
+            this.personalDictionaryStatus.Name = "personalDictionaryStatus";
+            this.personalDictionaryStatus.Size = new System.Drawing.Size(218, 28);
+            this.personalDictionaryStatus.Text = "Незнайомі слова: 0";
             // 
             // SettingsTab
             // 
@@ -285,7 +309,7 @@
             this.SettingsTab.Panel.TabIndex = 3;
             this.SettingsTab.Panel.Text = "Налаштування";
             this.SettingsTab.Position = 1;
-            this.SettingsTab.Size = new System.Drawing.Size(166, 41);
+            this.SettingsTab.Size = new System.Drawing.Size(152, 34);
             this.SettingsTab.Tag = "1";
             this.SettingsTab.Text = "Налаштування";
             // 
@@ -298,10 +322,10 @@
             this.PoemTextBox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.PoemTextBox.ForeColor = System.Drawing.Color.LightGray;
             this.PoemTextBox.HideSelection = false;
-            this.PoemTextBox.Location = new System.Drawing.Point(0, 187);
+            this.PoemTextBox.Location = new System.Drawing.Point(0, 183);
             this.PoemTextBox.Name = "PoemTextBox";
             this.PoemTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.PoemTextBox.Size = new System.Drawing.Size(980, 614);
+            this.PoemTextBox.Size = new System.Drawing.Size(980, 339);
             this.PoemTextBox.TabIndex = 3;
             this.PoemTextBox.Text = "";
             this.PoemTextBox.TextChanged += new System.EventHandler(this.HandleTextChanged);
@@ -342,12 +366,23 @@
             this.toolStripPanelItem3.Text = "toolStripPanelItem3";
             this.toolStripPanelItem3.Transparent = true;
             // 
+            // openPersonalDictionaryButton
+            // 
+            this.openPersonalDictionaryButton.AutoSize = false;
+            this.openPersonalDictionaryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.openPersonalDictionaryButton.Image = Properties.Resources.DictionaryTransperentIcon;
+            this.openPersonalDictionaryButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openPersonalDictionaryButton.Name = "openPersonalDictionaryButton";
+            this.openPersonalDictionaryButton.Size = new System.Drawing.Size(218, 30);
+            this.openPersonalDictionaryButton.Text = "Редагувати";
+            this.openPersonalDictionaryButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            // 
             // MainFormDesign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.ClientSize = new System.Drawing.Size(980, 800);
+            this.ClientSize = new System.Drawing.Size(980, 521);
             this.ColorScheme = Syncfusion.Windows.Forms.Tools.RibbonForm.ColorSchemeType.Black;
             this.Controls.Add(this.backStage);
             this.Controls.Add(this.PoemTextBox);
@@ -368,6 +403,8 @@
             this.MainTab.Panel.PerformLayout();
             this.CurrentPoemToolStripGroup.ResumeLayout(false);
             this.CurrentPoemToolStripGroup.PerformLayout();
+            this.PersonalDictionaryPanel.ResumeLayout(false);
+            this.PersonalDictionaryPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -397,6 +434,9 @@
         private Syncfusion.Windows.Forms.Tools.ToolStripPanelItem toolStripPanelItem2;
         private Syncfusion.Windows.Forms.Tools.ToolStripPanelItem toolStripPanelItem3;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private Syncfusion.Windows.Forms.Tools.ToolStripEx toolStripEx1;
+        private Syncfusion.Windows.Forms.Tools.ToolStripEx PersonalDictionaryPanel;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripLabel personalDictionaryStatus;
+        private System.Windows.Forms.ToolStripButton openPersonalDictionaryButton;
     }
 }

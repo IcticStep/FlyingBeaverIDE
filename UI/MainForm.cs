@@ -12,7 +12,7 @@ namespace FlyingBeaverIDE.UI
             InitializeComponent();
             FinishInitializingCoreComponents();
             DebugConsole.Init();
-            
+
             var configurationProvider = new ConfigurationProvider();
             var dataBaseCredentials = configurationProvider.GetDataBaseCredentials();
             var localAccentuationsSavePath = configurationProvider.GetLocalAccentuationsSavePath;
@@ -39,16 +39,16 @@ namespace FlyingBeaverIDE.UI
         private readonly BackStageMenu _backStageMenu;
         private readonly RhythmSelector _rhythmSelector;
 
-        private void CreateNewFile(object sender, EventArgs e) => 
+        private void CreateNewFile(object sender, EventArgs e) =>
             _backStageMenu.CreateNewFile();
 
-        private void OpenFile(object sender, EventArgs e) => 
+        private void OpenFile(object sender, EventArgs e) =>
             _backStageMenu.OpenFile();
 
-        private void SaveFile(object sender, EventArgs e) => 
+        private void SaveFile(object sender, EventArgs e) =>
             _backStageMenu.SaveFile();
 
-        private void SaveFileAs(object sender, EventArgs e) => 
+        private void SaveFileAs(object sender, EventArgs e) =>
             _backStageMenu.SaveFileAs();
 
         private void ExitProgram(object sender, EventArgs e) =>
@@ -60,7 +60,7 @@ namespace FlyingBeaverIDE.UI
             _flyingBeaver.PoemText = textBox.Text;
         }
 
-        private void HandleClosingAttempt(object sender, FormClosingEventArgs e) => 
+        private void HandleClosingAttempt(object sender, FormClosingEventArgs e) =>
             _fileSaver.TrySaveOnClose(e);
     }
 }
