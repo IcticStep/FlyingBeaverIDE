@@ -81,7 +81,7 @@ namespace FlyingBeaverIDE.UI
                 selectedAccentuation.Word, 
                 selectedAccentuation);
             accentuationForm.OnSuccess += UpdateUi;
-            accentuationForm.Show();
+            accentuationForm.ShowDialog();
             UpdateUi();
         }
 

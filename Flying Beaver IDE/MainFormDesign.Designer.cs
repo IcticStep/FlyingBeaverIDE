@@ -53,6 +53,10 @@
             this.toolStripPanelItem1 = new Syncfusion.Windows.Forms.Tools.ToolStripPanelItem();
             this.toolStripPanelItem2 = new Syncfusion.Windows.Forms.Tools.ToolStripPanelItem();
             this.toolStripPanelItem3 = new Syncfusion.Windows.Forms.Tools.ToolStripPanelItem();
+            this.analyzeFilterChooserPanel = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
+            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
+            this.analyzerComboBox = new System.Windows.Forms.ToolStripComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControlAdv1)).BeginInit();
             this.ribbonControlAdv1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.backStage)).BeginInit();
@@ -60,6 +64,7 @@
             this.MainTab.Panel.SuspendLayout();
             this.CurrentPoemToolStripGroup.SuspendLayout();
             this.PersonalDictionaryPanel.SuspendLayout();
+            this.analyzeFilterChooserPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ribbonControlAdv1
@@ -203,6 +208,7 @@
             // 
             this.MainTab.Panel.Controls.Add(this.CurrentPoemToolStripGroup);
             this.MainTab.Panel.Controls.Add(this.PersonalDictionaryPanel);
+            this.MainTab.Panel.Controls.Add(this.analyzeFilterChooserPanel);
             this.MainTab.Panel.Name = "ribbonPanel1";
             this.MainTab.Panel.ScrollPosition = 0;
             this.MainTab.Panel.TabIndex = 2;
@@ -378,6 +384,50 @@
             this.toolStripPanelItem3.Text = "toolStripPanelItem3";
             this.toolStripPanelItem3.Transparent = true;
             // 
+            // analyzeFilterChooserPanel
+            // 
+            this.analyzeFilterChooserPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.analyzeFilterChooserPanel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.analyzeFilterChooserPanel.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.analyzeFilterChooserPanel.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.analyzeFilterChooserPanel.Image = null;
+            this.analyzeFilterChooserPanel.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.analyzeFilterChooserPanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel4,
+            this.toolStripLabel5,
+            this.analyzerComboBox});
+            this.analyzeFilterChooserPanel.Location = new System.Drawing.Point(411, 1);
+            this.analyzeFilterChooserPanel.Name = "analyzeFilterChooserPanel";
+            this.analyzeFilterChooserPanel.Office12Mode = false;
+            this.analyzeFilterChooserPanel.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.analyzeFilterChooserPanel.ShowCaption = false;
+            this.analyzeFilterChooserPanel.ShowLauncher = false;
+            this.analyzeFilterChooserPanel.Size = new System.Drawing.Size(181, 95);
+            this.analyzeFilterChooserPanel.TabIndex = 2;
+            // 
+            // toolStripLabel4
+            // 
+            this.toolStripLabel4.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toolStripLabel4.Name = "toolStripLabel4";
+            this.toolStripLabel4.Size = new System.Drawing.Size(170, 28);
+            this.toolStripLabel4.Text = "Аналіз";
+            // 
+            // toolStripLabel5
+            // 
+            this.toolStripLabel5.Name = "toolStripLabel5";
+            this.toolStripLabel5.Size = new System.Drawing.Size(170, 28);
+            this.toolStripLabel5.Text = "Аналізатор";
+            // 
+            // analyzerComboBox
+            // 
+            this.analyzerComboBox.BackColor = System.Drawing.Color.Black;
+            this.analyzerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.analyzerComboBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.analyzerComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.analyzerComboBox.MaxDropDownItems = 20;
+            this.analyzerComboBox.Name = "analyzerComboBox";
+            this.analyzerComboBox.Size = new System.Drawing.Size(168, 28);
+            // 
             // MainFormDesign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
@@ -406,6 +456,8 @@
             this.CurrentPoemToolStripGroup.PerformLayout();
             this.PersonalDictionaryPanel.ResumeLayout(false);
             this.PersonalDictionaryPanel.PerformLayout();
+            this.analyzeFilterChooserPanel.ResumeLayout(false);
+            this.analyzeFilterChooserPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -439,6 +491,10 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.ToolStripLabel personalDictionaryStatus;
         private System.Windows.Forms.ToolStripButton openPersonalDictionaryButton;
+        private Syncfusion.Windows.Forms.Tools.ToolStripEx analyzeFilterChooserPanel;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel4;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel5;
+        private System.Windows.Forms.ToolStripComboBox analyzerComboBox;
     }
 }
 

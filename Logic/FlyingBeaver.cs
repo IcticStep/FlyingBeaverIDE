@@ -56,9 +56,18 @@ public class FlyingBeaver : IDataReceiver<Poem>
     private double _analyzeInterval = 1500;
     private int _lastAnalyzedHash = string.Empty.GetHashCode();
     private bool _analyzeIsBusy;
+    private Analyzer _analyzer = Analyzer.None;
 
-    public Analyzer Analyzer { get; set; } = Analyzer.Rhyme;
-    
+    public Analyzer Analyzer
+    {
+        get => _analyzer;
+        set
+        {
+            _analyzer = value;
+            ForceReanalyze();
+        }
+    }
+
     public string PoemText
     {
         get => _poem.Text;
@@ -146,8 +155,10 @@ public class FlyingBeaver : IDataReceiver<Poem>
             case Analyzer.Rhyme:
                 Task.Run(AnalyzePoemRhyme());
                 break;
+            default:
+                _analyzeIsBusy = false;
+                break;
         }
-        
     }
 
     private Func<Task?> AnalyzePoemRhythmic()

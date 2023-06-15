@@ -2,6 +2,7 @@
 
 public enum Analyzer
 {
+    None,
     Rhythm,
     Rhyme
 }

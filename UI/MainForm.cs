@@ -23,8 +23,18 @@ namespace FlyingBeaverIDE.UI
             _analyzeResultsViewer = new(_localDictionaryPreviewer, PoemTextBox);
             _flyingBeaver.OnAnalyzeCompleted += _analyzeResultsViewer.ShowResults;
             _rhythmSelector = CreateRhythmSelector();
+            _analyzerSelector = new(analyzerComboBox);
+            _analyzerSelector.SetAnalyzer(Analyzer.None);
+            _analyzerSelector.OnUpdated += OnAnalyzerSelectorOnUpdated;
             _localDictionaryEditorViewer = new(_flyingBeaver.LocalAccentuationsDictionary);
             _localDictionaryEditorViewer.Edited += _flyingBeaver.ForceReanalyze;
+        }
+
+        private void OnAnalyzerSelectorOnUpdated(Analyzer analyzer)
+        {
+            _flyingBeaver.Analyzer = analyzer;
+            if(analyzer == Analyzer.None)
+                _analyzeResultsViewer.ClearViews();
         }
 
         public MainForm(string? path) : this()
@@ -43,6 +53,7 @@ namespace FlyingBeaverIDE.UI
         private readonly AnalyzeResultsViewer _analyzeResultsViewer;
         private readonly LocalDictionaryPreviewer _localDictionaryPreviewer;
         private readonly LocalDictionaryEditorViewer _localDictionaryEditorViewer;
+        private readonly AnalyzerSelector _analyzerSelector;
 
         private FlyingBeaver CreateFlyingBeaver()
         {

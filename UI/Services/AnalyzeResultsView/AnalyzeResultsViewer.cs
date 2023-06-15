@@ -20,6 +20,7 @@ public class AnalyzeResultsViewer
         };
     }
 
+
     public IReadOnlyList<string> UnknownWords => _unknownWords;
 
     public void ShowResults(AnalyzeResult analyzeResult)
@@ -34,6 +35,12 @@ public class AnalyzeResultsViewer
     {
         foreach (var viewer in _analyzeViewers)
             viewer.Draw(result);
+    }
+
+    public void ClearViews()
+    {
+        foreach (var viewer in _analyzeViewers)
+            viewer.ClearView();
     }
 
     private void CacheUnknownWords(AnalyzeResult analyzeResult)
