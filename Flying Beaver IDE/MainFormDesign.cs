@@ -47,5 +47,10 @@ namespace Flying_Beaver_IDE
         {
 
         }
+
+        private void OpenPersonalDictionary(object sender, EventArgs e)
+        {
+            new LocalDictionaryForm().Show();
+        }
     }
 }

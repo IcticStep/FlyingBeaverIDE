@@ -87,6 +87,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LocalDictionaryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LocalDictionaryForm.Designer.cs">
+      <DependentUpon>LocalDictionaryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainFormDesign.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,15 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SyncfusionActivator.cs" />
+    <Compile Include="WordAccentuationSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WordAccentuationSettingForm.Designer.cs">
+      <DependentUpon>WordAccentuationSettingForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="LocalDictionaryForm.resx">
+      <DependentUpon>LocalDictionaryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainFormDesign.resx">
       <DependentUpon>MainFormDesign.cs</DependentUpon>
     </EmbeddedResource>
@@ -109,6 +124,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="WordAccentuationSettingForm.resx">
+      <DependentUpon>WordAccentuationSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -131,6 +149,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\DictionaryTransperent.png" />
+    <Content Include="Resources\DictionaryTransperentIcon.png" />
+    <None Include="Resources\DictionaryTransperentIcon1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
