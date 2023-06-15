@@ -49,7 +49,7 @@ public class WordToken : Token, IWordToken
         if (obj is not IWordToken other)
             return false;
 
-        if (RawText != other.RawText || Position != other.Position)
+        if (RawText.ToLowerInvariant() != other.RawText.ToLowerInvariant() || Position != other.Position)
             return false;
 
         if (SyllableTokens.Count != other.SyllableTokens.Count)

@@ -17,7 +17,17 @@ namespace Flying_Beaver_IDE
             InitializeComponent();
         }
 
-        private void SubmitAccentuation(object sender, EventArgs e)
+        private void AddAccentuation(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ClearAccentuations(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SaveAccentuations(object sender, EventArgs e)
         {
 
         }

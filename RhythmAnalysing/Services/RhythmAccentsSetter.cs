@@ -21,6 +21,9 @@ public class RhythmAccentsSetter
         
         foreach (var word in verse.Words)
         {
+            if(word.SyllableTokens.Count <= 1)
+                continue;
+            
             var shouldBeAccentuated = GetShouldBeAccentuated(word);
             var couldBeAccentuated = word.PossibleAccentuations;
             if (!couldBeAccentuated.Any())

@@ -19,6 +19,15 @@ public class CalculatingWordTokensTests
     [Test]
     public void TestEmptyIfWhiteSpaceText() =>
         CheckResultIsExpected(" ", Enumerable.Empty<WordToken>());
+    
+    [Test]
+    [TestCase("в")]
+    [TestCase("Пфф")]
+    public void TestSyllablesEmptyIfNoSyllablesWord(string word)
+    {
+        var expectedToken = new WordToken(word, new List<ISyllableToken>(), 0);
+        CheckResultIsExpected(word, new[]{expectedToken});
+    }
 
     [Test]
     public void TestExceptionIfNull() =>

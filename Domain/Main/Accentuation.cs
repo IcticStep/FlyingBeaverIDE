@@ -14,6 +14,9 @@ public class Accentuation
     [DisplayName("Слово")]
     public string Word { get; set; }
     public List<int> Accentuations { get; set; }
+
+    [DisplayName("Наголоси")]
+    public string AccentuationsString => GetAccentuationsString();
     
     public static Accentuation? Combine(Accentuation? a, Accentuation? b)
     {
@@ -32,5 +35,13 @@ public class Accentuation
         
         var combinedAccentuations = a.Accentuations.Concat(b.Accentuations).ToList();
         return new(a.Word, combinedAccentuations);
+    }
+    
+    private string GetAccentuationsString()
+    {
+        var result = string.Empty;
+        foreach (var accentuation in Accentuations)
+            result += accentuation + " ";
+        return result;
     }
 }

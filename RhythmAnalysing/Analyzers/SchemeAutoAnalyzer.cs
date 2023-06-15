@@ -4,6 +4,7 @@ using DataStorage.Accentuations.Api;
 using Domain.Analysing.Results;
 using Domain.Analysing.Tokens.Api.Concrete;
 using Domain.Analysing.Tokens.Concrete;
+using MongoDB.Bson.Serialization.Serializers;
 using RhythmAnalysing.Api;
 using RhythmAnalysing.Services;
 
@@ -32,7 +33,8 @@ public class SchemeAutoAnalyzer : BasicSchemeAnalyzer
 
     private IEnumerable<IWordToken> GetFailedWords(PoemToken poemToken) =>
         poemToken.AllWords
-            .Where(word => !word.PossibleAccentuations.Any());
+            .Where(word => !word.PossibleAccentuations.Any())
+            .Where(word => word.SyllableTokens.Count > 1);
 
     private void SetAccentuations(PoemToken poem)
     {

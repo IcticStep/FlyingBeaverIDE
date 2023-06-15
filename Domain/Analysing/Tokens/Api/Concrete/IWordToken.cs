@@ -11,4 +11,5 @@ public interface IWordToken : IToken
     public void SetPossibleAccentuations(Accentuation accentuationData);
     void SetPossibleAccentuations(int accentuation);
     void SetAccentuation(int should);
+    public bool Equals(object? obj);
 }
