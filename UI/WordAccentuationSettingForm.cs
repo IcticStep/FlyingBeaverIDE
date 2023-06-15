@@ -12,31 +12,47 @@ namespace FlyingBeaverIDE.UI
         private readonly SyllablesTokenizer _syllablesTokenizer = new();
         private readonly IReadOnlyList<int> _vowelsPositions;
         private readonly List<int> _currentAccentuations = new();
+        private readonly bool _update;
 
         public Action OnSuccess;
         
-        public WordAccentuationSettingForm(IAccentuationsRepository accentuationsRepository, string word)
+        public WordAccentuationSettingForm(IAccentuationsRepository accentuationsRepository, 
+            string word, Accentuation? current = null)
         {
             InitializeComponent();
             _accentuationsRepository = accentuationsRepository;
             _word = word;
             _vowelsPositions = _syllablesTokenizer.GetVowelsPositions(_word).ToList();
             
+            if (!Validate()) 
+                return;
+
+            if (current is not null)
+            {
+                _currentAccentuations = current.Accentuations;
+                _update = true;
+            }
+
+            UpdateUi();
+        }
+
+        private bool Validate()
+        {
             if (!_vowelsPositions.Any())
             {
                 MessageBox.Show("Неможливо додати слово без голосних звуків!");
                 Close();
-                return;
+                return false;
             }
-            
-            if(_vowelsPositions.Count() == 1)
+
+            if (_vowelsPositions.Count() == 1)
             {
                 MessageBox.Show("Неможливо додати слово з одним складом!");
                 Close();
-                return;
+                return false;
             }
-            
-            UpdateUi();
+
+            return true;
         }
 
         private void UpdateUi()
@@ -99,7 +115,11 @@ namespace FlyingBeaverIDE.UI
             }
 
             var accentuation = new Accentuation(_word, _currentAccentuations);
-            _accentuationsRepository.Add(accentuation);
+            if(!_update)
+                _accentuationsRepository.Add(accentuation);
+            else
+                _accentuationsRepository.Update(accentuation);
+            
             Close();
             OnSuccess?.Invoke();
         }

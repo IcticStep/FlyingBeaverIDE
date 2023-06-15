@@ -26,5 +26,10 @@ namespace Flying_Beaver_IDE
         {
 
         }
+
+        private void UpdateSelectedWord(object sender, EventArgs e)
+        {
+
+        }
     }
 }

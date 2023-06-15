@@ -34,7 +34,8 @@ public class SchemeAutoAnalyzer : BasicSchemeAnalyzer
     private IEnumerable<IWordToken> GetFailedWords(PoemToken poemToken) =>
         poemToken.AllWords
             .Where(word => !word.PossibleAccentuations.Any())
-            .Where(word => word.SyllableTokens.Count > 1);
+            .Where(word => word.SyllableTokens.Count > 1)
+            .DistinctBy(word => word.RawText);
 
     private void SetAccentuations(PoemToken poem)
     {

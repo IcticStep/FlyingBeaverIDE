@@ -44,6 +44,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.newWordInput = new System.Windows.Forms.TextBox();
             this.newWordAddButton = new System.Windows.Forms.Button();
+            this.updateCurrentWordButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.suggestionsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.knownWords)).BeginInit();
@@ -169,6 +170,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.updateCurrentWordButton);
             this.panel4.Controls.Add(this.deleteCurrentWordButton);
             this.panel4.Controls.Add(this.CurrentWord);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -238,6 +240,20 @@
             this.newWordAddButton.Text = "Додати";
             this.newWordAddButton.UseVisualStyleBackColor = true;
             // 
+            // updateCurrentWordButton
+            // 
+            this.updateCurrentWordButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.updateCurrentWordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.updateCurrentWordButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.updateCurrentWordButton.Location = new System.Drawing.Point(0, 77);
+            this.updateCurrentWordButton.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.updateCurrentWordButton.Name = "updateCurrentWordButton";
+            this.updateCurrentWordButton.Size = new System.Drawing.Size(237, 40);
+            this.updateCurrentWordButton.TabIndex = 7;
+            this.updateCurrentWordButton.Text = "Редагувати";
+            this.updateCurrentWordButton.UseVisualStyleBackColor = true;
+            this.updateCurrentWordButton.Click += new System.EventHandler(this.UpdateSelectedWord);
+            // 
             // LocalDictionaryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -280,5 +296,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox newWordInput;
         private System.Windows.Forms.Button newWordAddButton;
+        private System.Windows.Forms.Button updateCurrentWordButton;
     }
 }

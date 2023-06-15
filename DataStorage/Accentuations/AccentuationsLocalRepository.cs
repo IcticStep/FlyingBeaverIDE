@@ -26,10 +26,16 @@ public class AccentuationsLocalRepository : IAccentuationsRepository
         foreach (var accentuation in _accentuations)
         {
             if (WordsAreSame(accentuation.Word, word))
-                return accentuation;
+                return ReduceAccentuationIndexes(accentuation);
         }
         
         return null;
+    }
+
+    private Accentuation ReduceAccentuationIndexes(Accentuation accentuation)
+    {
+        var indexes = accentuation.Accentuations.Select(x => x - 1);
+        return new(accentuation.Word, indexes.ToList());
     }
 
     public IEnumerable<Accentuation> GetAll() => 
@@ -48,6 +54,7 @@ public class AccentuationsLocalRepository : IAccentuationsRepository
         
         var index = FindAccentuationIndex(accentuation);
         _accentuations[index] = accentuation;
+        Save();
     }
 
 

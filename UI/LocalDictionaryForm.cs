@@ -77,6 +77,24 @@ namespace FlyingBeaverIDE.UI
             UpdateUi();
         }
 
+        private void UpdateSelectedWord(object? sender, EventArgs e)
+        {
+            var selectedAccentuation = GetSelectedKnownWordAccentuation();
+            if (selectedAccentuation is null)
+            {
+                MessageBox.Show("Щось пішло не так. Не вийшло оновити слово.");
+                return;
+            }
+            
+            var accentuationForm = new WordAccentuationSettingForm(
+                _accentuationsRepository,
+                selectedAccentuation.Word, 
+                selectedAccentuation);
+            accentuationForm.OnSuccess += UpdateUi;
+            accentuationForm.Show();
+            UpdateUi();
+        }
+
         private void UpdateSuggestions()
         {
             if (_unknownWords.Count == 0)
@@ -100,10 +118,10 @@ namespace FlyingBeaverIDE.UI
         private string? GetSelectedSuggestionWord() => 
             (string)suggestionsComboBox.SelectedItem;
 
-        private string? GetSelectedKnownWord()
-        {
-            var result = knownWords.SelectedRows[0].DataBoundItem as Accentuation;
-            return result?.Word;
-        }
+        private string? GetSelectedKnownWord() => 
+            GetSelectedKnownWordAccentuation()?.Word;
+
+        private Accentuation? GetSelectedKnownWordAccentuation() => 
+            knownWords.SelectedRows[0].DataBoundItem as Accentuation;
     }
 }
