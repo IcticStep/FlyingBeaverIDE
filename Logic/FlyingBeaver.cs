@@ -8,6 +8,7 @@ using Domain.Main.Rhythmics;
 using FlyingBeaverIDE.Logic.Api;
 using FlyingBeaverIDE.Logic.Services;
 using PoemTokenization.Tokenizers;
+using RhymeAnalaysing;
 using RhythmAnalysing;
 using RhythmAnalysing.Analyzers;
 using Timer = System.Timers.Timer;
@@ -23,6 +24,7 @@ public class FlyingBeaver : IDataReceiver<Poem>
         _accentuationsRepository = AccentuationRepositoryProvider.Create(
             dataBaseCredentials, localAccentuationsSavePath);
         _rhythmAnalyzer = new(new SchemeAutoAnalyzer(_accentuationsRepository));
+        _rhymeAnalyzer = new();
         InitTimer();
     }
 
@@ -36,7 +38,6 @@ public class FlyingBeaver : IDataReceiver<Poem>
     }
 
     public readonly double MinAnalyzeInterval = 300;
-
     public readonly double MaxAnalyzeInterval = 10000;
 
     public Rhythm[] AvailableRhythms =>
@@ -47,12 +48,24 @@ public class FlyingBeaver : IDataReceiver<Poem>
     private readonly PoemSaver _poemSaver;
     private readonly PoemTokenizer _poemTokenizer;
     private readonly RhythmAnalyzer _rhythmAnalyzer;
+    private readonly RhymeAnalyzer _rhymeAnalyzer;
     private readonly IAccentuationsRepository _accentuationsRepository;
     
     private Poem _poem = new("", RhythmBank.Trochee2);
-    private double _analyzeInterval = 1500;
+    private int _analyzeInterval = 1500;
     private int _lastAnalyzedHash = string.Empty.GetHashCode();
     private bool _analyzeIsBusy;
+    private Analyzer _analyzer = Analyzer.None;
+
+    public Analyzer Analyzer
+    {
+        get => _analyzer;
+        set
+        {
+            _analyzer = value;
+            ForceReanalyze();
+        }
+    }
 
     public string PoemText
     {
@@ -73,7 +86,7 @@ public class FlyingBeaver : IDataReceiver<Poem>
         set => _poem.Rhythm = value;
     }
 
-    public double AnalyzeInterval
+    public int AnalyzeInterval
     {
         get => _analyzeInterval;
         set
@@ -81,7 +94,15 @@ public class FlyingBeaver : IDataReceiver<Poem>
             if(value < MinAnalyzeInterval || value > MaxAnalyzeInterval)
                 throw new ArgumentOutOfRangeException(nameof(AnalyzeInterval));
             _analyzeInterval = value;
+            DeleteTimer();
+            InitTimer();
         }
+    }
+
+    private void DeleteTimer()
+    {
+        _analyzeTimer.Stop();
+        _analyzeTimer.Dispose();
     }
 
     public bool HasSavedPath => _poemSaver.HasSavedPath;
@@ -132,10 +153,22 @@ public class FlyingBeaver : IDataReceiver<Poem>
         _lastAnalyzedHash = currentHash;
         
         Console.WriteLine("Processing");
-        Task.Run(AnalyzePoem());
+
+        switch (Analyzer)
+        {
+            case Analyzer.Rhythm:
+                Task.Run(AnalyzePoemRhythmic());
+                break;
+            case Analyzer.Rhyme:
+                Task.Run(AnalyzePoemRhyme());
+                break;
+            default:
+                _analyzeIsBusy = false;
+                break;
+        }
     }
 
-    private Func<Task?> AnalyzePoem()
+    private Func<Task?> AnalyzePoemRhythmic()
     {
         return async () =>
         {
@@ -161,6 +194,31 @@ public class FlyingBeaver : IDataReceiver<Poem>
             }
 
             var rhythmResult = await _rhythmAnalyzer.AnalyzeAsync(poemToken);
+            _analyzeIsBusy = false;
+            OnAnalyzeCompleted?.Invoke(new(rhythmResult));
+        };
+    }
+    
+    private Func<Task?> AnalyzePoemRhyme()
+    {
+        return async () =>
+        {
+            if (string.IsNullOrWhiteSpace(Poem.Text))
+            {
+                _analyzeIsBusy = false;
+                return;
+            }
+
+            var cloned = (Poem)Poem.Clone();
+
+            var poemToken = await _poemTokenizer.TokenizeAsync(cloned);
+            if (!poemToken.AllSyllables.Any())
+            {
+                _analyzeIsBusy = false;
+                return;
+            }
+
+            var rhythmResult = await _rhymeAnalyzer.AnalyzeAsync(poemToken);
             _analyzeIsBusy = false;
             OnAnalyzeCompleted?.Invoke(new(rhythmResult));
         };

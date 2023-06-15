@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ribbonControlAdv1 = new Syncfusion.Windows.Forms.Tools.RibbonControlAdv();
             this.backStageView = new Syncfusion.Windows.Forms.BackStageView(this.components);
             this.backStage = new Syncfusion.Windows.Forms.BackStage();
@@ -46,7 +47,15 @@
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.personalDictionaryStatus = new System.Windows.Forms.ToolStripLabel();
             this.openPersonalDictionaryButton = new System.Windows.Forms.ToolStripButton();
+            this.analyzeFilterChooserPanel = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
+            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
+            this.analyzerComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.SettingsTab = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
+            this.OptimizationSettings = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
+            this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel7 = new System.Windows.Forms.ToolStripLabel();
+            this.UpdateSpeedSelector = new System.Windows.Forms.ToolStripComboBox();
             this.PoemTextBox = new System.Windows.Forms.RichTextBox();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolStripPanelItem1 = new Syncfusion.Windows.Forms.Tools.ToolStripPanelItem();
@@ -59,6 +68,9 @@
             this.MainTab.Panel.SuspendLayout();
             this.CurrentPoemToolStripGroup.SuspendLayout();
             this.PersonalDictionaryPanel.SuspendLayout();
+            this.analyzeFilterChooserPanel.SuspendLayout();
+            this.SettingsTab.Panel.SuspendLayout();
+            this.OptimizationSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // ribbonControlAdv1
@@ -202,6 +214,7 @@
             // 
             this.MainTab.Panel.Controls.Add(this.CurrentPoemToolStripGroup);
             this.MainTab.Panel.Controls.Add(this.PersonalDictionaryPanel);
+            this.MainTab.Panel.Controls.Add(this.analyzeFilterChooserPanel);
             this.MainTab.Panel.Name = "ribbonPanel1";
             this.MainTab.Panel.ScrollPosition = 0;
             this.MainTab.Panel.TabIndex = 2;
@@ -301,7 +314,7 @@
             // openPersonalDictionaryButton
             // 
             this.openPersonalDictionaryButton.AutoSize = false;
-            this.openPersonalDictionaryButton.Image = Properties.Resources.DictionaryTransperentIcon;
+            this.openPersonalDictionaryButton.Image = ((System.Drawing.Image)(resources.GetObject("openPersonalDictionaryButton.Image")));
             this.openPersonalDictionaryButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openPersonalDictionaryButton.Name = "openPersonalDictionaryButton";
             this.openPersonalDictionaryButton.Size = new System.Drawing.Size(218, 30);
@@ -309,12 +322,58 @@
             this.openPersonalDictionaryButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.openPersonalDictionaryButton.Click += new System.EventHandler(this.OpenPersonalDictionary);
             // 
+            // analyzeFilterChooserPanel
+            // 
+            this.analyzeFilterChooserPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.analyzeFilterChooserPanel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.analyzeFilterChooserPanel.ForeColor = System.Drawing.Color.Black;
+            this.analyzeFilterChooserPanel.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.analyzeFilterChooserPanel.Image = null;
+            this.analyzeFilterChooserPanel.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.analyzeFilterChooserPanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel4,
+            this.toolStripLabel5,
+            this.analyzerComboBox});
+            this.analyzeFilterChooserPanel.Location = new System.Drawing.Point(411, 1);
+            this.analyzeFilterChooserPanel.Name = "analyzeFilterChooserPanel";
+            this.analyzeFilterChooserPanel.Office12Mode = false;
+            this.analyzeFilterChooserPanel.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.analyzeFilterChooserPanel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.analyzeFilterChooserPanel.ShowCaption = false;
+            this.analyzeFilterChooserPanel.ShowLauncher = false;
+            this.analyzeFilterChooserPanel.Size = new System.Drawing.Size(173, 95);
+            this.analyzeFilterChooserPanel.TabIndex = 2;
+            // 
+            // toolStripLabel4
+            // 
+            this.toolStripLabel4.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toolStripLabel4.Name = "toolStripLabel4";
+            this.toolStripLabel4.Size = new System.Drawing.Size(162, 28);
+            this.toolStripLabel4.Text = "Аналіз";
+            // 
+            // toolStripLabel5
+            // 
+            this.toolStripLabel5.Name = "toolStripLabel5";
+            this.toolStripLabel5.Size = new System.Drawing.Size(162, 28);
+            this.toolStripLabel5.Text = "Аналізатор";
+            // 
+            // analyzerComboBox
+            // 
+            this.analyzerComboBox.BackColor = System.Drawing.Color.Black;
+            this.analyzerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.analyzerComboBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.analyzerComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.analyzerComboBox.MaxDropDownItems = 20;
+            this.analyzerComboBox.Name = "analyzerComboBox";
+            this.analyzerComboBox.Size = new System.Drawing.Size(160, 28);
+            // 
             // SettingsTab
             // 
             this.SettingsTab.Name = "SettingsTab";
             // 
             // ribbonControlAdv1.ribbonPanel2
             // 
+            this.SettingsTab.Panel.Controls.Add(this.OptimizationSettings);
             this.SettingsTab.Panel.Name = "ribbonPanel2";
             this.SettingsTab.Panel.ScrollPosition = 0;
             this.SettingsTab.Panel.TabIndex = 3;
@@ -323,6 +382,59 @@
             this.SettingsTab.Size = new System.Drawing.Size(166, 41);
             this.SettingsTab.Tag = "1";
             this.SettingsTab.Text = "Налаштування";
+            // 
+            // OptimizationSettings
+            // 
+            this.OptimizationSettings.AllowMerge = false;
+            this.OptimizationSettings.AutoSize = false;
+            this.OptimizationSettings.CaptionAlignment = Syncfusion.Windows.Forms.Tools.CaptionAlignment.Center;
+            this.OptimizationSettings.Dock = System.Windows.Forms.DockStyle.Left;
+            this.OptimizationSettings.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OptimizationSettings.ForeColor = System.Drawing.Color.Black;
+            this.OptimizationSettings.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.OptimizationSettings.Image = null;
+            this.OptimizationSettings.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.OptimizationSettings.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.OptimizationSettings.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel6,
+            this.toolStripLabel7,
+            this.UpdateSpeedSelector});
+            this.OptimizationSettings.LauncherStyle = Syncfusion.Windows.Forms.Tools.LauncherStyle.Office12;
+            this.OptimizationSettings.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.OptimizationSettings.Location = new System.Drawing.Point(0, 1);
+            this.OptimizationSettings.Name = "OptimizationSettings";
+            this.OptimizationSettings.Office12Mode = false;
+            this.OptimizationSettings.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.OptimizationSettings.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.OptimizationSettings.ShowCaption = false;
+            this.OptimizationSettings.Size = new System.Drawing.Size(273, 95);
+            this.OptimizationSettings.TabIndex = 1;
+            this.OptimizationSettings.ThemeName = "Office2016Black";
+            this.ribbonControlAdv1.SetUseInCustomQuickAccessDialog(this.OptimizationSettings, false);
+            this.OptimizationSettings.VisualStyle = Syncfusion.Windows.Forms.Tools.ToolStripExStyle.Office2016Black;
+            // 
+            // toolStripLabel6
+            // 
+            this.toolStripLabel6.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toolStripLabel6.Name = "toolStripLabel6";
+            this.toolStripLabel6.Size = new System.Drawing.Size(266, 28);
+            this.toolStripLabel6.Text = "Оптимізація";
+            // 
+            // toolStripLabel7
+            // 
+            this.toolStripLabel7.Name = "toolStripLabel7";
+            this.toolStripLabel7.Size = new System.Drawing.Size(266, 28);
+            this.toolStripLabel7.Text = "Швидкість оновлення(мс)";
+            // 
+            // UpdateSpeedSelector
+            // 
+            this.UpdateSpeedSelector.BackColor = System.Drawing.Color.Black;
+            this.UpdateSpeedSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.UpdateSpeedSelector.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.UpdateSpeedSelector.Margin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.UpdateSpeedSelector.MaxDropDownItems = 20;
+            this.UpdateSpeedSelector.Name = "UpdateSpeedSelector";
+            this.UpdateSpeedSelector.Size = new System.Drawing.Size(172, 28);
             // 
             // PoemTextBox
             // 
@@ -405,6 +517,11 @@
             this.CurrentPoemToolStripGroup.PerformLayout();
             this.PersonalDictionaryPanel.ResumeLayout(false);
             this.PersonalDictionaryPanel.PerformLayout();
+            this.analyzeFilterChooserPanel.ResumeLayout(false);
+            this.analyzeFilterChooserPanel.PerformLayout();
+            this.SettingsTab.Panel.ResumeLayout(false);
+            this.OptimizationSettings.ResumeLayout(false);
+            this.OptimizationSettings.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -438,5 +555,13 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.ToolStripLabel personalDictionaryStatus;
         private System.Windows.Forms.ToolStripButton openPersonalDictionaryButton;
+        private Syncfusion.Windows.Forms.Tools.ToolStripEx analyzeFilterChooserPanel;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel4;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel5;
+        private System.Windows.Forms.ToolStripComboBox analyzerComboBox;
+        private Syncfusion.Windows.Forms.Tools.ToolStripEx OptimizationSettings;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel6;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel7;
+        private System.Windows.Forms.ToolStripComboBox UpdateSpeedSelector;
     }
 }
