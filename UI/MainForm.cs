@@ -28,6 +28,9 @@ namespace FlyingBeaverIDE.UI
             _analyzerSelector.OnUpdated += OnAnalyzerSelectorOnUpdated;
             _localDictionaryEditorViewer = new(_flyingBeaver.LocalAccentuationsDictionary);
             _localDictionaryEditorViewer.Edited += _flyingBeaver.ForceReanalyze;
+            _updateTimerSelector = new(UpdateSpeedSelector);
+            _updateTimerSelector.SetUpdateTimer(_flyingBeaver.AnalyzeInterval);
+            _updateTimerSelector.OnUpdated += time => _flyingBeaver.AnalyzeInterval = time;
         }
 
         private void OnAnalyzerSelectorOnUpdated(Analyzer analyzer)
@@ -54,6 +57,7 @@ namespace FlyingBeaverIDE.UI
         private readonly LocalDictionaryPreviewer _localDictionaryPreviewer;
         private readonly LocalDictionaryEditorViewer _localDictionaryEditorViewer;
         private readonly AnalyzerSelector _analyzerSelector;
+        private readonly UpdateTimerSelector _updateTimerSelector;
 
         private FlyingBeaver CreateFlyingBeaver()
         {

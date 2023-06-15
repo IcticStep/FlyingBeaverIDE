@@ -38,7 +38,6 @@ public class FlyingBeaver : IDataReceiver<Poem>
     }
 
     public readonly double MinAnalyzeInterval = 300;
-
     public readonly double MaxAnalyzeInterval = 10000;
 
     public Rhythm[] AvailableRhythms =>
@@ -53,7 +52,7 @@ public class FlyingBeaver : IDataReceiver<Poem>
     private readonly IAccentuationsRepository _accentuationsRepository;
     
     private Poem _poem = new("", RhythmBank.Trochee2);
-    private double _analyzeInterval = 1500;
+    private int _analyzeInterval = 1500;
     private int _lastAnalyzedHash = string.Empty.GetHashCode();
     private bool _analyzeIsBusy;
     private Analyzer _analyzer = Analyzer.None;
@@ -87,7 +86,7 @@ public class FlyingBeaver : IDataReceiver<Poem>
         set => _poem.Rhythm = value;
     }
 
-    public double AnalyzeInterval
+    public int AnalyzeInterval
     {
         get => _analyzeInterval;
         set
@@ -95,7 +94,15 @@ public class FlyingBeaver : IDataReceiver<Poem>
             if(value < MinAnalyzeInterval || value > MaxAnalyzeInterval)
                 throw new ArgumentOutOfRangeException(nameof(AnalyzeInterval));
             _analyzeInterval = value;
+            DeleteTimer();
+            InitTimer();
         }
+    }
+
+    private void DeleteTimer()
+    {
+        _analyzeTimer.Stop();
+        _analyzeTimer.Dispose();
     }
 
     public bool HasSavedPath => _poemSaver.HasSavedPath;
