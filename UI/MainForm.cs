@@ -14,7 +14,7 @@ namespace FlyingBeaverIDE.UI
         {
             InitializeComponent();
             FinishInitializingCoreComponents();
-            DebugConsole.Init();
+            //DebugConsole.Init();
 
             _flyingBeaver = CreateFlyingBeaver();
             _fileSaver = new(_flyingBeaver);
