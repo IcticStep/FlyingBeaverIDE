@@ -35,26 +35,7 @@ namespace FlyingBeaverIDE.UI
 
             UpdateUi();
         }
-
-        private bool Validate()
-        {
-            if (!_vowelsPositions.Any())
-            {
-                MessageBox.Show("Неможливо додати слово без голосних звуків!");
-                Close();
-                return false;
-            }
-
-            if (_vowelsPositions.Count() == 1)
-            {
-                MessageBox.Show("Неможливо додати слово з одним складом!");
-                Close();
-                return false;
-            }
-
-            return true;
-        }
-
+        
         private void UpdateUi()
         {
             CurrentWord.Text = _word;

@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataStorage.Accentuations.Api;
 using Domain.Main;
+using PoemTokenization.Tokenizers;
 
 namespace FlyingBeaverIDE.UI
 {
     public partial class LocalDictionaryForm : Form
     {
         private IAccentuationsRepository _accentuationsRepository;
+        private readonly SyllablesTokenizer _syllablesTokenizer = new();
         private readonly List<string> _unknownWords;
 
         public LocalDictionaryForm(IAccentuationsRepository accentuationsRepository, IEnumerable<string> unknownWords)
@@ -42,10 +44,7 @@ namespace FlyingBeaverIDE.UI
                 return;
             }
 
-            var accentuationForm = new WordAccentuationSettingForm(_accentuationsRepository, selectedWord);
-            accentuationForm.OnSuccess += RemoveSelectedSuggestion;
-            accentuationForm.ShowDialog();
-            UpdateUi();
+            AddWord(selectedWord);
         }
 
         private void UpdateLocalRepositoryView()
@@ -123,5 +122,38 @@ namespace FlyingBeaverIDE.UI
 
         private Accentuation? GetSelectedKnownWordAccentuation() => 
             knownWords.SelectedRows[0].DataBoundItem as Accentuation;
+
+        private void AddNewWord(object? sender, EventArgs e)
+        {
+            var input = newWordInput.Text;
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                MessageBox.Show("Введіть слово, аби додати.");
+                return;
+            }
+            var vowelsPositions = _syllablesTokenizer.GetVowelsPositions(input).ToList();
+            
+            if (!vowelsPositions.Any())
+            {
+                MessageBox.Show("Неможливо додати слово без голосних звуків!");
+                return;
+            }
+
+            if (vowelsPositions.Count() == 1)
+            {
+                MessageBox.Show("Неможливо додати слово з одним складом!");
+                return;
+            }
+
+            AddWord(input);
+        }
+
+        private void AddWord(string selectedWord)
+        {
+            var accentuationForm = new WordAccentuationSettingForm(_accentuationsRepository, selectedWord);
+            accentuationForm.OnSuccess += RemoveSelectedSuggestion;
+            accentuationForm.ShowDialog();
+            UpdateUi();
+        }
     }
 }

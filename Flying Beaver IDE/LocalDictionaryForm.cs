@@ -31,5 +31,10 @@ namespace Flying_Beaver_IDE
         {
 
         }
+
+        private void AddNewWord(object sender, EventArgs e)
+        {
+
+        }
     }
 }

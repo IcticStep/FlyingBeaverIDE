@@ -39,12 +39,12 @@
             this.knownWords = new System.Windows.Forms.DataGridView();
             this.middlePanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.updateCurrentWordButton = new System.Windows.Forms.Button();
             this.deleteCurrentWordButton = new System.Windows.Forms.Button();
             this.CurrentWord = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.newWordInput = new System.Windows.Forms.TextBox();
             this.newWordAddButton = new System.Windows.Forms.Button();
-            this.updateCurrentWordButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.suggestionsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.knownWords)).BeginInit();
@@ -179,6 +179,20 @@
             this.panel4.Size = new System.Drawing.Size(237, 250);
             this.panel4.TabIndex = 4;
             // 
+            // updateCurrentWordButton
+            // 
+            this.updateCurrentWordButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.updateCurrentWordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.updateCurrentWordButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.updateCurrentWordButton.Location = new System.Drawing.Point(0, 77);
+            this.updateCurrentWordButton.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.updateCurrentWordButton.Name = "updateCurrentWordButton";
+            this.updateCurrentWordButton.Size = new System.Drawing.Size(237, 40);
+            this.updateCurrentWordButton.TabIndex = 7;
+            this.updateCurrentWordButton.Text = "Редагувати";
+            this.updateCurrentWordButton.UseVisualStyleBackColor = true;
+            this.updateCurrentWordButton.Click += new System.EventHandler(this.UpdateSelectedWord);
+            // 
             // deleteCurrentWordButton
             // 
             this.deleteCurrentWordButton.Dock = System.Windows.Forms.DockStyle.Top;
@@ -239,20 +253,7 @@
             this.newWordAddButton.TabIndex = 7;
             this.newWordAddButton.Text = "Додати";
             this.newWordAddButton.UseVisualStyleBackColor = true;
-            // 
-            // updateCurrentWordButton
-            // 
-            this.updateCurrentWordButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.updateCurrentWordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.updateCurrentWordButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.updateCurrentWordButton.Location = new System.Drawing.Point(0, 77);
-            this.updateCurrentWordButton.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.updateCurrentWordButton.Name = "updateCurrentWordButton";
-            this.updateCurrentWordButton.Size = new System.Drawing.Size(237, 40);
-            this.updateCurrentWordButton.TabIndex = 7;
-            this.updateCurrentWordButton.Text = "Редагувати";
-            this.updateCurrentWordButton.UseVisualStyleBackColor = true;
-            this.updateCurrentWordButton.Click += new System.EventHandler(this.UpdateSelectedWord);
+            this.newWordAddButton.Click += new System.EventHandler(this.AddNewWord);
             // 
             // LocalDictionaryForm
             // 
