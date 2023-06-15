@@ -36,7 +36,7 @@ namespace FlyingBeaverIDE.UI
         private void OnAnalyzerSelectorOnUpdated(Analyzer analyzer)
         {
             _flyingBeaver.Analyzer = analyzer;
-            if(analyzer == Analyzer.None)
+            if (analyzer == Analyzer.None)
                 _analyzeResultsViewer.ClearViews();
         }
 
@@ -99,7 +99,7 @@ namespace FlyingBeaverIDE.UI
         private void HandleClosingAttempt(object sender, FormClosingEventArgs e) =>
             _fileSaver.TrySaveOnClose(e);
 
-        private void OpenPersonalDictionary(object? sender, EventArgs e) => 
+        private void OpenPersonalDictionary(object? sender, EventArgs e) =>
             _localDictionaryEditorViewer.Show(_analyzeResultsViewer.UnknownWords);
     }
 }
