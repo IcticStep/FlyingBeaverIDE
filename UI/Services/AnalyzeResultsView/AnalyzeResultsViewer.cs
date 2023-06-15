@@ -6,14 +6,18 @@ namespace FlyingBeaverIDE.UI.Services.AnalyzeResultsView;
 public class AnalyzeResultsViewer
 {
     private readonly LocalDictionaryPreviewer _localDictionaryPreviewer;
-    private readonly RhythmResultDrawer _rhythmResultDrawer;
-    private RhythmResult _rhythmResult;
+    private readonly AnalyzeViewer[] _analyzeViewers;
+    private RhythmResult? _rhythmResult;
     private List<string> _unknownWords = new();
 
     public AnalyzeResultsViewer(LocalDictionaryPreviewer localDictionaryPreviewer, RichTextBox poemViewer)
     {
         _localDictionaryPreviewer = localDictionaryPreviewer;
-        _rhythmResultDrawer = new(poemViewer);
+        _analyzeViewers = new AnalyzeViewer[] 
+        { 
+            new RhythmResultDrawer(poemViewer),
+            new RhymeResultDrawer(poemViewer) 
+        };
     }
 
     public IReadOnlyList<string> UnknownWords => _unknownWords;
@@ -23,15 +27,30 @@ public class AnalyzeResultsViewer
         _rhythmResult = analyzeResult.RhythmResult;
         CacheUnknownWords(analyzeResult);
         ShowUnknownWordsCount();
-        _rhythmResultDrawer.Draw(analyzeResult);
-        Console.WriteLine($"Result: {{{analyzeResult.RhythmResult}}}");
+        DrawResults(analyzeResult);
     }
 
-    private void CacheUnknownWords(AnalyzeResult analyzeResult) => 
+    private void DrawResults(AnalyzeResult result)
+    {
+        foreach (var viewer in _analyzeViewers)
+            viewer.Draw(result);
+    }
+
+    private void CacheUnknownWords(AnalyzeResult analyzeResult)
+    {
+        if(analyzeResult.RhythmResult is null)
+            return;
+        
         _unknownWords = analyzeResult.RhythmResult.UnknownWords
             .Select(token => token.RawText)
             .ToList();
+    }
 
-    private void ShowUnknownWordsCount() => 
+    private void ShowUnknownWordsCount()
+    {
+        if(_rhythmResult is null)
+            return;
+        
         _localDictionaryPreviewer.SetUnknownWordsCount(_rhythmResult.UnknownWords.Count);
+    }
 }

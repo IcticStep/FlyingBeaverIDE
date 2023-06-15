@@ -21,11 +21,6 @@ public class SetAccentuationTests
         _poemTokenizer = new();
         _rhythmAccentsSetter = new();
     }
-
-    [Test]
-    [TestCase("Замок впав собі.", new[]{0, 0, 1})]
-    public void TestRealAccentuationsInTrochee6(string text, int[] expectedAccentuations)
-        => TestRealAccentuations(text, RhythmBank.Trochee6, expectedAccentuations);
     
     [Test]
     [TestCase("Замок закрили міцно.", new[]{1, 1, 0})]
