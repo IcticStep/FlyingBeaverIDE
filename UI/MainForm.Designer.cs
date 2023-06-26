@@ -105,7 +105,7 @@
             this.ribbonControlAdv1.ShowMinimizeButton = false;
             this.ribbonControlAdv1.ShowQuickItemsDropDownButton = false;
             this.ribbonControlAdv1.ShowRibbonDisplayOptionButton = false;
-            this.ribbonControlAdv1.Size = new System.Drawing.Size(982, 183);
+            this.ribbonControlAdv1.Size = new System.Drawing.Size(982, 200);
             this.ribbonControlAdv1.SystemText.QuickAccessDialogDropDownName = "Start menu";
             this.ribbonControlAdv1.SystemText.RenameDisplayLabelText = "&Display Name:";
             this.ribbonControlAdv1.TabIndex = 0;
